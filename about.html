@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="About Dylan Mitrovich — FOH engineer, educator and toolmaker with 20+ years touring, and the software he builds for live-sound consoles.">
+<link rel="icon" href="assets/logo.png">
+<title>About — Dylan [M] Audio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  :root {
+    --bg:#0b0e12; --surface:#12171d; --surface-2:#161b21; --border:#232b34; --hairline:#1a212a;
+    --text:#e6edf3; --muted:#8b949e; --dim:#5a6573;
+    --blue:#4fa3f7; --green:#62d27a; --amber:#e89e3c; --red:#e85c5c; --blue-soft:rgba(79,163,247,0.10);
+    --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Monaco,Consolas,monospace;
+    --maxw:1120px; --pad:clamp(20px,5vw,48px);
+  }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  html,body { margin:0; }
+  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
+  a { color:inherit; text-decoration:none; }
+  ::selection { background:rgba(79,163,247,0.28); }
+  .wrap { max-width:var(--maxw); margin:0 auto; padding-inline:var(--pad); }
+  .kicker { font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--blue); }
+  .kicker .tick { color:var(--dim); }
+
+  /* Toolbar */
+  header.bar { position:sticky; top:0; z-index:50; background:rgba(11,14,18,0.82);
+    backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid var(--hairline); }
+  .bar-inner { max-width:var(--maxw); margin:0 auto; padding:12px var(--pad); display:flex; align-items:center; gap:20px; }
+  .wordmark { font-weight:600; font-size:15px; letter-spacing:0.09em; text-transform:uppercase; display:flex; align-items:center; gap:10px; white-space:nowrap; }
+  .wordmark .logo-mark { width:26px; height:26px; border-radius:50%; display:block; }
+  .wordmark .br { color:var(--blue); font-weight:700; letter-spacing:0; margin:0 -0.18em; }
+  .bar nav { margin-left:auto; display:flex; align-items:center; gap:6px; }
+  .bar nav a { font-size:13px; color:var(--muted); padding:6px 12px; border-radius:7px; transition:color .15s, background .15s; }
+  .bar nav a:hover { color:var(--text); background:var(--surface-2); }
+  .bar nav a.active { color:var(--text); }
+  .bar .store-btn { font-family:var(--mono); font-size:12px; letter-spacing:0.03em; color:var(--text);
+    border:1px solid var(--border); padding:7px 13px; border-radius:8px; margin-left:6px; transition:border-color .15s, color .15s; }
+  .bar .store-btn:hover { border-color:var(--blue); color:var(--blue); }
+  @media (max-width:760px) { .bar nav a:not(.store-btn) { display:none; } }
+
+  /* Hero */
+  .hero { border-bottom:1px solid var(--hairline); position:relative; overflow:hidden; }
+  .hero::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:radial-gradient(90% 60% at 15% 0%, rgba(79,163,247,0.10), transparent 55%); }
+  .hero-inner { position:relative; z-index:2; max-width:var(--maxw); margin:0 auto; padding:clamp(48px,8vw,88px) var(--pad) clamp(40px,6vw,72px);
+    display:grid; grid-template-columns:1.25fr 0.85fr; gap:clamp(28px,5vw,60px); align-items:center; }
+  @media (max-width:840px) { .hero-inner { grid-template-columns:1fr; } }
+  .hero h1 { font-size:clamp(2.4rem,5.5vw,3.8rem); line-height:1.05; letter-spacing:-0.02em; font-weight:650; margin:16px 0 0; text-wrap:balance; }
+  .hero h1 .br { color:var(--blue); margin:0 -0.07em; }
+  .role { margin-top:14px; font-family:var(--mono); font-size:13px; letter-spacing:0.06em; color:var(--muted); text-transform:uppercase; }
+  .role b { color:var(--blue); font-weight:500; }
+  .hero .lede { margin:22px 0 0; max-width:52ch; font-size:clamp(1.05rem,1.6vw,1.24rem); color:var(--text); line-height:1.5; }
+  .hero .lede em { font-style:normal; color:var(--blue); }
+
+  /* Portrait */
+  .portrait { position:relative; border-radius:18px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 20px 50px rgba(0,0,0,0.5); aspect-ratio:3/4; background:var(--surface); }
+  .portrait-img { width:100%; height:100%; object-fit:cover; display:block; }
+  .portrait::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background:linear-gradient(to top, rgba(11,14,18,0.55), transparent 45%); }
+  .portrait.is-placeholder { display:grid; place-items:center;
+    background:radial-gradient(120% 90% at 50% 20%, rgba(79,163,247,0.14), transparent 55%),
+      linear-gradient(180deg, #10151b, #0b0e12); }
+  .portrait-ph { display:grid; place-items:center; width:100%; height:100%; }
+  .mono-cap { font-family:var(--mono); font-size:12px; color:var(--dim); letter-spacing:0.1em; }
+
+  /* Credential chips */
+  .creds { border-bottom:1px solid var(--hairline); }
+  .creds .wrap { padding-block:24px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .cred { font-family:var(--mono); font-size:12px; letter-spacing:0.02em; color:var(--muted);
+    border:1px solid var(--border); border-radius:999px; padding:7px 13px; display:inline-flex; gap:8px; align-items:center; background:var(--surface); }
+  .cred .dot { width:6px; height:6px; border-radius:50%; background:var(--blue); }
+  .cred.g .dot { background:var(--green); }
+  .cred b { color:var(--text); font-weight:500; }
+
+  /* Sections */
+  section { padding-block:clamp(56px,9vw,104px); }
+  .sec-head h2 { font-size:clamp(1.6rem,3.2vw,2.3rem); letter-spacing:-0.015em; font-weight:620; margin:14px 0 0; text-wrap:balance; max-width:24ch; }
+
+  /* Bio body */
+  .bio { border-bottom:1px solid var(--hairline); }
+  .bio-grid { display:grid; grid-template-columns:0.8fr 1.2fr; gap:clamp(28px,5vw,64px); }
+  @media (max-width:840px) { .bio-grid { grid-template-columns:1fr; gap:20px; } }
+  .bio-col h3 { font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue);
+    margin:0 0 8px; font-weight:500; }
+  .bio-col h3:not(:first-child) { margin-top:30px; }
+  .bio-col p { color:var(--muted); margin:0; font-size:1.06rem; max-width:62ch; }
+  .bio-col p + p { margin-top:14px; }
+  .bio-col strong { color:var(--text); font-weight:600; }
+  .bio-lead { color:var(--text) !important; font-size:1.2rem !important; line-height:1.5; }
+
+  /* What I do trio */
+  .do-grid { margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  @media (max-width:800px) { .do-grid { grid-template-columns:1fr; } }
+  .do-card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:24px; transition:border-color .18s, transform .18s; }
+  .do-card:hover { border-color:color-mix(in srgb, var(--blue) 45%, var(--border)); transform:translateY(-3px); }
+  .do-card .num { font-family:var(--mono); font-size:12px; color:var(--dim); }
+  .do-card h4 { margin:12px 0 8px; font-size:1.2rem; font-weight:620; letter-spacing:-0.01em; }
+  .do-card p { margin:0; color:var(--muted); font-size:0.96rem; line-height:1.55; }
+  .do-card .lnk { margin-top:16px; display:inline-flex; gap:6px; align-items:center; font-size:13px; font-weight:500; color:var(--blue); }
+  .do-card .lnk .arw { transition:transform .18s; }
+  .do-card:hover .lnk .arw { transform:translateX(3px); }
+
+  /* Training */
+  .training { border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline); }
+  .train-grid { display:grid; grid-template-columns:1fr 1fr; gap:clamp(28px,5vw,56px); align-items:center; }
+  @media (max-width:840px) { .train-grid { grid-template-columns:1fr; gap:26px; } }
+  .train-copy h2 { font-size:clamp(1.6rem,3.2vw,2.2rem); letter-spacing:-0.015em; font-weight:620; margin:14px 0 16px; text-wrap:balance; }
+  .train-copy p { color:var(--muted); margin:0 0 22px; max-width:46ch; }
+  .train-note { font-size:0.9rem !important; margin:18px 0 0 !important; color:var(--dim) !important; }
+  .train-note b { color:var(--muted); font-weight:500; }
+  .train-note a { color:var(--blue); }
+  .train-note a:hover { text-decoration:underline; }
+  .train-list { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
+  @media (max-width:520px) { .train-list { grid-template-columns:1fr; } }
+  .train-list li { display:flex; gap:10px; align-items:baseline; color:var(--text); font-size:0.96rem; }
+  .train-list .tk { color:var(--blue); font-family:var(--mono); font-size:11px; flex-shrink:0; }
+
+  .btn { display:inline-flex; align-items:center; gap:9px; font-size:14px; font-weight:500; padding:11px 18px;
+    border-radius:9px; border:1px solid transparent; cursor:pointer; transition:all .15s; font-family:inherit; }
+  .btn .arw { transition:transform .18s; }
+  .btn:hover .arw { transform:translateX(3px); }
+  .btn-primary { background:var(--blue); color:#06121f; font-weight:600; }
+  .btn-primary:hover { background:#6cb4fa; }
+  .btn-ghost { border-color:var(--border); color:var(--text); }
+  .btn-ghost:hover { border-color:var(--muted); background:var(--surface); }
+
+  /* CTA band */
+  .cta { text-align:center; }
+  .cta h2 { font-size:clamp(1.8rem,3.6vw,2.6rem); letter-spacing:-0.02em; font-weight:640; margin:14px 0 0; text-wrap:balance; }
+  .cta p { color:var(--muted); margin:16px auto 0; max-width:44ch; }
+  .cta-row { margin-top:30px; display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+
+  footer.site { border-top:1px solid var(--hairline); padding:34px var(--pad); }
+  .foot-inner { max-width:var(--maxw); margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:13px; color:var(--dim); }
+  .foot-inner .fl { display:flex; gap:20px; flex-wrap:wrap; }
+  .foot-inner a:hover { color:var(--text); }
+  .foot-mono { font-family:var(--mono); font-size:12px; }
+  .foot-legal { max-width:78ch; margin:20px auto 0; padding-top:18px; border-top:1px solid var(--hairline); font-size:11.5px; line-height:1.5; color:var(--dim); }
+
+  @media (prefers-reduced-motion:reduce) { *{animation:none !important; scroll-behavior:auto !important;} }
+</style>
+
+</head>
+<body>
+<header class="bar">
+  <div class="bar-inner">
+    <a href="index.html" class="wordmark"><img class="logo-mark" src="assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</a>
+    <nav>
+      <a href="index.html#software">Software</a>
+      <a href="#top" class="active">About</a>
+      <a href="index.html#book">Book</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://store.dylanmaudio.com" class="store-btn">Store&nbsp;&#8599;</a>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="kicker"><span class="tick">//</span>&nbsp; About</div>
+      <h1>Dylan <span class="br">[M]</span> Mitrovich</h1>
+      <div class="role">FOH Engineer <b>&middot;</b> Educator <b>&middot;</b> Toolmaker</div>
+      <p class="lede">For over 20 years I&rsquo;ve mixed front-of-house for internationally recognised artists &mdash; and built the <em>software</em> I wished existed at the console.</p>
+    </div>
+    <div class="portrait"><img class="portrait-img" src="assets/dylan-foh.jpg" alt="Dylan Mitrovich mixing front of house" /></div>
+  </div>
+</section>
+
+<div class="creds">
+  <div class="wrap">
+    <span class="cred"><span class="dot"></span><b>20+ years</b>&nbsp;international touring</span>
+    <span class="cred"><span class="dot"></span>Allen&nbsp;&amp;&nbsp;Heath dLive &mdash; <b>since 2017</b></span>
+    <span class="cred"><span class="dot"></span>Worked with <b>A&amp;H R&amp;D</b></span>
+    <span class="cred g"><span class="dot"></span>Certified <b>Dante</b> Trainer</span>
+    <span class="cred g"><span class="dot"></span>Certified <b>Pro&nbsp;Tools</b> Trainer</span>
+    <span class="cred"><span class="dot"></span>University <b>course advisor</b></span>
+  </div>
+</div>
+
+<section class="bio">
+  <div class="wrap bio-grid">
+    <div class="sec-head">
+      <div class="kicker"><span class="tick">//</span>&nbsp; The story</div>
+      <h2>Engineer first &mdash; which is exactly why the tools work.</h2>
+    </div>
+    <div class="bio-col">
+      <p class="bio-lead">Every app on this site started as a problem I hit on an actual gig. I&rsquo;m not a software company that discovered live sound; I&rsquo;m a live-sound engineer who started writing code.</p>
+
+      <h3>The mix</h3>
+      <p>Across two decades of international touring, I&rsquo;ve mixed front-of-house for a wide range of internationally recognised artists &mdash; chasing clear, dynamic, impactful shows through considered system design, automation, and show control. Every artist gets a tailored approach, with the mix workflow built around the arrangement rather than forced on top of it.</p>
+
+      <h3>The platform</h3>
+      <p>I&rsquo;ve worked almost <strong>exclusively on the Allen&nbsp;&amp;&nbsp;Heath dLive platform since 2017</strong> &mdash; providing training and support for it, and working alongside the A&amp;H R&amp;D team on upcoming releases. That depth is where the software comes from: I know exactly where the platform helps and where it needs a hand.</p>
+
+      <h3>The software</h3>
+      <p>So I build the missing pieces &mdash; small, focused macOS utilities for automation, failover, and timecode &mdash; then harden each one until it&rsquo;s <strong>show-safe</strong>. Talk Light Trigger, Pilot Tone Trigger, Time Code Tool, and the free MIDI Bridge each solve something that either had no solution on the platform before, or used to mean expensive hardware and juggling several other apps &mdash; now faster, cheaper, and right from your Mac.</p>
+
+      <h3>The classroom</h3>
+      <p>Alongside the engineering I teach. I&rsquo;ve designed curricula and delivered classes at Australian colleges, where I stay on as a course advisor, and I now run mix-workflow masterclasses and console-specific training internationally. As a certified <strong>Dante</strong> and <strong>Pro&nbsp;Tools</strong> trainer, I&rsquo;m always looking at what&rsquo;s next &mdash; and how to hand it to the next generation of engineers.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker"><span class="tick">//</span>&nbsp; What I do</div>
+      <h2>Three jobs, one signal chain.</h2>
+    </div>
+    <div class="do-grid">
+      <div class="do-card">
+        <div class="num">01</div>
+        <h4>Mix</h4>
+        <p>Front-of-house for international touring artists &mdash; system design, automation, and show control that hold up night after night.</p>
+      </div>
+      <div class="do-card">
+        <div class="num">02</div>
+        <h4>Teach</h4>
+        <p>Masterclasses, console-specific training, and one-to-one online sessions. Certified Dante &amp; Pro&nbsp;Tools trainer.</p>
+        <a href="#training" class="lnk">See training <span class="arw">&rarr;</span></a>
+      </div>
+      <div class="do-card">
+        <div class="num">03</div>
+        <h4>Build</h4>
+        <p>macOS utilities for live-sound consoles &mdash; built on tour, tested at showtime, hardened until they&rsquo;re show-safe.</p>
+        <a href="index.html#software" class="lnk">See the software <span class="arw">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="training" id="training">
+  <div class="wrap train-grid">
+    <div class="train-copy">
+      <div class="kicker"><span class="tick">//</span>&nbsp; One-on-one training</div>
+      <h2>Learn directly, tailored to your goals.</h2>
+      <p>Personalised online sessions built around what you actually want to get better at &mdash; drawing on 20+ years of touring and teaching, with practical techniques you can use on the next show.</p>
+      <a href="index.html#book" class="btn btn-primary">Book a session <span class="arw">&rarr;</span></a>
+      <p class="train-note">Sessions run <b>subject to availability</b>. If nothing&rsquo;s open on the calendar, <a href="index.html#contact">send a message</a> and we&rsquo;ll find a time.</p>
+    </div>
+    <ul class="train-list">
+      <li><span class="tk">01</span><span>Audio mixing &mdash; fundamentals to advanced show workflows</span></li>
+      <li><span class="tk">02</span><span>Workflow &amp; system design</span></li>
+      <li><span class="tk">03</span><span>MIDI control &amp; automation</span></li>
+      <li><span class="tk">04</span><span>Audio networking</span></li>
+      <li><span class="tk">05</span><span>Console training &mdash; dLive &amp; other platforms</span></li>
+      <li><span class="tk">06</span><span>Dante certification prep</span></li>
+      <li><span class="tk">07</span><span>Pro&nbsp;Tools &amp; DAW techniques</span></li>
+      <li><span class="tk">08</span><span>Show control &amp; automation strategy</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <div class="kicker" style="display:inline-block;"><span class="tick">//</span>&nbsp; Work together</div>
+    <h2>On the road, in the classroom, or in the software.</h2>
+    <p>Touring, training, or a licence question &mdash; here&rsquo;s where to start.</p>
+    <div class="cta-row">
+      <a href="index.html#book" class="btn btn-primary">Book a session <span class="arw">&rarr;</span></a>
+      <a href="index.html#software" class="btn btn-ghost">Explore the software</a>
+      <a href="index.html#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="foot-inner">
+    <div class="wordmark"><img class="logo-mark" src="assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
+    <div class="fl"><a href="index.html#software">Software</a><a href="#top">About</a><a href="index.html#book">Book</a><a href="index.html#contact">Contact</a><a href="https://store.dylanmaudio.com">Store &#8599;</a></div>
+    <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
+  </div>
+  <div class="foot-legal">Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, used here for identification only.</div>
+</footer>
+</body>
+</html>

@@ -204,7 +204,8 @@
   .card:hover .card-link .arw { transform: translateX(3px); }
   .soon { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
     color: var(--amber); border: 1px solid color-mix(in srgb, var(--amber) 38%, var(--border));
-    background: rgba(232,158,60,0.09); border-radius: 999px; padding: 5px 12px; }
+    background: rgba(232,158,60,0.09); border-radius: 999px; padding: 5px 12px; white-space: nowrap; }
+  .card-foot .soon { margin-left: auto; }
 
   /* Bundles --------------------------------------------------- */
   .bundles { margin-top: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -212,7 +213,7 @@
   .bundle {
     background: linear-gradient(180deg, var(--blue-soft), transparent), var(--surface);
     border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px;
-    display: flex; align-items: center; gap: 18px; flex-wrap: wrap; transition: border-color .18s;
+    display: flex; align-items: stretch; gap: 18px; flex-wrap: wrap; transition: border-color .18s;
   }
   .bundle.best { border-color: color-mix(in srgb, var(--green) 45%, var(--border)); }
   .bundle:hover { border-color: color-mix(in srgb, var(--blue) 50%, var(--border)); }
@@ -224,7 +225,7 @@
     background: rgba(98,210,122,0.10); padding: 2px 7px; border-radius: 999px;
   }
   .bundle p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; }
-  .bundle .b-buy { text-align: right; }
+  .bundle .b-buy { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; }
   .bundle .b-price { font-family: var(--mono); font-size: 17px; font-variant-numeric: tabular-nums; }
   .bundle .b-price .was { color: var(--dim); text-decoration: line-through; font-size: 0.78em; margin-right: 4px; }
 
@@ -418,7 +419,7 @@
         </div>
         <p>Watches a dLive channel and fires a talkback / cue light the instant signal crosses your threshold &mdash; hands-free tally for the podium, the pit, or the booth.</p>
         <div class="specs"><span class="spec">signal &rarr; trigger</span><span class="spec">tally</span><span class="spec">menu bar</span></div>
-        <div class="card-foot"><span class="price">$19</span><span class="soon">Coming soon</span></div>
+        <div class="card-foot"><span class="soon">Coming soon</span></div>
       </article>
 
       <article class="card">
@@ -428,7 +429,7 @@
         </div>
         <p>Listens for a pilot tone and drives automatic failover the moment it drops &mdash; for playback rigs and external processing (Waves and similar) alike. Recalls the backup scene you&rsquo;ve already built, before the audience hears it.</p>
         <div class="specs"><span class="spec">tone detect</span><span class="spec">auto-failover</span><span class="spec">Waves failover</span></div>
-        <div class="card-foot"><span class="price">$59</span><span class="soon">Coming soon</span></div>
+        <div class="card-foot"><span class="soon">Coming soon</span></div>
       </article>
 
       <article class="card">
@@ -438,18 +439,18 @@
         </div>
         <p>Read incoming LTC, regenerate it as MTC on a virtual port, or generate clean timecode to a WAV. A far more solid LTC endpoint than piping LTC straight into a DAW. Console-agnostic.</p>
         <div class="specs"><span class="spec">LTC in</span><span class="spec">MTC out</span><span class="spec">LTC&rarr;WAV</span></div>
-        <div class="card-foot"><span class="price">$69</span><span class="soon">Coming soon</span></div>
+        <div class="card-foot"><span class="soon">Coming soon</span></div>
       </article>
     </div>
 
     <div class="bundles">
       <div class="bundle">
-        <div class="b-main"><h4>dLive Utilities <span class="save">Save $9</span></h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the full dLive set. One key unlocks both paid apps.</p></div>
-        <div class="b-buy"><div class="b-price"><span class="was">$78</span> $69</div><span class="soon">Coming soon</span></div>
+        <div class="b-main"><h4>dLive Utilities</h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the full dLive set. One key unlocks both paid apps.</p></div>
+        <div class="b-buy"><span class="soon">Coming soon</span></div>
       </div>
       <div class="bundle best">
-        <div class="b-main"><h4>All Utilities <span class="save">Best value &middot; save $38</span></h4><p>Every app &mdash; TLT, PTT and Time Code Tool &mdash; in one licence. One key unlocks all three paid apps; MIDI Bridge is free for everyone.</p></div>
-        <div class="b-buy"><div class="b-price"><span class="was">$147</span> $109</div><span class="soon">Coming soon</span></div>
+        <div class="b-main"><h4>All Utilities</h4><p>Every app &mdash; TLT, PTT and Time Code Tool &mdash; in one licence. One key unlocks all three paid apps; MIDI Bridge is free for everyone.</p></div>
+        <div class="b-buy"><span class="soon">Coming soon</span></div>
       </div>
     </div>
 

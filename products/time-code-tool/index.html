@@ -1,18 +1,15 @@
-#!/usr/bin/env python3
-"""Generate per-product pages at products/<slug>/index.html.
-
-Data-driven from common.PRODUCTS. Set BUILD to the slugs to generate (others
-are scaffolded later once their videos/copy are ready). Drop a YouTube id into a
-product's `youtube` field in common.py and the facade becomes a lazy-loaded,
-privacy-mode embed automatically.
-"""
-import common as C
-
-# Which product pages to generate this run. All are built; nothing on the site
-# links to a page until its product ships (home cards flip to "Learn more" then).
-BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool"]
-
-CSS = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Time Code Tool — Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
+<link rel="icon" href="/assets/logo.png">
+<title>Time Code Tool — Dylan [M] Audio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
     --text:#e6edf3;--muted:#8b949e;--dim:#5a6573;--blue:#4fa3f7;--green:#62d27a;--amber:#e89e3c;--red:#e85c5c;
     --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
@@ -111,151 +108,74 @@ CSS = """
   .foot-mono{font-family:var(--mono);font-size:12px;}
   .foot-legal{max-width:78ch;margin:20px auto 0;padding-top:18px;border-top:1px solid var(--hairline);font-size:11.5px;line-height:1.5;color:var(--dim);}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;}}
-"""
-
-def nav(active="software"):
-    def cls(k): return ' class="active"' if k == active else ""
-    return f"""<header class="bar">
+</style>
+</head>
+<body class="product">
+<header class="bar">
   <div class="bar-inner">
     <a href="/" class="wordmark"><img class="logo-mark" src="/assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</a>
     <nav>
-      <a href="/#software"{cls('software')}>Software</a>
-      <a href="/about.html"{cls('about')}>About</a>
+      <a href="/#software" class="active">Software</a>
+      <a href="/about.html">About</a>
       <a href="/#book">Book</a>
       <a href="/#contact">Contact</a>
-      <a href="{C.DISCORD_URL}" class="nav-icon" aria-label="Join the Discord" target="_blank" rel="noopener">{C.DISCORD_SVG}</a>
-      <a href="{C.STORE_URL}" class="store-btn">Store&nbsp;&#8599;</a>
+      <a href="https://discord.gg/zBkPrFhzPQ" class="nav-icon" aria-label="Join the Discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg></a>
+      <a href="https://store.dylanmaudio.com" class="store-btn">Store&nbsp;&#8599;</a>
     </nav>
   </div>
-</header>"""
-
-FOOTER = f"""<footer class="site">
-  <div class="foot-inner">
-    <div class="wordmark"><img class="logo-mark" src="/assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
-    <div class="fl"><a href="/#software">Software</a><a href="/about.html">About</a><a href="/#book">Book</a><a href="/#contact">Contact</a><a class="di" href="{C.DISCORD_URL}" target="_blank" rel="noopener">Discord</a><a href="{C.STORE_URL}">Store &#8599;</a></div>
-    <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
-  </div>
-  <div class="foot-legal">{C.NONAFFIL}</div>
-</footer>"""
-
-CK = '<span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>'
-PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
-
-
-def video_block(p):
-    if p["youtube"]:
-        yt = p["youtube"]
-        facade = (f'<div class="video-facade" data-yt="{yt}" role="button" tabindex="0" aria-label="Play intro video">'
-                  f'<img src="https://i.ytimg.com/vi/{yt}/maxresdefault.jpg" alt="{p["name"]} intro video" loading="lazy" />'
-                  f'<span class="play">{PLAY}</span></div>')
-    else:
-        facade = (f'<div class="video-soon"><span class="ring">{PLAY}</span>'
-                  f'<span class="lbl">Intro video coming soon</span></div>')
-    return f'<section><div class="video-wrap"><div class="video-frame">{facade}</div></div></section>'
-
-
-def hero_cta(p):
-    if p["status"] == "free":
-        return (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
-                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
-    if p["status"] == "buy":
-        return f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
-    # coming
-    return ('<span class="btn btn-ghost disabled">Coming soon</span>'
-            f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>')
-
-
-def band(p):
-    if p["status"] == "free":
-        h, sub = f"{p['name']} is free.", "Download it, and drop into the Discord if you hit a snag or have a request."
-        cta = (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
-               f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
-    else:
-        h, sub = f"{p['name']} is coming soon.", "Join the Discord to hear the moment it lands — and help shape it."
-        cta = (f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>'
-               f'<a href="/#contact" class="btn btn-ghost">Contact</a>')
-    return (f'<section class="p-band"><div class="wrap"><div class="kicker" style="display:inline-block;">'
-            f'<span class="tick">//</span>&nbsp; {p["name"]}</div><h2>{h}</h2><p>{sub}</p>'
-            f'<div class="p-cta-row">{cta}</div></div></section>')
-
-
-def status_row(p):
-    if p["status"] == "free":
-        return '<div class="srow"><span class="k">Price</span><span class="v g">Free</span></div>'
-    if p["status"] == "buy":
-        return '<div class="srow"><span class="k">Price</span><span class="v">In store</span></div>'
-    return '<div class="srow"><span class="k">Status</span><span class="v">Coming soon</span></div>'
-
-
-def build_page(slug, p):
-    tagcls = " free" if p["tag"] == "Free" else ""
-    abbr = f'<span class="abbr">{p["abbr"]}</span>' if p["abbr"] else ""
-    features = "".join(f'<li>{CK}<span>{f}</span></li>' for f in p["features"])
-    chips = "".join(f'<span class="spec">{s}</span>' for s in p["specs"])
-    trial = ('<div class="srow"><span class="k">Trial</span><span class="v">20-min sessions</span></div>'
-             if p.get("trial") else "")
-    maker = '<div class="srow"><span class="k">Maker</span><span class="v">dylanmaudio</span></div>'
-
-    html = f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="description" content="{p['name']} — {p['tagline']}">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
-<link rel="icon" href="/assets/logo.png">
-<title>{p['name']} — Dylan [M] Audio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<style>{CSS}</style>
-</head>
-<body class="product">
-{nav("software")}
+</header>
 
 <section class="p-hero">
   <div class="p-hero-inner">
     <a class="crumb" href="/#software">&larr; All software</a>
     <div class="p-id">
-      <img src="/assets/{p['icon']}" alt="{p['name']} app icon" width="72" height="72" />
+      <img src="/assets/time-code-tool.png" alt="Time Code Tool app icon" width="72" height="72" />
       <div>
-        <h1>{p['name']}{abbr}</h1>
-        <div class="p-badges"><span class="tag{tagcls}">{p['tag']}</span></div>
+        <h1>Time Code Tool<span class="abbr">TxT</span></h1>
+        <div class="p-badges"><span class="tag">Universal</span></div>
       </div>
     </div>
-    <p class="p-tagline">{p['tagline']}</p>
-    <div class="p-cta-row">{hero_cta(p)}</div>
+    <p class="p-tagline">Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.</p>
+    <div class="p-cta-row"><span class="btn btn-ghost disabled">Coming soon</span><a href="https://discord.gg/zBkPrFhzPQ" class="btn btn-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg> Get notified</a></div>
   </div>
 </section>
 
-{video_block(p)}
+<section><div class="video-wrap"><div class="video-frame"><div class="video-soon"><span class="ring"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span class="lbl">Intro video coming soon</span></div></div></div></section>
 
 <section><div class="wrap p-grid">
   <div class="p-body">
     <div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; What it does</div>
-    <p class="p-lead">{p['lead']}</p>
+    <p class="p-lead">Time Code Tool reads incoming LTC, regenerates it as MTC on a virtual port, or generates clean timecode to a WAV file — a far more solid, stable LTC endpoint than piping LTC straight into a DAW. Console-agnostic; it works anywhere timecode does.</p>
   </div>
   <div>
-    <ul class="feature-list">{features}</ul>
+    <ul class="feature-list"><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Read + monitor incoming LTC</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Convert LTC → MTC on a virtual port</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Offline-generate timecode → WAV</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Works with any console or LTC source</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Full-featured 20-minute trial</span></li></ul>
     <div class="side" style="margin-top:24px;">
       <div class="h">// At a glance</div>
-      {status_row(p)}
+      <div class="srow"><span class="k">Status</span><span class="v">Coming soon</span></div>
       <div class="srow"><span class="k">Platform</span><span class="v">macOS 11+</span></div>
       <div class="srow"><span class="k">Chip</span><span class="v">Apple Silicon</span></div>
-      {trial}
-      {maker}
-      <div class="chips">{chips}</div>
+      <div class="srow"><span class="k">Trial</span><span class="v">20-min sessions</span></div>
+      <div class="srow"><span class="k">Maker</span><span class="v">dylanmaudio</span></div>
+      <div class="chips"><span class="spec">LTC in</span><span class="spec">MTC out</span><span class="spec">LTC→WAV</span><span class="spec">universal</span></div>
     </div>
   </div>
 </div></section>
 
-{band(p)}
+<section class="p-band"><div class="wrap"><div class="kicker" style="display:inline-block;"><span class="tick">//</span>&nbsp; Time Code Tool</div><h2>Time Code Tool is coming soon.</h2><p>Join the Discord to hear the moment it lands — and help shape it.</p><div class="p-cta-row"><a href="https://discord.gg/zBkPrFhzPQ" class="btn btn-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg> Get notified</a><a href="/#contact" class="btn btn-ghost">Contact</a></div></div></section>
 
-{FOOTER}
+<footer class="site">
+  <div class="foot-inner">
+    <div class="wordmark"><img class="logo-mark" src="/assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
+    <div class="fl"><a href="/#software">Software</a><a href="/about.html">About</a><a href="/#book">Book</a><a href="/#contact">Contact</a><a class="di" href="https://discord.gg/zBkPrFhzPQ" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a></div>
+    <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
+  </div>
+  <div class="foot-legal">Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, used here for identification only.</div>
+</footer>
 
 <script>
   // Lazy-load the YouTube embed only when the facade is activated.
-  document.querySelectorAll(".video-facade[data-yt]").forEach(function (f) {{
-    function load() {{
+  document.querySelectorAll(".video-facade[data-yt]").forEach(function (f) {
+    function load() {
       var id = f.getAttribute("data-yt");
       var ifr = document.createElement("iframe");
       ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
@@ -263,16 +183,10 @@ def build_page(slug, p):
       ifr.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
       ifr.allowFullscreen = true;
       f.parentNode.replaceChild(ifr, f);
-    }}
+    }
     f.addEventListener("click", load);
-    f.addEventListener("keydown", function (e) {{ if (e.key === "Enter" || e.key === " ") {{ e.preventDefault(); load(); }} }});
-  }});
+    f.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); } });
+  });
 </script>
 </body>
-</html>"""
-    C.write(f"products/{slug}/index.html", html)
-
-
-if __name__ == "__main__":
-    for slug in BUILD:
-        build_page(slug, C.PRODUCTS[slug])
+</html>

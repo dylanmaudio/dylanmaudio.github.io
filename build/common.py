@@ -1,0 +1,145 @@
+#!/usr/bin/env python3
+"""Shared constants, data, and snippets for the dylanmaudio.com build.
+
+The site is a static, hand-built set of pages. These builders regenerate the
+deployed HTML so we never hand-edit the live files directly:
+
+    python3 build/build_all.py     # regenerate everything
+
+Individual builders: build_site.py (home / index.html), build_about.py
+(about.html), build_products.py (products/<slug>/index.html).
+
+Design system: dark "instrument-panel" theme, signal-blue accent, the app icons
+carry each product's identity. Assets live in /assets and are committed to the
+repo (no machine-specific paths), so the build is fully reproducible anywhere.
+"""
+import pathlib
+
+# Repo root = parent of this build/ dir.
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# --- External services (all public, client-side values) -------------------
+DISCORD_URL = "https://discord.gg/zBkPrFhzPQ"
+STORE_URL   = "https://store.dylanmaudio.com"
+CAL_EMBED   = ("https://calendar.google.com/calendar/appointments/schedules/"
+               "AcZssZ0Prpa4yII9D6-eGZGCb-r9gg77xCxOY7JvN0Ds3sARHqH1IINad7mVj0CnI7B6Bieymq1_PFd-?gv=true")
+WEB3FORMS_KEY = "d869112c-0f00-4e71-99bb-8bcd1cfe9bf2"
+
+# Lemon Squeezy checkout URLs (per product).
+CHECKOUT = {
+    "midi-bridge": f"{STORE_URL}/checkout/buy/77778860-577c-4fc6-9f84-59e78db1539b",
+    "talk-light-trigger": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6",
+    "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d",
+    "time-code-tool": f"{STORE_URL}/checkout/buy/52a61e9a-34cd-4ee7-88ca-c859e14fd365",
+}
+
+# Discord glyph (inline SVG, uses currentColor).
+DISCORD_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">'
+               '<path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0'
+               'A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 '
+               '6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 '
+               '12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 '
+               '6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 '
+               '2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 '
+               '0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg>')
+
+# --- Products (drives the per-product pages) --------------------------------
+# youtube = None until an intro video exists (then set the 11-char video id).
+# status: "free" | "coming" | "buy". store = checkout URL or None.
+PRODUCTS = {
+    "console-control": dict(
+        name="Console Control", abbr="", tag="Flagship", accent="blue",
+        icon="console-control.png", affiliated=True, status="coming", store=None, youtube=None,
+        tagline="A complete timeline-based automation control platform for the dLive.",
+        lead=("Console Control turns show automation into a timeline you can see. Lay cues, moves and "
+              "recalls on a scrubber-driven timeline, rehearse them against the desk, and fire the whole "
+              "show with frame-accurate confidence — a proper automation platform, not a pile of scenes."),
+        features=[
+            "Timeline-based cue &amp; automation sequencing",
+            "Drives the dLive live, in sync with your show",
+            "Rehearse, scrub and refine before showtime",
+            "Built by a working FOH engineer",
+        ],
+        specs=["timeline", "automation", "show control", "dLive"],
+    ),
+    "midi-bridge": dict(
+        name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
+        icon="midi-bridge.png", affiliated=True, status="free",
+        store=CHECKOUT["midi-bridge"], youtube=None,
+        tagline="Bridge MIDI to your dLive over TCP, with a live decoded message monitor.",
+        lead=("MIDI Bridge carries MIDI over TCP to and from your dLive, and ships with a live, decoded "
+              "message monitor — every fader, mute and scene crossing the wire in plain language, with "
+              "real console descriptions instead of raw MIDI bytes. Free, and the foundation the other apps "
+              "build on."),
+        features=[
+            "MIDI over TCP, to and from the console",
+            "Live decoded monitor — real console descriptions, not raw MIDI bytes",
+            "Advanced monitor mode for protocol-level detail",
+            "At-a-glance menu-bar status indicator",
+            "Free — no licence, no trial timer",
+        ],
+        specs=["MIDI over TCP", "live monitor", "advanced monitor", "menu-bar status", "free"],
+    ),
+    "talk-light-trigger": dict(
+        name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
+        icon="talk-light-trigger.png", affiliated=True, status="coming",
+        store=CHECKOUT["talk-light-trigger"], youtube=None,
+        tagline="Turn a console channel into a hands-free talkback / cue light.",
+        lead=("Talk Light Trigger watches a dLive channel and fires a talkback / cue light the instant "
+              "signal crosses your threshold — hands-free tally for the podium, the pit, or the booth, "
+              "using the console's own light and no extra hardware."),
+        features=[
+            "Threshold trigger on any dLive channel",
+            "Fires the console's own talkback / cue light — no extra hardware",
+            "Set-and-forget menu-bar app",
+            "Full-featured 20-minute trial",
+        ],
+        specs=["signal → trigger", "tally", "menu bar"],
+    ),
+    "pilot-tone-trigger": dict(
+        name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
+        icon="pilot-tone-trigger.png", affiliated=True, status="coming",
+        store=CHECKOUT["pilot-tone-trigger"], youtube=None,
+        tagline="Detects a dropped pilot tone and recalls your backup scene — automatically.",
+        lead=("Pilot Tone Trigger listens for a pilot tone on any critical audio path and drives automatic "
+              "failover the instant it drops — for playback rigs and external processing (Waves and similar) "
+              "alike. You've already built the backup scene; PTT recalls it before the audience hears the gap."),
+        features=[
+            "Detects loss of pilot tone on any critical path",
+            "Auto-recalls your backup scene on the console",
+            "Fails safe — never leaves the console mid-switch",
+            "Full-featured 20-minute trial",
+        ],
+        specs=["tone detect", "auto-failover", "Waves failover"],
+    ),
+    "time-code-tool": dict(
+        name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
+        icon="time-code-tool.png", affiliated=False, status="coming",
+        store=CHECKOUT["time-code-tool"], youtube=None,
+        tagline="Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.",
+        lead=("Time Code Tool reads incoming LTC, regenerates it as MTC on a virtual port, or generates clean "
+              "timecode to a WAV file — a far more solid, stable LTC endpoint than piping LTC straight into a "
+              "DAW. Console-agnostic; it works anywhere timecode does."),
+        features=[
+            "Read + monitor incoming LTC",
+            "Convert LTC → MTC on a virtual port",
+            "Offline-generate timecode → WAV",
+            "Works with any console or LTC source",
+            "Full-featured 20-minute trial",
+        ],
+        specs=["LTC in", "MTC out", "LTC→WAV", "universal"],
+    ),
+}
+
+REQUIREMENTS = "macOS 11 or later &middot; Apple Silicon"
+NONAFFIL = ("Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by "
+            "Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, "
+            "used here for identification only.")
+
+
+def write(rel_path: str, html: str):
+    """Write html to a repo-relative path, creating parent dirs."""
+    dest = ROOT / rel_path
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(html, encoding="utf-8")
+    print("wrote", dest.relative_to(ROOT), f"({len(html)} bytes)")

@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Generate the About page -> about.html."""
+import common as C
+
+HTML = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -154,7 +158,7 @@
       <a href="#top" class="active">About</a>
       <a href="index.html#book">Book</a>
       <a href="index.html#contact">Contact</a>
-      <a href="https://discord.gg/zBkPrFhzPQ" class="nav-icon" aria-label="Join the Discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg></a>
+      <a href="__DISCORD_URL__" class="nav-icon" aria-label="Join the Discord" target="_blank" rel="noopener">__DISCORD_SVG__</a>
       <a href="https://store.dylanmaudio.com" class="store-btn">Store&nbsp;&#8599;</a>
     </nav>
   </div>
@@ -274,10 +278,17 @@
 <footer class="site">
   <div class="foot-inner">
     <div class="wordmark"><img class="logo-mark" src="assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
-    <div class="fl"><a href="index.html#software">Software</a><a href="#top">About</a><a href="index.html#book">Book</a><a href="index.html#contact">Contact</a><a class="di" href="https://discord.gg/zBkPrFhzPQ" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a></div>
+    <div class="fl"><a href="index.html#software">Software</a><a href="#top">About</a><a href="index.html#book">Book</a><a href="index.html#contact">Contact</a><a class="di" href="__DISCORD_URL__" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a></div>
     <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
   </div>
-  <div class="foot-legal">Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, used here for identification only.</div>
+  <div class="foot-legal">__NONAFFIL__</div>
 </footer>
 </body>
-</html>
+</html>"""
+
+out = (HTML.replace("__DISCORD_URL__", C.DISCORD_URL)
+           .replace("__DISCORD_SVG__", C.DISCORD_SVG)
+           .replace("__NONAFFIL__", C.NONAFFIL))
+
+if __name__ == "__main__":
+    C.write("about.html", out)

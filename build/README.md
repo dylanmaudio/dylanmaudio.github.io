@@ -53,6 +53,13 @@ to every page. `build_og.py` renders the 1200×630 share card (`assets/og-cover.
 photo) are the build inputs and are committed. App icons are the 256px exports;
 regenerate with `sips -z 256 256 <1024-master> --out assets/<slug>.png`.
 
+**Brand mark / favicons:** `build_icons.py` renders `assets/logo.png` (1024) and
+`favicon-16/32/180.png` from `build/assets-src/logo.svg` — the crisp white-M/bars
+mark (recolored from `logo-original-black.svg`: black strokes → white, their halos
+→ disc grey). Run `python3 build/build_icons.py` then `python3 build/build_og.py`
+after any change to the mark. Favicons are cached hard by browsers — expect a delay
+(or hard-refresh) before a changed favicon shows in the tab.
+
 ## Paths
 
 Home and About use root-relative-to-file links (`assets/…`, `about.html`); product

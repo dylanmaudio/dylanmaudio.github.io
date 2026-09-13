@@ -6,11 +6,17 @@ are scaffolded later once their videos/copy are ready). Drop a YouTube id into a
 product's `youtube` field in common.py and the facade becomes a lazy-loaded,
 privacy-mode embed automatically.
 """
+import html as htmlmod
 import common as C
 
 # Which product pages to generate this run. All are built; nothing on the site
 # links to a page until its product ships (home cards flip to "Learn more" then).
 BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool"]
+
+# Slugs allowed into search results. Empty = every product page is parked
+# (noindex + absent from sitemap). At launch, add the slug here AND to
+# build_seo.PAGES so Google can index it.
+INDEXED = set()
 
 CSS = """
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
@@ -196,6 +202,16 @@ def build_page(slug, p):
              if p.get("trial") else "")
     maker = '<div class="srow"><span class="k">Maker</span><span class="v">dylanmaudio</span></div>'
 
+    p_title = f"{p['name']} — Dylan [M] Audio"
+    ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": p["name"],
+          "operatingSystem": "macOS 11+", "applicationCategory": "MultimediaApplication",
+          "description": htmlmod.unescape(p["tagline"]), "url": C.abs_url(f"products/{slug}/"),
+          "author": {"@type": "Person", "name": "Dylan Mitrovich", "url": C.SITE_ROOT + "/"}}
+    if p["status"] == "free":
+        ld["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    seo = C.seo_head(f"products/{slug}/", p_title, p["tagline"],
+                     image=f"assets/{p['icon']}", noindex=(slug not in INDEXED), ld=ld)
+
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -207,6 +223,7 @@ def build_page(slug, p):
 <link rel="icon" href="/assets/logo.png">
 <title>{p['name']} — Dylan [M] Audio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{seo}
 <style>{CSS}</style>
 </head>
 <body class="product">

@@ -13,10 +13,14 @@ Design system: dark "instrument-panel" theme, signal-blue accent, the app icons
 carry each product's identity. Assets live in /assets and are committed to the
 repo (no machine-specific paths), so the build is fully reproducible anywhere.
 """
-import pathlib
+import json, pathlib
 
 # Repo root = parent of this build/ dir.
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Canonical origin + default share image (used for canonical/OG/sitemap URLs).
+SITE_ROOT = "https://dylanmaudio.com"
+OG_IMAGE = "assets/og-cover.png"
 
 # --- External services (all public, client-side values) -------------------
 DISCORD_URL = "https://discord.gg/zBkPrFhzPQ"
@@ -135,6 +139,43 @@ REQUIREMENTS = "macOS 11 or later &middot; Apple Silicon"
 NONAFFIL = ("Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by "
             "Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, "
             "used here for identification only.")
+
+
+def abs_url(path: str) -> str:
+    return SITE_ROOT.rstrip("/") + "/" + path.lstrip("/")
+
+
+def seo_head(canonical: str, title: str, description: str, *, image: str = OG_IMAGE,
+             og_type: str = "website", noindex: bool = False, ld=None) -> str:
+    """Canonical + Open Graph + Twitter Card (+ optional JSON-LD) tags for one page.
+
+    `canonical` is a site-relative path ("/", "about.html", "products/x/").
+    `noindex` keeps a page out of search (parked product pages) — the page stays
+    crawlable so Google can *see* the noindex; it's simply left out of sitemap.xml.
+    """
+    url, img = abs_url(canonical), abs_url(image)
+    parts = []
+    if noindex:
+        parts.append('<meta name="robots" content="noindex, follow">')
+    parts += [
+        f'<link rel="canonical" href="{url}">',
+        f'<meta property="og:type" content="{og_type}">',
+        '<meta property="og:site_name" content="Dylan [M] Audio">',
+        f'<meta property="og:title" content="{title}">',
+        f'<meta property="og:description" content="{description}">',
+        f'<meta property="og:url" content="{url}">',
+        f'<meta property="og:image" content="{img}">',
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{title}">',
+        f'<meta name="twitter:description" content="{description}">',
+        f'<meta name="twitter:image" content="{img}">',
+    ]
+    if ld is not None:
+        parts.append('<script type="application/ld+json">'
+                     + json.dumps(ld, separators=(",", ":")) + '</script>')
+    return "\n".join(parts)
 
 
 def write(rel_path: str, html: str):

@@ -13,6 +13,7 @@ HTML = r"""<!DOCTYPE html>
 <link rel="icon" href="assets/logo.png">
 <title>About — Dylan [M] Audio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+__SEO__
 <style>
   :root {
     --bg:#0b0e12; --surface:#12171d; --surface-2:#161b21; --border:#232b34; --hairline:#1a212a;
@@ -286,7 +287,20 @@ HTML = r"""<!DOCTYPE html>
 </body>
 </html>"""
 
-out = (HTML.replace("__DISCORD_URL__", C.DISCORD_URL)
+ABOUT_TITLE = "About — Dylan [M] Audio"
+ABOUT_DESC = ("About Dylan Mitrovich — FOH engineer, educator and toolmaker with 20+ years "
+              "touring, and the software he builds for live-sound consoles.")
+ABOUT_LD = {"@context": "https://schema.org", "@type": "ProfilePage",
+            "mainEntity": {"@type": "Person", "name": "Dylan Mitrovich",
+                           "alternateName": "Dylan [M] Audio", "url": C.SITE_ROOT + "/",
+                           "jobTitle": "Front-of-House Engineer & Audio Educator",
+                           "knowsAbout": ["Live sound", "Front-of-house mixing", "Allen & Heath dLive",
+                                          "Dante", "Pro Tools", "Show control"],
+                           "sameAs": ["https://store.dylanmaudio.com", C.DISCORD_URL]}}
+
+out = (HTML.replace("__SEO__", C.seo_head("about.html", ABOUT_TITLE, ABOUT_DESC,
+                                          og_type="profile", ld=ABOUT_LD))
+           .replace("__DISCORD_URL__", C.DISCORD_URL)
            .replace("__DISCORD_SVG__", C.DISCORD_SVG)
            .replace("__NONAFFIL__", C.NONAFFIL))
 

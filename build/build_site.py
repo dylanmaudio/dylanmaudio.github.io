@@ -10,13 +10,14 @@ HTML = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="FOH engineer, educator and toolmaker. macOS software for live-sound consoles, plus 1-on-1 training.">
+<meta name="description" content="__DESC__">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="icon" href="assets/logo.png">
-<title>Dylan [M] Audio</title>
+<title>__TITLE__</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+__SEO__
 <style>
   :root {
     --bg:        #0b0e12;
@@ -522,7 +523,23 @@ HTML = r"""<!DOCTYPE html>
 </body>
 </html>"""
 
-out = (HTML.replace("__DISCORD_URL__", C.DISCORD_URL)
+TITLE = "Dylan [M] Audio — macOS Software for Allen & Heath dLive"
+DESC = ("macOS software for the Allen & Heath dLive — plus FOH engineering and 1-on-1 "
+        "training, from a working front-of-house engineer.")
+HOME_LD = {"@context": "https://schema.org", "@graph": [
+    {"@type": "WebSite", "@id": C.SITE_ROOT + "/#website", "url": C.SITE_ROOT + "/",
+     "name": "Dylan [M] Audio",
+     "description": "macOS software for the Allen & Heath dLive, plus FOH engineering and training."},
+    {"@type": "Person", "@id": C.SITE_ROOT + "/#dylan", "name": "Dylan Mitrovich",
+     "alternateName": "Dylan [M] Audio", "url": C.SITE_ROOT + "/",
+     "jobTitle": "Front-of-House Engineer & Audio Educator",
+     "sameAs": ["https://store.dylanmaudio.com", C.DISCORD_URL]},
+]}
+
+out = (HTML.replace("__TITLE__", TITLE)
+           .replace("__DESC__", DESC)
+           .replace("__SEO__", C.seo_head("/", TITLE, DESC, ld=HOME_LD))
+           .replace("__DISCORD_URL__", C.DISCORD_URL)
            .replace("__DISCORD_SVG__", C.DISCORD_SVG)
            .replace("__CAL_EMBED__", C.CAL_EMBED)
            .replace("__WEB3KEY__", C.WEB3FORMS_KEY)

@@ -144,7 +144,7 @@ NONAFFIL = ("Developed independently by dylanmaudio and not affiliated with, end
 # Cloudflare Web Analytics beacon token (cookieless, no consent banner needed).
 # Paste the token from cloudflare.com/web-analytics here, then rebuild + deploy.
 # Empty = analytics off (pages build byte-identical without it).
-CF_BEACON_TOKEN = ""
+CF_BEACON_TOKEN = "d20d574500344548bef2df8dba76b57d"
 
 
 def inject_analytics(html_str: str) -> str:

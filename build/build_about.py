@@ -305,4 +305,4 @@ out = (HTML.replace("__SEO__", C.seo_head("about.html", ABOUT_TITLE, ABOUT_DESC,
            .replace("__NONAFFIL__", C.NONAFFIL))
 
 if __name__ == "__main__":
-    C.write("about.html", out)
+    C.write("about.html", C.inject_analytics(out))

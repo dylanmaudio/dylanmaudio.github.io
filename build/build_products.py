@@ -287,7 +287,7 @@ def build_page(slug, p):
 </script>
 </body>
 </html>"""
-    C.write(f"products/{slug}/index.html", html)
+    C.write(f"products/{slug}/index.html", C.inject_analytics(html))
 
 
 if __name__ == "__main__":

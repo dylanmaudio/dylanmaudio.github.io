@@ -32,6 +32,21 @@ when its page is ready to ship.
   `Coming soon` badge / Download link to a `Learn more →` link pointing at
   `/products/<slug>/` (in `build_site.py`).
 
+## Analytics
+
+Cloudflare Web Analytics (cookieless, no consent banner). Paste the beacon token
+into `CF_BEACON_TOKEN` in `common.py`, rebuild, and it's injected before `</body>`
+on every page. Empty token = analytics off (pages build identically without it).
+
+## SEO
+
+`build_seo.py` writes `sitemap.xml` (only the pages in `PAGES` — live pages only)
+and `robots.txt`. `common.seo_head()` adds canonical + Open Graph + Twitter + JSON-LD
+to every page. `build_og.py` renders the 1200×630 share card (`assets/og-cover.png`)
+— run it separately (needs Chrome) when branding changes. Parked product pages are
+`noindex` and excluded from the sitemap until their slug is added to
+`build_products.INDEXED` **and** `build_seo.PAGES` at launch.
+
 ## Assets
 
 `/assets/*.png` (logo, favicons, app icons incl. `console-control.png`, the FOH

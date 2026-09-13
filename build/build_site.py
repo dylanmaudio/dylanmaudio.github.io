@@ -546,4 +546,4 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__NONAFFIL__", C.NONAFFIL))
 
 if __name__ == "__main__":
-    C.write("index.html", out)
+    C.write("index.html", C.inject_analytics(out))

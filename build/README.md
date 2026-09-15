@@ -18,6 +18,7 @@ Then commit + push; GitHub Pages serves `main` at dylanmaudio.com.
 | `build_site.py` | `index.html` | Home. Hero, Software (Console Control flagship + utility grid + bundles), About teaser, Book, Contact, Community (Discord). |
 | `build_about.py` | `about.html` | Bio, credentials, what-I-do, training, CTA. |
 | `build_products.py` | `products/<slug>/index.html` | Data-driven per-product pages. |
+| `build_redirects.py` | `<slug>/index.html` | Short links (e.g. `/discord`). Add a row to `REDIRECTS`. |
 
 ## Product pages
 
@@ -31,6 +32,22 @@ when its page is ready to ship.
 - **When a product page goes live,** switch its home-page card CTA from the
   `Coming soon` badge / Download link to a `Learn more →` link pointing at
   `/products/<slug>/` (in `build_site.py`).
+
+## Short links
+
+GitHub Pages is static — there are no server-side 301s — so `dylanmaudio.com/discord`
+is a real page that bounces the browser onward via `<meta http-equiv="refresh">`
+(works with JS off) plus `location.replace()` (fires sooner, and keeps the short
+link out of the back-button history). A visible fallback link covers the case
+where both are blocked.
+
+Add one by adding a `slug -> (url, label)` row to `REDIRECTS` in
+`build_redirects.py` and rebuilding. `/discord` reads `common.DISCORD_URL`, so
+changing the invite in one place updates the site links *and* the short link.
+
+Redirect pages are `noindex` and stay out of `sitemap.xml` — the destination is
+what deserves indexing, not the bounce. They also skip the analytics beacon: it
+loads deferred, so the redirect always wins the race and it would only add latency.
 
 ## Analytics
 

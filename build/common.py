@@ -87,7 +87,7 @@ PRODUCTS = {
     "talk-light-trigger": dict(
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
         icon="talk-light-trigger.png", affiliated=True, status="buy", trial=True, price="$19",
-        store=CHECKOUT["talk-light-trigger"], youtube=None,
+        store=CHECKOUT["talk-light-trigger"], youtube="jP2Yyvd1uq4",
         sale=dict(now="$9", was="$19", code="TLTINTROSALE",
                   until="2026-10-31", until_label="31 October 2026"),
         tagline="Turn a console channel into a hands-free talkback / cue light.",

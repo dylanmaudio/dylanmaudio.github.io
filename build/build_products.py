@@ -16,7 +16,7 @@ BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-tri
 # Slugs allowed into search results. Empty = every product page is parked
 # (noindex + absent from sitemap). At launch, add the slug here AND to
 # build_seo.PAGES so Google can index it.
-INDEXED = set()
+INDEXED = {"talk-light-trigger"}
 
 CSS = """
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
@@ -165,7 +165,8 @@ def hero_cta(p):
         return (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     if p["status"] == "buy":
-        return f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+        return (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     # coming
     return ('<span class="btn btn-ghost disabled">Coming soon</span>'
             f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>')
@@ -176,6 +177,13 @@ def band(p):
         h, sub = f"{p['name']} is free.", "Download it, and drop into the Discord if you hit a snag or have a request."
         cta = (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
+    elif p["status"] == "buy":
+        price = p.get("price", "")
+        h = f"Get {p['name']}."
+        sub = ("Buy a licence" + (f" &mdash; {price}" if price else "")
+               + ", or try it free first with 20-minute sessions.")
+        cta = (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+               f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     else:
         h, sub = f"{p['name']} is coming soon.", "Join the Discord to hear the moment it lands — and help shape it."
         cta = (f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>'
@@ -189,7 +197,7 @@ def status_row(p):
     if p["status"] == "free":
         return '<div class="srow"><span class="k">Price</span><span class="v g">Free</span></div>'
     if p["status"] == "buy":
-        return '<div class="srow"><span class="k">Price</span><span class="v">In store</span></div>'
+        return f'<div class="srow"><span class="k">Price</span><span class="v">{p.get("price", "In store")}</span></div>'
     return '<div class="srow"><span class="k">Status</span><span class="v">Coming soon</span></div>'
 
 
@@ -209,6 +217,11 @@ def build_page(slug, p):
           "author": {"@type": "Person", "name": "Dylan Mitrovich", "url": C.SITE_ROOT + "/"}}
     if p["status"] == "free":
         ld["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    elif p["status"] == "buy" and p.get("price"):
+        ld["offers"] = {"@type": "Offer", "price": p["price"].lstrip("$"),
+                        "priceCurrency": "USD", "url": p["store"]}
+    manual_btn = (f'<a class="btn btn-ghost" href="/guides/{slug}-quick-reference.pdf" '
+                  f'target="_blank" rel="noopener">Manual (PDF) &#8599;</a>')
     seo = C.seo_head(f"products/{slug}/", p_title, p["tagline"],
                      image=f"assets/{p['icon']}", noindex=(slug not in INDEXED), ld=ld)
 
@@ -240,7 +253,7 @@ def build_page(slug, p):
       </div>
     </div>
     <p class="p-tagline">{p['tagline']}</p>
-    <div class="p-cta-row">{hero_cta(p)}</div>
+    <div class="p-cta-row">{hero_cta(p)}{manual_btn}</div>
   </div>
 </section>
 

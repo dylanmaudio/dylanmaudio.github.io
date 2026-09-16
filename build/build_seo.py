@@ -12,6 +12,7 @@ import common as C
 PAGES = [
     ("/", "1.0"),
     ("about.html", "0.8"),
+    ("products/talk-light-trigger/", "0.7"),
 ]
 
 def build():

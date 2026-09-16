@@ -86,7 +86,7 @@ PRODUCTS = {
     ),
     "talk-light-trigger": dict(
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
-        icon="talk-light-trigger.png", affiliated=True, status="coming", trial=True,
+        icon="talk-light-trigger.png", affiliated=True, status="buy", trial=True, price="$19",
         store=CHECKOUT["talk-light-trigger"], youtube=None,
         tagline="Turn a console channel into a hands-free talkback / cue light.",
         lead=("Talk Light Trigger watches a dLive channel and fires a talkback / cue light the instant "
@@ -102,7 +102,7 @@ PRODUCTS = {
     ),
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
-        icon="pilot-tone-trigger.png", affiliated=True, status="coming", trial=True,
+        icon="pilot-tone-trigger.png", affiliated=True, status="coming", trial=True, price="$59",
         store=CHECKOUT["pilot-tone-trigger"], youtube=None,
         tagline="Detects a dropped pilot tone and recalls your backup scene — automatically.",
         lead=("Pilot Tone Trigger listens for a pilot tone on any critical audio path and drives automatic "
@@ -118,7 +118,7 @@ PRODUCTS = {
     ),
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
-        icon="time-code-tool.png", affiliated=False, status="coming", trial=True,
+        icon="time-code-tool.png", affiliated=False, status="coming", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], youtube=None,
         tagline="Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.",
         lead=("Time Code Tool reads incoming LTC, regenerates it as MTC on a virtual port, or generates clean "

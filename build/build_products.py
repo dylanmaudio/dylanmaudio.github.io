@@ -16,7 +16,7 @@ BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-tri
 # Slugs allowed into search results. Empty = every product page is parked
 # (noindex + absent from sitemap). At launch, add the slug here AND to
 # build_seo.PAGES so Google can index it.
-INDEXED = {"talk-light-trigger"}
+INDEXED = {"talk-light-trigger", "midi-bridge"}
 
 CSS = """
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
@@ -159,7 +159,8 @@ def video_block(p):
     if p["youtube"]:
         yt = p["youtube"]
         facade = (f'<div class="video-facade" data-yt="{yt}" role="button" tabindex="0" aria-label="Play intro video">'
-                  f'<img src="https://i.ytimg.com/vi/{yt}/maxresdefault.jpg" alt="{p["name"]} intro video" loading="lazy" />'
+                  f'<img src="https://i.ytimg.com/vi/{yt}/maxresdefault.jpg" alt="{p["name"]} intro video" loading="lazy" '
+                  f'onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/{yt}/hqdefault.jpg\'" />'
                   f'<span class="play">{PLAY}</span></div>')
     else:
         facade = (f'<div class="video-soon"><span class="ring">{PLAY}</span>'

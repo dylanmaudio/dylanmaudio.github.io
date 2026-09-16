@@ -69,7 +69,7 @@ PRODUCTS = {
     "midi-bridge": dict(
         name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
         icon="midi-bridge.png", affiliated=True, status="free",
-        store=CHECKOUT["midi-bridge"], youtube=None,
+        store=CHECKOUT["midi-bridge"], youtube="2M57Z-v7fs0",
         tagline="Bridge MIDI to your dLive over TCP, with a live decoded message monitor.",
         lead=("MIDI Bridge carries MIDI over TCP to and from your dLive, and ships with a live, decoded "
               "message monitor — every fader, mute and scene crossing the wire in plain language, with "

@@ -54,6 +54,13 @@ CSS = """
   .btn-ghost{border-color:var(--border);color:var(--text);} .btn-ghost:hover{border-color:var(--muted);background:var(--surface);}
   .btn-discord{background:#5865F2;color:#fff;font-weight:600;} .btn-discord:hover{background:#6b76f0;}
   .btn.disabled{opacity:.55;pointer-events:none;}
+  [hidden]{display:none!important;}
+  .sale-banner{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:22px 0 0;padding:12px 16px;
+    border-radius:11px;border:1px solid color-mix(in srgb,var(--green) 40%,var(--border));background:rgba(98,210,122,0.08);}
+  .sale-banner .s-hi{font-weight:640;color:var(--green);font-size:1.02rem;}
+  .sale-banner .s-sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:0.02em;}
+  .sale-banner code, .p-band code{font-family:var(--mono);color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:1px 6px;}
+  .srow s, .p-band s{color:var(--dim);}
   section{padding-block:clamp(52px,8vw,96px);}
   /* product hero */
   .p-hero{border-bottom:1px solid var(--hairline);position:relative;overflow:hidden;}
@@ -179,9 +186,17 @@ def band(p):
                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
     elif p["status"] == "buy":
         price = p.get("price", "")
+        sale = p.get("sale")
         h = f"Get {p['name']}."
-        sub = ("Buy a licence" + (f" &mdash; {price}" if price else "")
-               + ", or try it free first with 20-minute sessions.")
+        reg_sub = ("Buy a licence" + (f" &mdash; {price}" if price else "")
+                   + ", or try it free first with 20-minute sessions.")
+        if sale:
+            sub = (f'<span class="sale-only" data-sale-until="{sale["until"]}"><b>Intro sale &mdash; {sale["now"]}</b> '
+                   f'with code <code>{sale["code"]}</code> until {sale["until_label"]} '
+                   f'<s>(was {sale["was"]})</s>. Or try it free first, 20-minute sessions.</span>'
+                   f'<span class="sale-reg" hidden>{reg_sub}</span>')
+        else:
+            sub = reg_sub
         cta = (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     else:
@@ -197,7 +212,14 @@ def status_row(p):
     if p["status"] == "free":
         return '<div class="srow"><span class="k">Price</span><span class="v g">Free</span></div>'
     if p["status"] == "buy":
-        return f'<div class="srow"><span class="k">Price</span><span class="v">{p.get("price", "In store")}</span></div>'
+        sale = p.get("sale")
+        if sale:
+            v = (f'<span class="sale-only" data-sale-until="{sale["until"]}"><s>{sale["was"]}</s> '
+                 f'<b style="color:var(--green)">{sale["now"]}</b></span>'
+                 f'<span class="sale-reg" hidden>{p.get("price", "")}</span>')
+        else:
+            v = p.get("price", "In store")
+        return f'<div class="srow"><span class="k">Price</span><span class="v">{v}</span></div>'
     return '<div class="srow"><span class="k">Status</span><span class="v">Coming soon</span></div>'
 
 
@@ -218,8 +240,19 @@ def build_page(slug, p):
     if p["status"] == "free":
         ld["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     elif p["status"] == "buy" and p.get("price"):
-        ld["offers"] = {"@type": "Offer", "price": p["price"].lstrip("$"),
-                        "priceCurrency": "USD", "url": p["store"]}
+        sale = p.get("sale")
+        if sale:
+            ld["offers"] = {"@type": "Offer", "price": sale["now"].lstrip("$"), "priceCurrency": "USD",
+                            "url": p["store"], "priceValidUntil": sale["until"]}
+        else:
+            ld["offers"] = {"@type": "Offer", "price": p["price"].lstrip("$"),
+                            "priceCurrency": "USD", "url": p["store"]}
+    sale = p.get("sale")
+    sale_banner = ("" if not sale else
+                   f'<div class="sale-banner sale-only" data-sale-until="{sale["until"]}">'
+                   f'<span class="s-hi">Intro sale &mdash; {sale["now"]}</span>'
+                   f'<span class="s-sub"><s>was {sale["was"]}</s> &middot; code <b>{sale["code"]}</b> &middot; until {sale["until_label"]}</span>'
+                   f'</div>')
     manual_btn = (f'<a class="btn btn-ghost" href="/guides/{slug}-quick-reference.pdf" '
                   f'target="_blank" rel="noopener">Manual (PDF) &#8599;</a>')
     seo = C.seo_head(f"products/{slug}/", p_title, p["tagline"],
@@ -253,6 +286,7 @@ def build_page(slug, p):
       </div>
     </div>
     <p class="p-tagline">{p['tagline']}</p>
+    {sale_banner}
     <div class="p-cta-row">{hero_cta(p)}{manual_btn}</div>
   </div>
 </section>
@@ -297,6 +331,7 @@ def build_page(slug, p):
     f.addEventListener("click", load);
     f.addEventListener("keydown", function (e) {{ if (e.key === "Enter" || e.key === " ") {{ e.preventDefault(); load(); }} }});
   }});
+  {C.SALE_GUARD_JS}
 </script>
 </body>
 </html>"""

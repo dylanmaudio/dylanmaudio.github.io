@@ -88,6 +88,8 @@ PRODUCTS = {
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
         icon="talk-light-trigger.png", affiliated=True, status="buy", trial=True, price="$19",
         store=CHECKOUT["talk-light-trigger"], youtube=None,
+        sale=dict(now="$9", was="$19", code="TLTINTROSALE",
+                  until="2026-10-31", until_label="31 October 2026"),
         tagline="Turn a console channel into a hands-free talkback / cue light.",
         lead=("Talk Light Trigger watches a dLive channel and fires a talkback / cue light the instant "
               "signal crosses your threshold — hands-free tally for the podium, the pit, or the booth, "
@@ -154,6 +156,19 @@ def inject_analytics(html_str: str) -> str:
     snippet = ('<script defer src="https://static.cloudflareinsights.com/beacon.min.js" '
                'data-cf-beacon=\'{"token": "' + CF_BEACON_TOKEN + '"}\'></script>\n')
     return html_str.replace("</body>", snippet + "</body>", 1)
+
+
+# Self-expiring sale guard: after the date in [data-sale-until], hide every
+# .sale-only element and reveal every .sale-reg one (the regular-price fallback),
+# so a time-boxed promo reverts on its own without a rebuild. Uses the native
+# `hidden` attribute (see the [hidden]{display:none!important} rule in the CSS).
+SALE_GUARD_JS = (
+    "(function(){var s=document.querySelector('[data-sale-until]');if(!s)return;"
+    "var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');"
+    "if(Date.now()>end.getTime()){"
+    "document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});"
+    "document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();"
+)
 
 
 def abs_url(path: str) -> str:

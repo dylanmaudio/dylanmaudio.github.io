@@ -146,6 +146,8 @@ __SEO__
   .card-foot { margin-top: auto; padding-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .price { font-family: var(--mono); font-size: 15px; color: var(--text); font-variant-numeric: tabular-nums; }
   .price.free { color: var(--green); }
+  .price s { color: var(--dim); font-size: 0.82em; margin-right: 2px; }
+  [hidden] { display: none !important; }
   .card-link { font-size: 13px; font-weight: 500; color: var(--blue); display: inline-flex; align-items: center; gap: 6px; }
   .card-link .arw { transition: transform .18s; }
   .card:hover .card-link .arw { transform: translateX(3px); }
@@ -326,7 +328,7 @@ __SEO__
         </div>
         <p>Watches a dLive channel and fires a talkback / cue light the instant signal crosses your threshold &mdash; hands-free tally for the podium, the pit, or the booth.</p>
         <div class="specs"><span class="spec">signal &rarr; trigger</span><span class="spec">tally</span><span class="spec">menu bar</span></div>
-        <div class="card-foot"><span class="price">$19</span><a href="products/talk-light-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
+        <div class="card-foot"><span class="price sale-only" data-sale-until="2026-10-31"><s>$19</s> <b style="color:var(--green)">$9</b></span><span class="price sale-reg" hidden>$19</span><a href="products/talk-light-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>
 
       <article class="card">
@@ -519,6 +521,7 @@ __SEO__
         });
     });
   })();
+  __SALE_GUARD__
 </script>
 </body>
 </html>"""
@@ -543,7 +546,8 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__DISCORD_SVG__", C.DISCORD_SVG)
            .replace("__CAL_EMBED__", C.CAL_EMBED)
            .replace("__WEB3KEY__", C.WEB3FORMS_KEY)
-           .replace("__NONAFFIL__", C.NONAFFIL))
+           .replace("__NONAFFIL__", C.NONAFFIL)
+           .replace("__SALE_GUARD__", C.SALE_GUARD_JS))
 
 if __name__ == "__main__":
     C.write("index.html", C.inject_analytics(out))

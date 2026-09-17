@@ -166,7 +166,12 @@ __SEO__
   .bundle .b-main { flex: 1; min-width: 220px; }
   .bundle h4 { margin: 0; font-size: 1.05rem; font-weight: 600; display: flex; align-items: center; gap: 10px; }
   .bundle p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; }
-  .bundle .b-buy { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; }
+  .bundle .b-buy { display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; gap: 6px; }
+  .bundle .save { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--green); border: 1px solid color-mix(in srgb, var(--green) 40%, var(--border));
+    background: rgba(98,210,122,0.10); padding: 2px 7px; border-radius: 999px; }
+  .bundle .b-price { font-family: var(--mono); font-size: 17px; font-variant-numeric: tabular-nums; }
+  .bundle .b-price .was { color: var(--dim); text-decoration: line-through; font-size: 0.78em; margin-right: 4px; }
 
   .note { margin-top: 30px; font-family: var(--mono); font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 9px; }
   .note .d { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
@@ -354,8 +359,8 @@ __SEO__
 
     <div class="bundles">
       <div class="bundle">
-        <div class="b-main"><h4>dLive Menubar Utilities</h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the dLive menu-bar set. One key unlocks both paid apps.</p></div>
-        <div class="b-buy"><span class="soon">Coming soon</span></div>
+        <div class="b-main"><h4>dLive Menubar Utilities <span class="save">Save $9</span></h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the dLive menu-bar set. One key unlocks both paid apps.</p></div>
+        <div class="b-buy"><div class="b-price"><span class="was">$78</span> $69</div><a href="__BUY_DLIVE_MENUBAR__" class="card-link">Get bundle <span class="arw">&rarr;</span></a></div>
       </div>
       <div class="bundle best">
         <div class="b-main"><h4>All Menubar Utilities</h4><p>Every menu-bar app &mdash; TLT, PTT and Time Code Tool &mdash; in one licence. One key unlocks all three paid apps; MIDI Bridge is free for everyone.</p></div>
@@ -547,7 +552,8 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__CAL_EMBED__", C.CAL_EMBED)
            .replace("__WEB3KEY__", C.WEB3FORMS_KEY)
            .replace("__NONAFFIL__", C.NONAFFIL)
-           .replace("__SALE_GUARD__", C.SALE_GUARD_JS))
+           .replace("__SALE_GUARD__", C.SALE_GUARD_JS)
+           .replace("__BUY_DLIVE_MENUBAR__", C.CHECKOUT["dlive-menubar"]))
 
 if __name__ == "__main__":
     C.write("index.html", C.inject_analytics(out))

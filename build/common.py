@@ -35,6 +35,9 @@ CHECKOUT = {
     "talk-light-trigger": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6",
     "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d",
     "time-code-tool": f"{STORE_URL}/checkout/buy/52a61e9a-34cd-4ee7-88ca-c859e14fd365",
+    # Bundles
+    "dlive-menubar": f"{STORE_URL}/checkout/buy/f6c14f2a-d9f6-4d0f-adbd-9eafec887950",  # TLT+PTT (+free Bridge)
+    "all-menubar": f"{STORE_URL}/checkout/buy/7ce181d1-c1c1-4607-8389-88744e958f46",    # + Time Code Tool
 }
 
 # Discord glyph (inline SVG, uses currentColor).

@@ -162,7 +162,7 @@
   </div>
 </section>
 
-<section><div class="video-wrap"><div class="video-frame"><div class="video-facade" data-yt="2M57Z-v7fs0" role="button" tabindex="0" aria-label="Play intro video"><img src="https://i.ytimg.com/vi/2M57Z-v7fs0/maxresdefault.jpg" alt="MIDI Bridge intro video" loading="lazy" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/2M57Z-v7fs0/hqdefault.jpg'" /><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div></div></div></section>
+<section><div class="video-wrap"><div class="video-frame"><iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/2M57Z-v7fs0?rel=0" title="MIDI Bridge intro video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></section>
 
 <section><div class="wrap p-grid">
   <div class="p-body">
@@ -195,20 +195,6 @@
 </footer>
 
 <script>
-  // Lazy-load the YouTube embed only when the facade is activated.
-  document.querySelectorAll(".video-facade[data-yt]").forEach(function (f) {
-    function load() {
-      var id = f.getAttribute("data-yt");
-      var ifr = document.createElement("iframe");
-      ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-      ifr.title = "Intro video";
-      ifr.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-      ifr.allowFullscreen = true;
-      f.parentNode.replaceChild(ifr, f);
-    }
-    f.addEventListener("click", load);
-    f.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); } });
-  });
   (function(){var s=document.querySelector('[data-sale-until]');if(!s)return;var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');if(Date.now()>end.getTime()){document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>

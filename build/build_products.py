@@ -157,15 +157,17 @@ PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
 
 def video_block(p):
     if p["youtube"]:
-        yt = p["youtube"]
-        facade = (f'<div class="video-facade" data-yt="{yt}" role="button" tabindex="0" aria-label="Play intro video">'
-                  f'<img src="https://i.ytimg.com/vi/{yt}/maxresdefault.jpg" alt="{p["name"]} intro video" loading="lazy" '
-                  f'onerror="this.onerror=null;this.src=\'https://i.ytimg.com/vi/{yt}/hqdefault.jpg\'" />'
-                  f'<span class="play">{PLAY}</span></div>')
+        # Direct (lazy) embed: the viewer's single click lands on YouTube's own
+        # play button and starts with sound every time — no autoplay-policy
+        # second click. Privacy via youtube-nocookie.
+        inner = (f'<iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/{p["youtube"]}?rel=0" '
+                 f'title="{p["name"]} intro video" loading="lazy" '
+                 f'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" '
+                 f'allowfullscreen></iframe>')
     else:
-        facade = (f'<div class="video-soon"><span class="ring">{PLAY}</span>'
-                  f'<span class="lbl">Intro video coming soon</span></div>')
-    return f'<section><div class="video-wrap"><div class="video-frame">{facade}</div></div></section>'
+        inner = (f'<div class="video-soon"><span class="ring">{PLAY}</span>'
+                 f'<span class="lbl">Intro video coming soon</span></div>')
+    return f'<section><div class="video-wrap"><div class="video-frame">{inner}</div></div></section>'
 
 
 def hero_cta(p):
@@ -318,20 +320,6 @@ def build_page(slug, p):
 {FOOTER}
 
 <script>
-  // Lazy-load the YouTube embed only when the facade is activated.
-  document.querySelectorAll(".video-facade[data-yt]").forEach(function (f) {{
-    function load() {{
-      var id = f.getAttribute("data-yt");
-      var ifr = document.createElement("iframe");
-      ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-      ifr.title = "Intro video";
-      ifr.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-      ifr.allowFullscreen = true;
-      f.parentNode.replaceChild(ifr, f);
-    }}
-    f.addEventListener("click", load);
-    f.addEventListener("keydown", function (e) {{ if (e.key === "Enter" || e.key === " ") {{ e.preventDefault(); load(); }} }});
-  }});
   {C.SALE_GUARD_JS}
 </script>
 </body>

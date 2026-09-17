@@ -196,20 +196,6 @@
 </footer>
 
 <script>
-  // Lazy-load the YouTube embed only when the facade is activated.
-  document.querySelectorAll(".video-facade[data-yt]").forEach(function (f) {
-    function load() {
-      var id = f.getAttribute("data-yt");
-      var ifr = document.createElement("iframe");
-      ifr.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0";
-      ifr.title = "Intro video";
-      ifr.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
-      ifr.allowFullscreen = true;
-      f.parentNode.replaceChild(ifr, f);
-    }
-    f.addEventListener("click", load);
-    f.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); load(); } });
-  });
   (function(){var s=document.querySelector('[data-sale-until]');if(!s)return;var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');if(Date.now()>end.getTime()){document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>

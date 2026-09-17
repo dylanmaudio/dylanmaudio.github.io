@@ -14,6 +14,7 @@ PAGES = [
     ("about.html", "0.8"),
     ("products/talk-light-trigger/", "0.7"),
     ("products/midi-bridge/", "0.7"),
+    ("products/pilot-tone-trigger/", "0.7"),
 ]
 
 def build():

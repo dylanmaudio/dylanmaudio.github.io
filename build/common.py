@@ -104,8 +104,8 @@ PRODUCTS = {
     ),
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
-        icon="pilot-tone-trigger.png", affiliated=True, status="coming", trial=True, price="$59",
-        store=CHECKOUT["pilot-tone-trigger"], youtube=None,
+        icon="pilot-tone-trigger.png", affiliated=True, status="buy", trial=True, price="$59",
+        store=CHECKOUT["pilot-tone-trigger"], youtube="GOfFZzGTEuA",
         tagline="Detects a dropped pilot tone and recalls your backup scene — automatically.",
         lead=("Pilot Tone Trigger listens for a pilot tone on any critical audio path and drives automatic "
               "failover the instant it drops — for playback rigs and external processing (Waves and similar) "

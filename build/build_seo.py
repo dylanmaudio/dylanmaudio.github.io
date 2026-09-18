@@ -15,6 +15,7 @@ PAGES = [
     ("products/talk-light-trigger/", "0.7"),
     ("products/midi-bridge/", "0.7"),
     ("products/pilot-tone-trigger/", "0.7"),
+    ("products/time-code-tool/", "0.7"),
 ]
 
 def build():

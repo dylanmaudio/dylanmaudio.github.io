@@ -123,8 +123,8 @@ PRODUCTS = {
     ),
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
-        icon="time-code-tool.png", affiliated=False, status="coming", trial=True, price="$69",
-        store=CHECKOUT["time-code-tool"], youtube=None,
+        icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
+        store=CHECKOUT["time-code-tool"], youtube="A6iKjxHxXA4",
         tagline="Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.",
         lead=("Time Code Tool reads incoming LTC, regenerates it as MTC on a virtual port, or generates clean "
               "timecode to a WAV file — a far more solid, stable LTC endpoint than piping LTC straight into a "

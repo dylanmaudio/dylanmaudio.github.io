@@ -353,7 +353,7 @@ __SEO__
         </div>
         <p>Read incoming LTC, regenerate it as MTC on a virtual port, or generate clean timecode to a WAV. A far more solid LTC endpoint than piping LTC straight into a DAW. Console-agnostic.</p>
         <div class="specs"><span class="spec">LTC in</span><span class="spec">MTC out</span><span class="spec">LTC&rarr;WAV</span></div>
-        <div class="card-foot"><span class="soon">Coming soon</span></div>
+        <div class="card-foot"><span class="price">$69</span><a href="products/time-code-tool/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>
     </div>
 
@@ -363,8 +363,8 @@ __SEO__
         <div class="b-buy"><div class="b-price"><span class="was">$78</span> $69</div><a href="__BUY_DLIVE_MENUBAR__" class="card-link">Get bundle <span class="arw">&rarr;</span></a></div>
       </div>
       <div class="bundle best">
-        <div class="b-main"><h4>All Menubar Utilities</h4><p>Every menu-bar app &mdash; TLT, PTT and Time Code Tool &mdash; in one licence. One key unlocks all three paid apps; MIDI Bridge is free for everyone.</p></div>
-        <div class="b-buy"><span class="soon">Coming soon</span></div>
+        <div class="b-main"><h4>All Menubar Utilities <span class="save">Best value &middot; save $38</span></h4><p>Every menu-bar app &mdash; TLT, PTT and Time Code Tool &mdash; in one licence. One key unlocks all three paid apps; MIDI Bridge is free for everyone.</p></div>
+        <div class="b-buy"><div class="b-price"><span class="was">$147</span> $109</div><a href="__BUY_ALL_MENUBAR__" class="card-link" style="color: var(--green);">Get bundle <span class="arw">&rarr;</span></a></div>
       </div>
     </div>
 
@@ -553,7 +553,8 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__WEB3KEY__", C.WEB3FORMS_KEY)
            .replace("__NONAFFIL__", C.NONAFFIL)
            .replace("__SALE_GUARD__", C.SALE_GUARD_JS)
-           .replace("__BUY_DLIVE_MENUBAR__", C.CHECKOUT["dlive-menubar"]))
+           .replace("__BUY_DLIVE_MENUBAR__", C.CHECKOUT["dlive-menubar"])
+           .replace("__BUY_ALL_MENUBAR__", C.CHECKOUT["all-menubar"]))
 
 if __name__ == "__main__":
     C.write("index.html", C.inject_analytics(out))

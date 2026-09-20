@@ -45,6 +45,13 @@ Add one by adding a `slug -> (url, label)` row to `REDIRECTS` in
 `build_redirects.py` and rebuilding. `/discord` reads `common.DISCORD_URL`, so
 changing the invite in one place updates the site links *and* the short link.
 
+Destinations can be external (`/discord` → discord.gg) or site-relative
+(`/sessions` → `/#book`, the Sessions & consults section on the home page).
+Site-relative ones are verified at build time — a missing page or a renamed
+section id fails the build rather than quietly landing visitors at the top of
+the home page. So if you rename a `<section id="...">` that a short link points
+at, the build tells you.
+
 Redirect pages are `noindex` and stay out of `sitemap.xml` — the destination is
 what deserves indexing, not the bounce. They also skip the analytics beacon: it
 loads deferred, so the redirect always wins the race and it would only add latency.

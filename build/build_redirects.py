@@ -16,8 +16,12 @@ Add a short link by adding a row to REDIRECTS below, then rebuild.
 import common as C
 
 # slug -> (destination URL, human label shown for the half-second it renders)
+# Site-relative destinations ("/", "/#book", "/about.html") are checked below
+# against the generated HTML, so a renamed section id breaks the build instead
+# of silently dumping visitors at the top of the page.
 REDIRECTS = {
-    "discord": (C.DISCORD_URL, "the dylanmaudio Discord"),
+    "discord":  (C.DISCORD_URL, "the dylanmaudio Discord"),
+    "sessions": ("/#book", "sessions &amp; consults"),
 }
 
 HTML = r"""<!DOCTYPE html>
@@ -61,8 +65,22 @@ HTML = r"""<!DOCTYPE html>
 """
 
 
+def check_internal(dest: str):
+    """Fail the build if a site-relative destination (or its #anchor) is missing."""
+    path, _, frag = dest.lstrip("/").partition("#")
+    target = C.ROOT / (path or "index.html")
+    if target.is_dir():
+        target = target / "index.html"
+    if not target.exists():
+        raise SystemExit(f"redirect target missing: {dest} -> {target}")
+    if frag and f'id="{frag}"' not in target.read_text(encoding="utf-8"):
+        raise SystemExit(f"redirect anchor missing: {dest} (no id=\"{frag}\" in {target.name})")
+
+
 def build():
     for slug, (dest, label) in REDIRECTS.items():
+        if dest.startswith("/"):
+            check_internal(dest)
         html = (HTML.replace("__DEST__", dest).replace("__LABEL__", label))
         C.write(f"{slug}/index.html", html)
 

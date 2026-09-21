@@ -18,6 +18,7 @@ Then commit + push; GitHub Pages serves `main` at dylanmaudio.com.
 | `build_site.py` | `index.html` | Home. Hero, Software (Console Control flagship + utility grid + bundles), About teaser, Book, Contact, Community (Discord). |
 | `build_about.py` | `about.html` | Bio, credentials, what-I-do, training, CTA. |
 | `build_products.py` | `products/<slug>/index.html` | Data-driven per-product pages. |
+| `build_404.py` | `404.html` | Not-found page. GitHub Pages serves it for any missing path, at any depth, so it uses site-root paths only. `noindex`, not in the sitemap. Its app links follow `build_products.BUILD`. |
 | `build_redirects.py` | `<slug>/index.html` | Short links (e.g. `/discord`). Add a row to `REDIRECTS`. |
 
 ## Product pages

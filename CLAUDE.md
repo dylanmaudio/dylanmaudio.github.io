@@ -21,7 +21,9 @@ then commit + push. Editing `index.html`, `about.html` or
   (`PRODUCTS` and the shared constants).
 - **Home page layout** → `build/build_site.py`. **About** →
   `build_about.py`. **Per-product pages** → `build_products.py` (its
-  `BUILD = [...]` list controls which pages ship). **Short links** →
+  `BUILD = [...]` list controls which pages ship). **404 page** →
+  `build_404.py` (served by Pages for any missing path, so site-root paths
+  only; its app links follow `BUILD`). **Short links** →
   `build_redirects.py` (static Pages has no server-side 301s, so these are
   real pages using `<meta http-equiv="refresh">` plus `location.replace()`).
 - See [build/README.md](build/README.md) for the full table, including how

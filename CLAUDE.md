@@ -31,11 +31,33 @@ then commit + push. Editing `index.html`, `about.html` or
 
 **Public on the Lemon Squeezy store** (`store.dylanmaudio.com`): MIDI Bridge
 (free), Talk Light Trigger ($19), Pilot Tone Trigger ($59) and Time Code Tool
-($69), plus both bundles (TLT+PTT, and the same plus Time Code Tool).
+($69), plus both bundles — **dLive Menubar Utilities** (TLT + PTT) and **All
+Menubar Utilities** (the same plus Time Code Tool). Those are the store's
+product names (operator, 2026-09-21); use them exactly.
 
 **Not public:** Console Control (`status="coming"` in `PRODUCTS`) and the
 Bitfocus Companion module. Their pages and CTAs must not imply availability
-unless the operator says an item has shipped.
+unless the operator says an item has shipped. **Console Control has no
+product page until launch** (operator, 2026-09-21): it's left out of
+`build_products.BUILD`; the home page's "Coming soon" flagship card stays.
+Add the slug back to `BUILD` (and `INDEXED`, and `build_seo.PAGES`) at launch.
+
+## Sources of truth — read them, don't copy them
+
+The prices and names above are a convenience copy. What the site says has to
+match facts owned elsewhere; read them from their owner at the start of a
+session rather than trusting what's already on the page. A daily cross-repo
+digest flags any page that disagrees.
+
+| Fact | Owner |
+| --- | --- |
+| Which version of each app is public, and release dates | `~/Documents/GitHub/dLive Utility Apps/CLAUDE.md`, "What is public" |
+| What changed in each version | `~/Documents/GitHub/dLive Utility Apps/apps/<app>/CHANGELOG.md` |
+| Prices, sales, bundle names, the marketing plan | `~/Documents/GitHub/dylanmaudio-marketing/STATUS.md` |
+| Store and social copy | `~/Documents/GitHub/dylanmaudio-marketing/copy/app-descriptions.md` |
+| The short major-features list per app | `~/Documents/GitHub/dylanmaudio-marketing/copy/features.md` |
+| Where the repos disagree, including this site | `~/Documents/GitHub/dylanmaudio-marketing/digest/LATEST.md` |
+| Bugs, ideas and requests (site ones labelled `area:website`) | GitHub Issues on `dylanmaudio/dLive-Utility-Apps` |
 
 Current DMGs are Apple-Silicon-only — `REQUIREMENTS` in `build/common.py`
 declares *"macOS 11 or later · Apple Silicon"* until the universal2 rebuild

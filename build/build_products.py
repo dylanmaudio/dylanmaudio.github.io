@@ -11,7 +11,10 @@ import common as C
 
 # Which product pages to generate this run. All are built; nothing on the site
 # links to a page until its product ships (home cards flip to "Learn more" then).
-BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool"]
+# Console Control is not in BUILD: its product page stays down until it
+# launches (operator, 2026-09-21). The home page's "Coming soon" flagship
+# card is separate (build_site.py) and stays. Add the slug back at launch.
+BUILD = ["midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool"]
 
 # Slugs allowed into search results. Empty = every product page is parked
 # (noindex + absent from sitemap). At launch, add the slug here AND to

@@ -22,6 +22,9 @@ import common as C
 REDIRECTS = {
     "discord":  (C.DISCORD_URL, "the dylanmaudio Discord"),
     "sessions": ("/#book", "sessions &amp; consults"),
+    # Unlisted: given to beta testers directly, never linked from the site.
+    "cc-beta":  (f"{C.STORE_URL}/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4",
+                 "the beta download"),
 }
 
 HTML = r"""<!DOCTYPE html>

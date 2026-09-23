@@ -183,17 +183,17 @@ def video_block(p):
 
 def hero_cta(p):
     if p["status"] == "free":
-        return (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
+        return (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     if p["status"] == "buy":
         # The store page carries the trial and the licence together; the trial
         # download is the conversion a search visitor is most likely to make.
         if p.get("trial"):
             price = f' &mdash; {p["price"]}' if p.get("price") else ""
-            return (f'<a href="{p.get("trial_store") or p["store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
-                    f'<a href="{p["store"]}" class="btn btn-ghost">Buy a licence{price}</a>'
+            return (f'<a href="{p.get("trial_store") or p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
+                    f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{price}</a>'
                     f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
-        return (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+        return (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     # coming
     return ('<span class="btn btn-ghost disabled">Coming soon</span>'
@@ -203,7 +203,7 @@ def hero_cta(p):
 def band(p):
     if p["status"] == "free":
         h, sub = f"{p['name']} is free.", "Download it, and drop into the Discord if you hit a snag or have a request."
-        cta = (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
+        cta = (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
     elif p["status"] == "buy":
         price = p.get("price", "")
@@ -219,11 +219,11 @@ def band(p):
         else:
             sub = reg_sub
         if p.get("trial_store"):
-            cta = (f'<a href="{p["trial_store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
-                   f'<a href="{p["store"]}" class="btn btn-ghost">Buy a licence{(" &mdash; " + price) if price else ""}</a>'
+            cta = (f'<a href="{p["trial_store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
+                   f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{(" &mdash; " + price) if price else ""}</a>'
                    f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
         else:
-            cta = (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+            cta = (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                    f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     else:
         h, sub = f"{p['name']} is coming soon.", "Join the Discord to hear the moment it lands — and help shape it."

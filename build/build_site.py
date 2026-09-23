@@ -351,7 +351,7 @@ __SEO__
           <img class="app-icon" src="assets/time-code-tool.png" alt="Time Code Tool app icon" width="56" height="56" />
           <div><h3>Time Code Tool<span class="abbr">TxT</span></h3><span class="tag">Universal</span></div>
         </div>
-        <p>Read incoming LTC, regenerate it as MTC on a virtual port, or generate clean timecode to a WAV. A far more solid LTC endpoint than piping LTC straight into a DAW. Console-agnostic.</p>
+        <p>Read incoming LTC or MTC and see how healthy it is; send it on clean as LTC, MTC or both, at any frame rate; or be the timecode master and render LTC to a WAV. A far steadier endpoint than piping LTC straight into a DAW. Works with any console.</p>
         <div class="specs"><span class="spec">LTC in</span><span class="spec">MTC out</span><span class="spec">LTC&rarr;WAV</span></div>
         <div class="card-foot"><span class="price">$69</span><a href="products/time-code-tool/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>

@@ -114,6 +114,14 @@ CSS = """
   .srow .k{color:var(--dim);} .srow .v{color:var(--text);text-align:right;} .srow .v.g{color:var(--green);}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
   .chips .spec{font-family:var(--mono);font-size:11px;color:var(--dim);border:1px solid var(--hairline);border-radius:6px;padding:3px 8px;background:var(--bg);}
+  /* long-form (optional per product: common.PRODUCTS[slug]["longform"]) */
+  .lf{border-top:1px solid var(--hairline);}
+  .lf .wrap{max-width:820px;}
+  .lf-block{margin-bottom:clamp(40px,6vw,64px);} .lf-block:last-child{margin-bottom:0;}
+  .lf p{color:var(--muted);margin:0 0 16px;max-width:68ch;} .lf p:last-child{margin-bottom:0;}
+  .lf h3{font-size:1.05rem;font-weight:620;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--text);}
+  .lf .lf-item:first-of-type h3{margin-top:0;}
+  .lf em{color:var(--text);font-style:italic;}
   /* cta band */
   .p-band{border-top:1px solid var(--hairline);text-align:center;}
   .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
@@ -178,6 +186,13 @@ def hero_cta(p):
         return (f'<a href="{p["store"]}" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     if p["status"] == "buy":
+        # The store page carries the trial and the licence together; the trial
+        # download is the conversion a search visitor is most likely to make.
+        if p.get("trial"):
+            price = f' &mdash; {p["price"]}' if p.get("price") else ""
+            return (f'<a href="{p["store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
+                    f'<a href="{p["store"]}" class="btn btn-ghost">Buy a licence{price}</a>'
+                    f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
         return (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     # coming
@@ -229,6 +244,34 @@ def status_row(p):
     return '<div class="srow"><span class="k">Status</span><span class="v">Coming soon</span></div>'
 
 
+def longform(p):
+    """Optional long-form copy: story, what-it-does, who-uses-it, FAQ."""
+    lf = p.get("longform")
+    if not lf:
+        return ""
+    def kick(t): return f'<div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; {t}</div>'
+    def paras(b): return "".join(f"<p>{x}</p>" for x in b["paras"])
+    def items(b): return "".join(f'<div class="lf-item"><h3>{h}</h3><p>{t}</p></div>' for h, t in b["items"])
+    blocks = []
+    if "story" in lf: blocks.append(kick(lf["story"]["kicker"]) + paras(lf["story"]))
+    if "what" in lf:  blocks.append(kick(lf["what"]["kicker"]) + items(lf["what"]))
+    if "who" in lf:   blocks.append(kick(lf["who"]["kicker"]) + paras(lf["who"]))
+    if "faq" in lf:   blocks.append(kick(lf["faq"]["kicker"]) + items(lf["faq"]))
+    inner = "".join(f'<div class="lf-block">{b}</div>' for b in blocks)
+    return f'<section class="lf"><div class="wrap">{inner}</div></section>'
+
+
+def faq_ld(p):
+    """schema.org FAQPage for a product's long-form FAQ, or None."""
+    items = (p.get("longform") or {}).get("faq", {}).get("items")
+    if not items:
+        return None
+    strip = lambda t: htmlmod.unescape(t)
+    return {"@type": "FAQPage", "mainEntity": [
+        {"@type": "Question", "name": strip(q),
+         "acceptedAnswer": {"@type": "Answer", "text": strip(a)}} for q, a in items]}
+
+
 def build_page(slug, p):
     tagcls = " free" if p["tag"] == "Free" else ""
     abbr = f'<span class="abbr">{p["abbr"]}</span>' if p["abbr"] else ""
@@ -238,7 +281,9 @@ def build_page(slug, p):
              if p.get("trial") else "")
     maker = '<div class="srow"><span class="k">Maker</span><span class="v">dylanmaudio</span></div>'
 
-    p_title = f"{p['name']} — Dylan [M] Audio"
+    p_title = p.get("seo_title") or f"{p['name']} — Dylan [M] Audio"
+    p_desc = p.get("seo_desc") or f"{p['name']} — {p['tagline']}"      # <meta name=description>
+    og_desc = p.get("seo_desc") or p["tagline"]                          # og / twitter description
     ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": p["name"],
           "operatingSystem": "macOS 11+", "applicationCategory": "MultimediaApplication",
           "description": htmlmod.unescape(p["tagline"]), "url": C.abs_url(f"products/{slug}/"),
@@ -261,19 +306,22 @@ def build_page(slug, p):
                    f'</div>')
     manual_btn = (f'<a class="btn btn-ghost" href="/guides/{slug}-quick-reference.pdf" '
                   f'target="_blank" rel="noopener">Manual (PDF) &#8599;</a>')
-    seo = C.seo_head(f"products/{slug}/", p_title, p["tagline"],
+    fld = faq_ld(p)
+    if fld:
+        ld = {"@context": "https://schema.org", "@graph": [{k: v for k, v in ld.items() if k != "@context"}, fld]}
+    seo = C.seo_head(f"products/{slug}/", p_title, og_desc,
                      image=f"assets/{p['icon']}", noindex=(slug not in INDEXED), ld=ld)
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="{p['name']} — {p['tagline']}">
+<meta name="description" content="{p_desc}">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="icon" href="/assets/logo.png">
-<title>{p['name']} — Dylan [M] Audio</title>
+<title>{p_title}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 {seo}
 <style>{CSS}</style>
@@ -317,6 +365,8 @@ def build_page(slug, p):
     </div>
   </div>
 </div></section>
+
+{longform(p)}
 
 {band(p)}
 

@@ -125,18 +125,111 @@ PRODUCTS = {
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
         icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], youtube="A6iKjxHxXA4",
-        tagline="Read, monitor, convert and generate timecode — a rock-solid LTC endpoint for any rig.",
-        lead=("Time Code Tool reads incoming LTC, regenerates it as MTC on a virtual port, or generates clean "
-              "timecode to a WAV file — a far more solid, stable LTC endpoint than piping LTC straight into a "
-              "DAW. Console-agnostic; it works anywhere timecode does."),
+        # Search-facing title/description (the page <title> and meta description).
+        seo_title="Time Code Tool — LTC &amp; MTC reader and converter for Mac",
+        seo_desc=("Read, monitor, convert and generate LTC and MTC timecode on a Mac. LTC to MTC, "
+                  "MTC to LTC, frame-rate conversion, LTC to WAV. Free 20-minute trial."),
+        tagline="Read, check, convert and generate timecode on your Mac.",
+        lead=("An LTC and MTC reader, converter and generator that does the job of a rack timecode "
+              "clock — and shows you what your timecode is actually doing. Read incoming LTC or MTC and "
+              "see exactly how healthy it is; send it on clean as LTC, MTC or both, at the same frame "
+              "rate or a different one; or run it as the timecode master and render sample-accurate "
+              "LTC to a WAV. A far steadier endpoint than piping LTC straight into a DAW. Works with "
+              "any console."),
         features=[
-            "Read + monitor incoming LTC",
-            "Convert LTC → MTC on a virtual port",
-            "Offline-generate timecode → WAV",
-            "Works with any console or LTC source",
+            "Read + monitor LTC or MTC — lock, frame rate, freewheel, missed / misread / jumped frames",
+            "Convert in any direction — LTC → MTC, MTC → LTC, LTC → LTC, MTC → MTC — or both outputs at once",
+            "Frame-rate conversion on either output (23.976 / 24 / 25 / 29.97 DF / NDF / 30)",
+            "Generate mode — LTC and MTC from one clock; render sample-accurate LTC to a WAV",
+            "Virtual audio and MIDI ports, in and out — timecode between apps on one Mac",
+            "Works with any console or timecode source",
             "Full-featured 20-minute trial",
         ],
-        specs=["LTC in", "MTC out", "LTC→WAV", "universal"],
+        specs=["LTC → MTC", "MTC → LTC", "frame-rate convert", "timecode monitor", "LTC→WAV", "universal"],
+        # Long-form page copy (rendered by build_products.longform). Source:
+        # dylanmaudio-marketing, briefs/done/time-code-tool-copy-draft.md §3.
+        longform=dict(
+            story=dict(
+                kicker="Why I built it",
+                paras=[
+                    "I was sending LTC into my DAW over an audio network driver and it kept dropping the "
+                    "odd frame. I fixed it the usual way: a hardware timecode clock in the rack, which "
+                    "would freewheel, convert frame rates and turn LTC into MTC. It was rock solid. It was "
+                    "also about $1,000 for something that mostly sat there looking nice, and when a tour "
+                    "came along where I needed a smaller rack, I wrote the software version. It turned out "
+                    "to be better at the part the box couldn&rsquo;t do &mdash; telling me <em>what</em> "
+                    "was wrong with the timecode.",
+                ],
+            ),
+            what=dict(
+                kicker="In detail",
+                items=[
+                    ("Reads LTC or MTC, and tells you how healthy it is.",
+                     "Linear timecode (LTC, the SMPTE audio signal) from any audio input, or MIDI Time Code "
+                     "(MTC) from any MIDI port. A large readout, lock and freewheel state, the detected frame "
+                     "rate, and separate counts of missed, misread and jumped frames &mdash; so you can tell a "
+                     "bad source from a bad path."),
+                    ("Converts in any direction.",
+                     "LTC to MTC, MTC to LTC, LTC to LTC, MTC to MTC. Run both outputs together and one "
+                     "incoming feed leaves as LTC for video and MTC for lighting."),
+                    ("Converts frame rates.",
+                     "Each output follows the input or converts to the rate you set: 23.976, 24, 25, 29.97 "
+                     "drop-frame and non-drop, 30."),
+                    ("Cleans up what it&rsquo;s given.",
+                     "A single misread frame is ridden through instead of sending everything downstream to "
+                     "the wrong place and back. A dropout is freewheeled. A real relocate still follows, one "
+                     "frame later, and is written to the log with the reason."),
+                    ("Generates timecode.",
+                     "With no input, it free-runs as the timecode master &mdash; LTC and MTC from one clock, "
+                     "at the start time, frame rate and level you choose."),
+                    ("Renders LTC to a WAV.",
+                     "Sample-accurate LTC files with your choice of start, length, frame rate, sample rate, "
+                     "bit depth and level. Drop it on a track in your playback session."),
+                    ("Passes timecode between apps on one Mac.",
+                     "An optional virtual audio device carries LTC in and out, and virtual MIDI ports carry "
+                     "MTC in and out. No loopback cables, no separate routing utility. (The virtual audio "
+                     "device needs macOS 13 or later.)"),
+                ],
+            ),
+            who=dict(
+                kicker="Who uses it",
+                paras=[
+                    "Anyone who sends or chases timecode from a Mac: playback engineers running Ableton Live "
+                    "or Reaper; lighting programmers whose software wants MTC when the show sends LTC; video "
+                    "and media-server operators; theatre sound with QLab; pyro and show control; FOH and "
+                    "monitor engineers running timecode-driven console automation. It doesn&rsquo;t care what "
+                    "console you&rsquo;re on.",
+                ],
+            ),
+            faq=dict(
+                kicker="Questions",
+                items=[
+                    ("My DAW drops or misreads LTC frames arriving over an audio network driver. Will this help?",
+                     "That&rsquo;s the problem it was built for. Read the LTC in Time Code Tool instead and give "
+                     "the DAW clean MTC on the virtual port, or regenerated LTC. The frame counters will also "
+                     "show you whether frames are being lost on the way in."),
+                    ("Can it convert LTC to MTC for lighting software that only takes MIDI timecode?",
+                     "Yes &mdash; to a virtual MIDI port for software on the same Mac, or to any MIDI interface "
+                     "for a console or another computer."),
+                    ("Is it a replacement for a hardware timecode clock such as a Rosendahl MIF4 or a CB Electronics TC-5?",
+                     "For reading, converting LTC and MTC, frame-rate conversion, freewheeling and regenerating "
+                     "clean timecode, on a Mac that&rsquo;s already in your rig &mdash; that&rsquo;s what I use it "
+                     "for. Those boxes are excellent, and they do two things this doesn&rsquo;t: word clock and "
+                     "video reference. Time Code Tool is LTC and MTC only. If you need those, or timecode with "
+                     "no computer involved, buy the box."),
+                    ("I used Lockstep. Is this a replacement?",
+                     "It does what Lockstep did &mdash; LTC in, MTC out &mdash; and the other directions, "
+                     "natively on Apple Silicon, and it&rsquo;s maintained."),
+                    ("Can I just make an LTC WAV file?",
+                     "Yes, offline, at any frame rate including drop-frame."),
+                    ("Windows? Intel Macs?",
+                     "macOS 11 or later on Apple Silicon only, for now."),
+                    ("Does it phone home?",
+                     "No analytics, no telemetry. Activating the licence is the only network call, and a "
+                     "licence covers two Macs &mdash; the show machine and the spare."),
+                ],
+            ),
+        ),
     ),
 }
 

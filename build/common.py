@@ -34,7 +34,10 @@ CHECKOUT = {
     "midi-bridge": f"{STORE_URL}/checkout/buy/77778860-577c-4fc6-9f84-59e78db1539b",
     "talk-light-trigger": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6",
     "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d",
-    "time-code-tool": f"{STORE_URL}/checkout/buy/52a61e9a-34cd-4ee7-88ca-c859e14fd365",
+    # Time Code Tool: the store product has two variants; `?enabled=<variant>`
+    # restricts the checkout to one of them (licence 2024673, free trial 2013074).
+    "time-code-tool": f"{STORE_URL}/checkout/buy/a60bb362-a29b-49fa-83c4-e1d65a9d9b6a?enabled=2024673",
+    "time-code-tool-trial": f"{STORE_URL}/checkout/buy/52a61e9a-34cd-4ee7-88ca-c859e14fd365?enabled=2013074",
     # Bundles
     "dlive-menubar": f"{STORE_URL}/checkout/buy/f6c14f2a-d9f6-4d0f-adbd-9eafec887950",  # TLT+PTT (+free Bridge)
     "all-menubar": f"{STORE_URL}/checkout/buy/7ce181d1-c1c1-4607-8389-88744e958f46",    # + Time Code Tool
@@ -124,7 +127,7 @@ PRODUCTS = {
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
         icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
-        store=CHECKOUT["time-code-tool"], youtube="A6iKjxHxXA4",
+        store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         # Search-facing title/description (the page <title> and meta description).
         seo_title="Time Code Tool — LTC &amp; MTC reader and converter for Mac",
         seo_desc=("Read, monitor, convert and generate LTC and MTC timecode on a Mac. LTC to MTC, "
@@ -135,14 +138,14 @@ PRODUCTS = {
               "see exactly how healthy it is; send it on clean as LTC, MTC or both, at the same frame "
               "rate or a different one; or run it as the timecode master and render sample-accurate "
               "LTC to a WAV. A far steadier endpoint than piping LTC straight into a DAW. Works with "
-              "any console."),
+              "any console or application that needs timecode."),
         features=[
             "Read + monitor LTC or MTC — lock, frame rate, freewheel, missed / misread / jumped frames",
             "Convert in any direction — LTC → MTC, MTC → LTC, LTC → LTC, MTC → MTC — or both outputs at once",
             "Frame-rate conversion on either output (23.976 / 24 / 25 / 29.97 DF / NDF / 30)",
             "Generate mode — LTC and MTC from one clock; render sample-accurate LTC to a WAV",
             "Virtual audio and MIDI ports, in and out — timecode between apps on one Mac",
-            "Works with any console or timecode source",
+            "Works with any console or application that needs timecode — audio, lighting, video, playback, pyro",
             "Full-featured 20-minute trial",
         ],
         specs=["LTC → MTC", "MTC → LTC", "frame-rate convert", "timecode monitor", "LTC→WAV", "universal"],
@@ -189,6 +192,9 @@ PRODUCTS = {
                      "An optional virtual audio device carries LTC in and out, and virtual MIDI ports carry "
                      "MTC in and out. No loopback cables, no separate routing utility. (The virtual audio "
                      "device needs macOS 13 or later.)"),
+                    ("Stream Deck control &mdash; coming soon.",
+                     "Transport, mode, inputs and outputs and the generator as Bitfocus Companion buttons, "
+                     "with the live timecode, lock state and frame rate shown back on the deck."),
                 ],
             ),
             who=dict(
@@ -198,7 +204,7 @@ PRODUCTS = {
                     "or Reaper; lighting programmers whose software wants MTC when the show sends LTC; video "
                     "and media-server operators; theatre sound with QLab; pyro and show control; FOH and "
                     "monitor engineers running timecode-driven console automation. It doesn&rsquo;t care what "
-                    "console you&rsquo;re on.",
+                    "console, desk or application is on the other end.",
                 ],
             ),
             faq=dict(
@@ -223,7 +229,9 @@ PRODUCTS = {
                     ("Can I just make an LTC WAV file?",
                      "Yes, offline, at any frame rate including drop-frame."),
                     ("Windows? Intel Macs?",
-                     "macOS 11 or later on Apple Silicon only, for now."),
+                     "Apple Silicon Macs on macOS 11 or later today. Intel Mac and Windows versions are "
+                     "coming &mdash; <a href=\"/#contact\">register your interest</a> and you&rsquo;ll hear "
+                     "when they land."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "
                      "licence covers two Macs &mdash; the show machine and the spare."),

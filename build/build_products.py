@@ -121,7 +121,7 @@ CSS = """
   .lf p{color:var(--muted);margin:0 0 16px;max-width:68ch;} .lf p:last-child{margin-bottom:0;}
   .lf h3{font-size:1.05rem;font-weight:620;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--text);}
   .lf .lf-item:first-of-type h3{margin-top:0;}
-  .lf em{color:var(--text);font-style:italic;}
+  .lf em{color:var(--text);font-style:italic;} .lf a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
   /* cta band */
   .p-band{border-top:1px solid var(--hairline);text-align:center;}
   .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
@@ -190,7 +190,7 @@ def hero_cta(p):
         # download is the conversion a search visitor is most likely to make.
         if p.get("trial"):
             price = f' &mdash; {p["price"]}' if p.get("price") else ""
-            return (f'<a href="{p["store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
+            return (f'<a href="{p.get("trial_store") or p["store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
                     f'<a href="{p["store"]}" class="btn btn-ghost">Buy a licence{price}</a>'
                     f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
         return (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
@@ -218,8 +218,13 @@ def band(p):
                    f'<span class="sale-reg" hidden>{reg_sub}</span>')
         else:
             sub = reg_sub
-        cta = (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
-               f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
+        if p.get("trial_store"):
+            cta = (f'<a href="{p["trial_store"]}" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
+                   f'<a href="{p["store"]}" class="btn btn-ghost">Buy a licence{(" &mdash; " + price) if price else ""}</a>'
+                   f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
+        else:
+            cta = (f'<a href="{p["store"]}" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
+                   f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     else:
         h, sub = f"{p['name']} is coming soon.", "Join the Discord to hear the moment it lands — and help shape it."
         cta = (f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>'

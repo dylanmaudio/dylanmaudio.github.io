@@ -33,7 +33,9 @@ WEB3FORMS_KEY = "d869112c-0f00-4e71-99bb-8bcd1cfe9bf2"
 CHECKOUT = {
     "midi-bridge": f"{STORE_URL}/checkout/buy/77778860-577c-4fc6-9f84-59e78db1539b",
     "talk-light-trigger": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6",
-    "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d",
+    # Pilot Tone Trigger: two variants (licence 2019975, free trial 2013072); validated 23 Sept.
+    "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/cc74ef8c-6c9c-449d-89da-c8ebbeff1d9c?enabled=2019975",
+    "pilot-tone-trigger-trial": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d?enabled=2013072",
     # Time Code Tool: the store product has two variants; `?enabled=<variant>`
     # restricts the checkout to one of them (licence 2024673, free trial 2013074).
     "time-code-tool": f"{STORE_URL}/checkout/buy/a60bb362-a29b-49fa-83c4-e1d65a9d9b6a?enabled=2024673",
@@ -111,18 +113,133 @@ PRODUCTS = {
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
         icon="pilot-tone-trigger.png", affiliated=True, status="buy", trial=True, price="$59",
-        store=CHECKOUT["pilot-tone-trigger"], youtube="GOfFZzGTEuA",
-        tagline="Detects a dropped pilot tone and recalls your backup scene — automatically.",
-        lead=("Pilot Tone Trigger listens for a pilot tone on any critical audio path and drives automatic "
-              "failover the instant it drops — for playback rigs and external processing (Waves and similar) "
-              "alike. You've already built the backup scene; PTT recalls it before the audience hears the gap."),
+        store=CHECKOUT["pilot-tone-trigger"], trial_store=CHECKOUT["pilot-tone-trigger-trial"], youtube="GOfFZzGTEuA",
+        seo_title="Pilot Tone Trigger — playback &amp; Waves failover for dLive",
+        seo_desc=("Automatic failover for Allen & Heath dLive. A pilot tone drops and the console switches to "
+                  "your backup rig or pulls the inserts-out scene. Free trial."),
+        tagline="Automatic failover for your dLive, in software.",
+        lead=("A pilot tone drops — a playback machine, a Waves server, a plugin host — and the console "
+              "switches to the backup you already built. No switching hardware. Pilot Tone Trigger listens "
+              "for a pilot tone on the path you can't afford to lose and the instant it drops recalls a "
+              "Scene, fires an Action, or both: main/backup playback switched at the console, or the "
+              "\"inserts out\" scene for a dead Waves server, pulled automatically."),
         features=[
-            "Detects loss of pilot tone on any critical path",
-            "Auto-recalls your backup scene on the console",
-            "Fails safe — never leaves the console mid-switch",
+            "Detects loss of a pilot tone on any critical path — playback, Waves / SoundGrid, plugin hosts, outboard",
+            "Switches the console to your backup in milliseconds — a Scene, an Action, or both",
+            "Main / backup playback with no switching hardware — an Action moves the input source from Preamp A to B",
+            "Pulls the \"inserts out\" scene when SuperRack, LiveProfessor, Gig Performer or MainStage dies",
+            "Signal Integrity — catches a tone that's present but damaged, and warns or fails over",
+            "Automatic failback, latch until you reset, or Flip A/B by hand",
+            "Fails safe — stopping the app never fires a failover",
             "Full-featured 20-minute trial",
         ],
-        specs=["tone detect", "auto-failover", "Waves failover"],
+        specs=["auto-failover", "redundant playback", "Waves failover", "pilot tone", "signal integrity"],
+        # Long-form page copy. Source: dylanmaudio-marketing,
+        # briefs/done/pilot-tone-trigger-copy-draft.md §3 (written against 1.1.1).
+        longform=dict(
+            story=dict(
+                kicker="Why I built it",
+                paras=[
+                    "Playback redundancy has always meant hardware. A Radial SW8 is excellent, but it&rsquo;s "
+                    "about $1,400, it&rsquo;s heavy, it switches eight analog channels, and it sits between the "
+                    "interfaces and the desk &mdash; and everyone knows D-subs are a pain. The PlayAUDIO boxes do "
+                    "a similar job for around $1,200; the Dante-capable DirectOut unit is over $3,000. All of "
+                    "them need a hardware interface on each machine, and the analog ones can&rsquo;t switch a "
+                    "source that arrives at the console digitally. On a dLive you can already build the backup "
+                    "&mdash; an Action that moves each channel&rsquo;s input source to the B machine, or a Scene "
+                    "that takes every insert out when the plugin server dies. What was missing was something "
+                    "that fires it faster than a person can. So I wrote that.",
+                ],
+            ),
+            what=dict(
+                kicker="In detail",
+                items=[
+                    ("Listens for a pilot tone.",
+                     "A continuous tone on the path you can&rsquo;t afford to lose &mdash; from the app&rsquo;s own "
+                     "generator or your own. Any input on any interface the Mac can see (Dante, SoundGrid, MADI, "
+                     "Thunderbolt, USB, PCIe), on any channel."),
+                    ("Fires your backup when it drops.",
+                     "A Scene recall, a console Action, or both, sent to the dLive in milliseconds. You build the "
+                     "backup once, on the console, the way you&rsquo;d build it anyway."),
+                    ("Main and backup playback, no switching hardware.",
+                     "Both playback machines feed the console directly &mdash; over Dante Virtual Soundcard, the "
+                     "SoundGrid driver, or any interface. The Action switches each channel&rsquo;s input source "
+                     "from Preamp A to B. Whatever the tracks run in &mdash; Ableton Live, Reaper, Logic, Cubase "
+                     "&mdash; makes no difference."),
+                    ("The &ldquo;inserts out&rdquo; scene, automated.",
+                     "If you mix through SuperRack, SuperRack Performer, LiveProfessor, Gig Performer, MainStage "
+                     "or another plugin host, you already have the Scene that bypasses every insert. Pilot Tone "
+                     "Trigger pulls it the instant the server stops passing the tone."),
+                    ("Checks the tone is clean, not just present.",
+                     "Signal Integrity watches how much of the incoming audio actually sits at the tone&rsquo;s "
+                     "frequency, so clicks, dropouts, noise, clipping and a garbled tone all show up &mdash; the "
+                     "ways a digital path degrades before it fails outright. Warn only, or fail over. Off by "
+                     "default; tune it to your own rig."),
+                    ("Fail back your way.",
+                     "Automatically when the tone returns, or hold on the backup until you press Reset &mdash; so "
+                     "the desk never flips back onto a source that just failed. Reset won&rsquo;t fire while the "
+                     "tone is still missing. Flip A/B switches by hand any time, whatever the detector thinks."),
+                    ("Catches a feed that&rsquo;s already dead.",
+                     "Press Start on a path that&rsquo;s already down and it fails over immediately."),
+                    ("Fails safe.",
+                     "Stopping the app, or the trial ending, sends nothing to the console. If the Mac running it "
+                     "dies, nothing is sent either &mdash; the show stays exactly where it was."),
+                    ("Know it works before doors.",
+                     "Test Connection confirms the console is answering. The menu-bar icon shows tone present, "
+                     "tone lost, degraded, and restored but still on the backup."),
+                    ("Gentle on the show interface.",
+                     "One input channel, a large buffer, and it never changes the sample rate."),
+                    ("Stream Deck control &mdash; coming soon.",
+                     "Run, failback mode, Reset and the tone generator as Bitfocus Companion buttons, with the "
+                     "app&rsquo;s state shown back."),
+                ],
+            ),
+            who=dict(
+                kicker="Who uses it",
+                paras=[
+                    "Playback engineers and techs running tracks into a dLive; FOH and monitor engineers mixing "
+                    "through Waves or a native plugin host; theatre and worship productions with a backup machine "
+                    "and nobody spare to watch it. It needs a dLive, a Mac on the network, and the backup path "
+                    "already patched to the console.",
+                ],
+            ),
+            faq=dict(
+                kicker="Questions",
+                items=[
+                    ("Does this replace a Radial SW8 or an iConnectivity PlayAUDIO?",
+                     "For a dLive, yes &mdash; that&rsquo;s what it&rsquo;s for. Those boxes switch analog outputs "
+                     "upstream of any console, and if that&rsquo;s what you need, they&rsquo;re the right tool. "
+                     "Pilot Tone Trigger switches at the console instead, so it costs nothing in hardware, works "
+                     "with digital sources, and needs the backup path patched to spare inputs."),
+                    ("My playback comes in over Dante Virtual Soundcard. Can hardware switchers handle that?",
+                     "Not the analog ones. This can: the tone is just another channel, and the switch happens on "
+                     "the console."),
+                    ("What happens when the Waves server crashes mid-show?",
+                     "If it stops passing the tone, Pilot Tone Trigger fires the Scene you&rsquo;ve built with every "
+                     "insert out. Audio carries on through the console; nobody has to find the panic button."),
+                    ("Isn&rsquo;t another computer just another thing that can fail?",
+                     "If Pilot Tone Trigger stops &mdash; or the Mac does &mdash; nothing is sent, and the console "
+                     "stays on the main rig exactly as it was. It can only ever fire the backup you built."),
+                    ("How fast is it?",
+                     "The detector&rsquo;s defaults are a 50 ms dropout hold and a 30 ms envelope release, so the "
+                     "switch is sent in milliseconds. A measured end-to-end figure on a console is coming."),
+                    ("What does it need?",
+                     "A dLive, a Mac on the console&rsquo;s network (Direct TCP, or through the free MIDI Bridge), a "
+                     "pilot-tone feed into any audio input, and the backup &mdash; a Scene, an Action, or both "
+                     "&mdash; built on the console."),
+                    ("Does it work with other consoles?",
+                     "dLive today. Other consoles are being looked into &mdash; <a href=\"/#contact\">register "
+                     "your interest</a> and say which desk. (Time Code Tool already works with anything.)"),
+                    ("Windows? Intel Macs?",
+                     "Apple Silicon Macs on macOS 11 or later today. Intel Mac and Windows versions are coming "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> and you&rsquo;ll hear when they land."),
+                    ("Does it phone home?",
+                     "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
+                     "runs only when you press it, and nothing goes online while a trigger is armed. A licence "
+                     "covers two Macs &mdash; show machine and spare."),
+                ],
+            ),
+        ),
     ),
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",

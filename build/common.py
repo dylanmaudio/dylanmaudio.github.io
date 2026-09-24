@@ -445,12 +445,12 @@ PRODUCTS = {
         icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         # Search-facing title/description (the page <title> and meta description).
-        seo_title="Time Code Tool — LTC &amp; MTC reader and converter for Mac",
-        seo_desc=("Read, monitor, convert and generate LTC and MTC timecode on a Mac. LTC to MTC, "
-                  "MTC to LTC, frame-rate conversion, LTC to WAV. Free 20-minute trial."),
-        tagline="Read, check, convert and generate timecode on your Mac.",
-        lead=("An LTC and MTC reader, converter and generator that does the job of a rack timecode "
-              "clock — and shows you what your timecode is actually doing. Read incoming LTC or MTC and "
+        seo_title="Time Code Tool — SMPTE timecode generator, monitor &amp; converter for Mac",
+        seo_desc=("SMPTE timecode generator, monitor and converter for Mac. Read LTC or MTC, see its health, "
+                  "convert between them at any frame rate, render LTC to WAV. Free 20-minute trial."),
+        tagline="SMPTE timecode generator, monitor and converter — on your Mac.",
+        lead=("Generate, monitor and convert SMPTE timecode — LTC and MTC — with an app that does the job "
+              "of a rack timecode clock and shows you what your timecode is actually doing. Read incoming LTC or MTC and "
               "see exactly how healthy it is; send it on clean as LTC, MTC or both, at the same frame "
               "rate or a different one; or run it as the timecode master and render sample-accurate "
               "LTC to a WAV. A far steadier endpoint than piping LTC straight into a DAW. Works with "

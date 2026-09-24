@@ -32,7 +32,9 @@ WEB3FORMS_KEY = "d869112c-0f00-4e71-99bb-8bcd1cfe9bf2"
 # Lemon Squeezy checkout URLs (per product).
 CHECKOUT = {
     "midi-bridge": f"{STORE_URL}/checkout/buy/77778860-577c-4fc6-9f84-59e78db1539b",
-    "talk-light-trigger": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6",
+    # Talk Light Trigger: two variants (licence 2024669, free trial 2006006); validated 23 Sept.
+    "talk-light-trigger": f"{STORE_URL}/checkout/buy/178c7256-4ba5-4269-9c0f-79876a37aee7?enabled=2024669",
+    "talk-light-trigger-trial": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6?enabled=2006006",
     # Pilot Tone Trigger: two variants (licence 2019975, free trial 2013072); validated 23 Sept.
     "pilot-tone-trigger": f"{STORE_URL}/checkout/buy/cc74ef8c-6c9c-449d-89da-c8ebbeff1d9c?enabled=2019975",
     "pilot-tone-trigger-trial": f"{STORE_URL}/checkout/buy/f1b17f98-2bed-4bef-be31-bf1f0cfb2c5d?enabled=2013072",
@@ -95,20 +97,119 @@ PRODUCTS = {
     "talk-light-trigger": dict(
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
         icon="talk-light-trigger.png", affiliated=True, status="buy", trial=True, price="$19",
-        store=CHECKOUT["talk-light-trigger"], youtube="jP2Yyvd1uq4",
+        store=CHECKOUT["talk-light-trigger"], trial_store=CHECKOUT["talk-light-trigger-trial"], youtube="jP2Yyvd1uq4",
         sale=dict(now="$9", was="$19", code="TLTINTROSALE",
                   until="2026-10-31", until_label="31 October 2026"),
-        tagline="Turn a console channel into a hands-free talkback / cue light.",
-        lead=("Talk Light Trigger watches a dLive channel and fires a talkback / cue light the instant "
-              "signal crosses your threshold — hands-free tally for the podium, the pit, or the booth, "
-              "using the console's own light and no extra hardware."),
+        seo_title="Talk Light Trigger — talkback light for dLive, no hardware",
+        seo_desc=("Turn your dLive's own surface lights into a talkback or shout light: someone talks on the "
+                  "shout bus, the desk flashes. Cancel from a SoftKey. Free trial."),
+        tagline="A talkback light for your dLive, from the console's own lights.",
+        lead=("Someone talks on the shout bus, the surface flashes, you put the headphones on. Nothing to rig; "
+              "one SoftKey to cancel. Talk Light Trigger watches a talkback mic or the shout bus and flashes "
+              "the dLive's own surface lights while someone is talking &mdash; a talkback light, shout light "
+              "or call light for the FOH engineer who can't hear the stage until the headphones go on, and "
+              "for anyone who talks on cue."),
         features=[
-            "Threshold trigger on any dLive channel",
-            "Fires the console's own talkback / cue light — no extra hardware",
-            "Set-and-forget menu-bar app",
+            "The console's own lights flash when someone talks on the talkback mic or shout bus — no extra hardware",
+            "Flash Rate and Flash Hold — the lights actually flash, and keep going for a few seconds after a pause",
+            "Cancel SoftKey — one press on the desk stops the flash; it resumes if they're still talking",
+            "Threshold trigger on any audio input — Dante, SoundGrid, MADI, USB, Thunderbolt, PCIe",
+            "Tunable sensitivity — no chattering on breaths and pauses",
+            "Recall Filter to illumination only, so nothing else on the console changes",
             "Full-featured 20-minute trial",
         ],
-        specs=["signal → trigger", "tally", "menu bar"],
+        specs=["talkback light", "shout light", "signal → trigger", "tally", "menu bar"],
+        # Long-form page copy. Source: dylanmaudio-marketing,
+        # briefs/done/talk-light-trigger-copy-draft.md §3 (written against 1.1.2).
+        longform=dict(
+            story=dict(
+                kicker="Why I built it",
+                paras=[
+                    "I was mixing FOH without a shout box. The old one hadn&rsquo;t been loud, but it had a "
+                    "signal light, and that was the useful part: when the light came on I knew someone on "
+                    "stage wanted me, and I&rsquo;d get closer or put the headphones on. Then it broke "
+                    "mid-tour. The crew could talk all they liked; I couldn&rsquo;t hear them until the "
+                    "headphones went on, and I had no way of knowing when that was &mdash; short of them "
+                    "texting me and hoping I&rsquo;d look down. So I sent every talkback mic to a bus, and "
+                    "wrote something that watches that bus and flashes the console when there&rsquo;s signal "
+                    "on it. The dLive has the lights already. It just needed telling when.",
+                ],
+            ),
+            what=dict(
+                kicker="In detail",
+                items=[
+                    ("Watches the shout bus.",
+                     "Any talkback mic, or a bus carrying all of them, on any input of any interface the Mac "
+                     "can see &mdash; Dante, SoundGrid, MADI, USB, Thunderbolt, PCIe."),
+                    ("Flashes the console&rsquo;s own lights.",
+                     "When signal crosses your threshold it recalls a &ldquo;talk&rdquo; Scene; when it stops, a "
+                     "&ldquo;quiet&rdquo; Scene. Each Scene carries a different Surface Illumination, and its "
+                     "Recall Filter is set to illumination only, so nothing else on the desk changes. Flash "
+                     "Rate alternates the two so the lights really flash; Flash Hold keeps them going for a "
+                     "few seconds after a pause."),
+                    ("Cancel from a SoftKey.",
+                     "Assign a SoftKey to Custom MIDI &mdash; the panel shows you the exact string to type "
+                     "&mdash; and one press stops the flash the instant you&rsquo;ve seen it. If they&rsquo;re "
+                     "still talking after the cooldown, it comes back."),
+                    ("Doesn&rsquo;t chatter.",
+                     "Threshold, attack, release and a minimum retrigger time, tuned to the voice and the room, "
+                     "so breaths and pauses don&rsquo;t set it off."),
+                    ("Tells you if the lights stop.",
+                     "If Scenes stop reaching the console the panel turns red and says why. Through MIDI Bridge "
+                     "it reconnects by itself after a quiet spell. The session log records every Scene sent, "
+                     "every failure and every Cancel press, so an exported log shows what happened."),
+                    ("Gentle on the show interface.",
+                     "One input channel, a large buffer, and it never changes the sample rate."),
+                    ("Connects the way you already do.",
+                     "Direct TCP to the console with nothing else installed, or through the free MIDI Bridge. "
+                     "(The Cancel SoftKey needs a connection that can receive &mdash; Direct TCP, or a two-way "
+                     "MIDI port.)"),
+                    ("Stream Deck control &mdash; coming soon.",
+                     "Run and Threshold as Bitfocus Companion buttons, with the talk state fed back."),
+                ],
+            ),
+            who=dict(
+                kicker="Who uses it",
+                paras=[
+                    "FOH and monitor engineers who can&rsquo;t hear the stage until the headphones go on. Anyone "
+                    "running a shout system, or who lost theirs. Podium, pit and booth setups where a mic going "
+                    "live should show on the desk. And as a plain call light: any signal on any input, and the "
+                    "console lights up.",
+                ],
+            ),
+            faq=dict(
+                kicker="Questions",
+                items=[
+                    ("Does it need a shout box?",
+                     "No &mdash; that&rsquo;s the point. It needs a talkback mic (or the bus they&rsquo;re all on) "
+                     "reaching an input the Mac can see, and a dLive on the network."),
+                    ("Will it change anything else on the console?",
+                     "Not if the two Scenes&rsquo; Recall Filters are set to Surface Illumination only, which is "
+                     "the setup the Quick Reference walks through. The Scenes then touch the lights and nothing "
+                     "else."),
+                    ("How do I stop it flashing once I&rsquo;ve seen it?",
+                     "A SoftKey. Set it to Custom MIDI with the string the panel shows and one press cancels the "
+                     "flash; it resumes after the cooldown if they&rsquo;re still talking."),
+                    ("Can I use it as a cue light or a call light?",
+                     "Yes. It doesn&rsquo;t know what the signal is &mdash; any input crossing the threshold "
+                     "lights the desk."),
+                    ("What does it need?",
+                     "A dLive; a Mac on the console&rsquo;s network (Direct TCP, or through MIDI Bridge); the "
+                     "talkback signal on any audio input; and two Scenes on the console with different Surface "
+                     "Illumination."),
+                    ("Does it work with other consoles?",
+                     "It&rsquo;s built for the dLive, and users report it works on Allen &amp; Heath Avantis as "
+                     "well &mdash; I haven&rsquo;t tested that myself yet. Other consoles are being looked into "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> and say which desk."),
+                    ("Windows? Intel Macs?",
+                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                    ("Does it phone home?",
+                     "No analytics, no telemetry. Activating the licence is the only network call; Check for "
+                     "updates runs only when you press it. A licence covers two Macs &mdash; show machine and "
+                     "spare."),
+                ],
+            ),
+        ),
     ),
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
@@ -228,11 +329,12 @@ PRODUCTS = {
                      "pilot-tone feed into any audio input, and the backup &mdash; a Scene, an Action, or both "
                      "&mdash; built on the console."),
                     ("Does it work with other consoles?",
-                     "dLive today. Other consoles are being looked into &mdash; <a href=\"/#contact\">register "
+                     "It&rsquo;s built for the dLive. Users report it works on Allen &amp; Heath Avantis with "
+                     "Scene recall &mdash; Actions are a dLive feature &mdash; though I haven&rsquo;t tested that "
+                     "myself yet. Other consoles are being looked into &mdash; <a href=\"/#contact\">register "
                      "your interest</a> and say which desk. (Time Code Tool already works with anything.)"),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later today. Intel Mac and Windows versions are coming "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> and you&rsquo;ll hear when they land."),
+                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
                      "runs only when you press it, and nothing goes online while a trigger is armed. A licence "
@@ -346,9 +448,7 @@ PRODUCTS = {
                     ("Can I just make an LTC WAV file?",
                      "Yes, offline, at any frame rate including drop-frame."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later today. Intel Mac and Windows versions are "
-                     "coming &mdash; <a href=\"/#contact\">register your interest</a> and you&rsquo;ll hear "
-                     "when they land."),
+                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "
                      "licence covers two Macs &mdash; the show machine and the spare."),

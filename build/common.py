@@ -80,19 +80,116 @@ PRODUCTS = {
         name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
         icon="midi-bridge.png", affiliated=True, status="free",
         store=CHECKOUT["midi-bridge"], youtube="2M57Z-v7fs0",
-        tagline="Bridge MIDI to your dLive over TCP, with a live decoded message monitor.",
-        lead=("MIDI Bridge carries MIDI over TCP to and from your dLive, and ships with a live, decoded "
-              "message monitor — every fader, mute and scene crossing the wire in plain language, with "
-              "real console descriptions instead of raw MIDI bytes. Free, and the foundation the other apps "
-              "build on."),
+        seo_title="MIDI Bridge — free dLive MIDI bridge with a decoded monitor",
+        seo_desc=("Free MIDI between your Mac and the dLive, with real connection status, plain-language "
+                  "errors and a live MIDI Monitor that decodes what's on the wire."),
+        tagline="Free MIDI between your Mac and the dLive — with a status light that means it.",
+        lead=("Real connection status, plain-language errors, and a monitor that reads every fader, mute, "
+              "Scene, EQ and send in console language instead of hex. One connection your DAW, the other "
+              "dylanmaudio apps and Bitfocus Companion all share. The bridging half of Allen &amp; Heath's "
+              "MIDI Control app, with the parts it leaves out."),
         features=[
-            "MIDI over TCP, to and from the console",
-            "Live decoded monitor — real console descriptions, not raw MIDI bytes",
-            "Advanced monitor mode for protocol-level detail",
-            "At-a-glance menu-bar status indicator",
+            "\"Connected\" means the console is answering — checked every few seconds, reconnects by itself",
+            "Errors in words — base-channel mismatch named with the fix, port clashes named with the program",
+            "Live MIDI Monitor in console language, not hex — faders, mutes, Scenes, EQ, HPF, sends, preamp",
+            "Colour-coded by the program that sent it; copy any row's raw MIDI",
+            "\"dLive Bridge\" virtual ports for any DAW; complete fader moves back through the Return port",
+            "One shared console connection for your DAW and the other apps",
             "Free — no licence, no trial timer",
         ],
-        specs=["MIDI over TCP", "live monitor", "advanced monitor", "menu-bar status", "free"],
+        specs=["MIDI over TCP", "MIDI monitor", "connection status", "shared connection", "NRPN decoded", "free"],
+        # Long-form page copy. Source: dylanmaudio-marketing,
+        # briefs/done/midi-bridge-copy-draft.md §3 (written against 1.2.1).
+        longform=dict(
+            story=dict(
+                kicker="Why I built it",
+                paras=[
+                    "Allen &amp; Heath&rsquo;s own MIDI Control app does the job: it makes the ports and connects "
+                    "them to the desk. What it doesn&rsquo;t do is tell you anything. There&rsquo;s no status "
+                    "beyond opening the app and looking, no error reporting, and no diagnostics &mdash; a button "
+                    "flashes for in and a button flashes for out, and that&rsquo;s the monitoring. I&rsquo;m a "
+                    "believer in watching MIDI traffic; as rigs get more complex, with software and hardware "
+                    "talking over the same wire, a monitor is how you trace signal flow. But every monitor I "
+                    "used showed NRPNs and hex. I like the number structures. Most people, reasonably, "
+                    "don&rsquo;t &mdash; and that&rsquo;s where a setup stalls. So this decodes everything into "
+                    "console language, tags every message with the program that sent it, tells you the moment "
+                    "the connection drops and why, and reconnects on its own. Then, as I built the other apps, "
+                    "it made sense for all of them to share this one connection and report through it.",
+                ],
+            ),
+            what=dict(
+                kicker="In detail",
+                items=[
+                    ("Connection status that means something.",
+                     "The menu-bar disc shows stopped, connecting, connected or error, with a flash for activity "
+                     "&mdash; and &ldquo;Connected&rdquo; only once the console is actually answering. The bridge "
+                     "checks straight away and every few seconds, shows &ldquo;Waiting for a reply from &hellip;&rdquo; "
+                     "until it does, notices within about 20 seconds if the console stops, and reconnects by itself."),
+                    ("Errors in words.",
+                     "A base-channel mismatch is named, with the channel to switch to. A port clash names the "
+                     "program holding it and how to fix it. The panel says so if the running bridge is on a "
+                     "different address from the one in the fields."),
+                    ("A MIDI Monitor that speaks console.",
+                     "Every fader, mute, Scene and Action crossing the wire in plain language, colour-coded by the "
+                     "program that sent it, with a filter to show just one. Parametric EQ, HPF, aux, FX and matrix "
+                     "sends, preamp gain, pad and 48V, names, colours and assignments each read as what they are "
+                     "&mdash; &ldquo;Input 3 HPF &rarr; ~85 Hz&rdquo; &mdash; with their own filter. Advanced mode "
+                     "shows the full detail, and any row&rsquo;s raw MIDI is one Cmd-click to copy."),
+                    ("One connection for everything.",
+                     "Your DAW, the other dylanmaudio apps and Bitfocus Companion share MIDI Bridge&rsquo;s "
+                     "connection to the console instead of each opening their own, so there&rsquo;s one thing to "
+                     "check when something goes quiet. The log names every app that connects, when it leaves, and "
+                     "any message refused after its connection closed."),
+                    ("Works with any DAW, no drivers.",
+                     "&ldquo;dLive Bridge&rdquo; MIDI ports that Reaper, Logic, Ableton Live or any MIDI app can use "
+                     "straight away. Fader moves made on the desk come back complete through the Return port, so "
+                     "automation records what the engineer actually did."),
+                    ("A log for afterwards.",
+                     "Every session is logged; Export log puts a copy on your Desktop, so &ldquo;it stopped working "
+                     "after a couple of minutes&rdquo; has something to show."),
+                    ("Set it and forget it.",
+                     "Starts at login, an optional Dock icon, Check for updates only when you press it, and the "
+                     "Quick Reference installed with the app."),
+                    ("Stream Deck control &mdash; coming soon.",
+                     "Start, stop and restart the bridge, and run the console, from Bitfocus Companion buttons that "
+                     "show the bridge&rsquo;s state."),
+                ],
+            ),
+            who=dict(
+                kicker="Who uses it",
+                paras=[
+                    "Anyone with a dLive and a Mac: engineers recording console automation into a DAW, show-control "
+                    "operators, anyone trying to work out why a MIDI setup has gone quiet &mdash; and everyone "
+                    "running the other dylanmaudio apps, which connect through it.",
+                ],
+            ),
+            faq=dict(
+                kicker="Questions",
+                items=[
+                    ("Is this a replacement for Allen &amp; Heath MIDI Control?",
+                     "For getting MIDI between a Mac and the console, yes &mdash; with connection status, error "
+                     "reporting and a decoded monitor that MIDI Control doesn&rsquo;t have. It does not do MIDI "
+                     "Control&rsquo;s HUI / Mackie Control emulation for driving a DAW from the desk surface; if you "
+                     "use that, keep it."),
+                    ("Why does the monitor matter?",
+                     "Because a dLive fader move is three NRPN messages, and an EQ change looks the same in hex. "
+                     "Reading them by hand is how setups stall. The monitor reads them for you, and tags who sent "
+                     "them."),
+                    ("Does it work with the other dylanmaudio apps?",
+                     "They connect through it, share its console connection and show up by name in the monitor "
+                     "and the log."),
+                    ("Does it work with other consoles?",
+                     "It&rsquo;s built for the dLive, and users report it works on Allen &amp; Heath Avantis as "
+                     "well &mdash; I haven&rsquo;t tested that myself yet. Other consoles are being looked into "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> and say which desk."),
+                    ("Windows? Intel Macs?",
+                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free download and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                    ("Does it phone home?",
+                     "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
+                     "licence and no trial timer."),
+                ],
+            ),
+        ),
     ),
     "talk-light-trigger": dict(
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",

@@ -63,6 +63,16 @@ Cloudflare Web Analytics (cookieless, no consent banner). Paste the beacon token
 into `CF_BEACON_TOKEN` in `common.py`, rebuild, and it's injected before `</body>`
 on every page. Empty token = analytics off (pages build identically without it).
 
+**UTM pass-through** (`common.UTM_PASS_JS`, on the home page and every product
+page): if the page URL carries `utm_*` tags or a `gclid`, they are copied onto
+every store checkout link as Lemon Squeezy custom data
+(`checkout[custom][utm_source]=…`), so an order can be traced to the ad or post
+that sent it. No cookie, no storage, no third-party request — it only rewrites
+the links on the current page load. The values arrive on Lemon Squeezy's
+`order_created` webhook as `meta.custom_data`. This is the site's only
+attribution; there is deliberately no Meta Pixel or Google tag on
+dylanmaudio.com (that would need a consent banner for EU/UK visitors).
+
 ## SEO
 
 `build_seo.py` writes `sitemap.xml` (only the pages in `PAGES` — live pages only)

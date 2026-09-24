@@ -589,6 +589,23 @@ SALE_GUARD_JS = (
 )
 
 
+# UTM pass-through: copies utm_* (and gclid) from the page URL onto every
+# store checkout link as Lemon Squeezy custom data, so an order can be traced
+# to the ad that sent it. Stores nothing on the visitor's device, loads nothing
+# from third parties, and only acts on the current page load — a visitor who
+# comes back later by typing the address counts as organic. The values come
+# back on the order_created webhook as meta.custom_data. Operator-approved
+# 2026-09-23 (dylanmaudio-marketing, briefs/paid-advertising.md §4.3).
+UTM_PASS_JS = (
+    "(function(){try{var q=new URLSearchParams(location.search),keys=['utm_source','utm_medium',"
+    "'utm_campaign','utm_term','utm_content','gclid'],got=[];keys.forEach(function(k){var v=q.get(k);"
+    "if(v){got.push([k,v.slice(0,100)]);}});if(!got.length)return;"
+    "document.querySelectorAll('a[href^=\"" + STORE_URL + "/checkout/\"]').forEach(function(a){"
+    "var u=new URL(a.href);got.forEach(function(kv){u.searchParams.set('checkout[custom]['+kv[0]+']',kv[1]);});"
+    "a.href=u.toString();});}catch(e){}})();"
+)
+
+
 def abs_url(path: str) -> str:
     return SITE_ROOT.rstrip("/") + "/" + path.lstrip("/")
 

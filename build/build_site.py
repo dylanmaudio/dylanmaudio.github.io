@@ -552,7 +552,7 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__CAL_EMBED__", C.CAL_EMBED)
            .replace("__WEB3KEY__", C.WEB3FORMS_KEY)
            .replace("__NONAFFIL__", C.NONAFFIL)
-           .replace("__SALE_GUARD__", C.SALE_GUARD_JS)
+           .replace("__SALE_GUARD__", C.SALE_GUARD_JS + "\n  " + C.UTM_PASS_JS)
            .replace("__BUY_DLIVE_MENUBAR__", C.CHECKOUT["dlive-menubar"])
            .replace("__BUY_ALL_MENUBAR__", C.CHECKOUT["all-menubar"]))
 

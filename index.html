@@ -532,6 +532,7 @@
     });
   })();
   (function(){var s=document.querySelector('[data-sale-until]');if(!s)return;var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');if(Date.now()>end.getTime()){document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();
+  (function(){try{var q=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'],got=[];keys.forEach(function(k){var v=q.get(k);if(v){got.push([k,v.slice(0,100)]);}});if(!got.length)return;document.querySelectorAll('a[href^="https://store.dylanmaudio.com/checkout/"]').forEach(function(a){var u=new URL(a.href);got.forEach(function(kv){u.searchParams.set('checkout[custom]['+kv[0]+']',kv[1]);});a.href=u.toString();});}catch(e){}})();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>
 </body>

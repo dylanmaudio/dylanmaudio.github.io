@@ -379,6 +379,7 @@ def build_page(slug, p):
 
 <script>
   {C.SALE_GUARD_JS}
+  {C.UTM_PASS_JS}
 </script>
 </body>
 </html>"""

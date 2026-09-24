@@ -445,9 +445,9 @@ PRODUCTS = {
         icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         # Search-facing title/description (the page <title> and meta description).
-        seo_title="Time Code Tool — SMPTE timecode generator, monitor &amp; converter for Mac",
-        seo_desc=("SMPTE timecode generator, monitor and converter for Mac. Read LTC or MTC, see its health, "
-                  "convert between them at any frame rate, render LTC to WAV. Free 20-minute trial."),
+        seo_title="Time Code Tool — SMPTE timecode generator &amp; monitor for Mac",
+        seo_desc=("SMPTE timecode generator, monitor and converter for Mac. Read LTC or MTC, check its "
+                  "health, convert at any frame rate, render LTC to WAV. Free trial."),
         tagline="SMPTE timecode generator, monitor and converter — on your Mac.",
         lead=("Generate, monitor and convert SMPTE timecode — LTC and MTC — with an app that does the job "
               "of a rack timecode clock and shows you what your timecode is actually doing. Read incoming LTC or MTC and "

@@ -3,12 +3,15 @@
 
 A dark rounded tile with a 3×2 grid of keys, some lit in the site's
 signal colours: the shape of a Stream Deck page, no third-party logo.
-Matches the 256 px app icons in /assets. Re-run after a colour change.
+Matches the 256 px app icons in /assets, plus a 1024 px master for the
+social cards (dylanmaudio-marketing/store-assets). Re-run after a colour change.
 """
 from PIL import Image, ImageDraw, ImageFilter
 import pathlib
 
-OUT = pathlib.Path(__file__).resolve().parent.parent / "assets" / "companion.png"
+ASSETS = pathlib.Path(__file__).resolve().parent.parent / "assets"
+OUT = ASSETS / "companion.png"            # 256 px, the site icon
+MASTER = ASSETS / "companion-1024.png"    # 1024 px, read by the marketing social-card generators
 S = 4 * 256                       # supersample, downscale at the end
 BG_TOP, BG_BOT = (30, 36, 44), (14, 17, 22)
 KEY_OFF = (38, 45, 55)
@@ -57,7 +60,9 @@ def build():
     out = Image.alpha_composite(Image.new("RGBA", (S, S), (0, 0, 0, 0)), img)
     out = Image.alpha_composite(Image.composite(glow, Image.new("RGBA", (S, S), (0, 0, 0, 0)), mask), out)
     out.resize((256, 256), Image.LANCZOS).save(OUT)
-    print("wrote", OUT.relative_to(OUT.parent.parent))
+    out.resize((1024, 1024), Image.LANCZOS).save(MASTER)
+    for f in (OUT, MASTER):
+        print("wrote", f.relative_to(ASSETS.parent))
 
 
 if __name__ == "__main__":

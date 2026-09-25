@@ -76,6 +76,196 @@ PRODUCTS = {
         ],
         specs=["timeline", "automation", "show control", "dLive"],
     ),
+    "companion": dict(
+        name="Companion Module", abbr="", tag="Free", accent="green",
+        icon="companion.png", affiliated=True, status="module", youtube=None, video=False,
+        store=None, host_url="https://bitfocus.io/companion", host_label="Get Companion",
+        manual_url="https://github.com/bitfocus/companion-module-dylanmaudio-apps/blob/main/companion/HELP.md", manual_label="Module help",
+        os="Windows, macOS, Linux (Bitfocus Companion 5.0+)",
+        glance=[("Needs", "Companion 5.0+"), ("Surface", "Stream Deck, web, tablet"),
+                ("Apps", "on the same Mac"), ("Licence", "MIT, open source")],
+        seo_title="dLive Stream Deck control — the dylanmaudio Companion module",
+        seo_desc=("Free Bitfocus Companion module for Allen &amp; Heath dLive and the dylanmaudio apps: Stream "
+                  "Deck keys with live state — mutes, faders, scenes, talkback, failover."),
+        tagline="Stream Deck control for your dLive and every dylanmaudio app — with the state back on the keys.",
+        lead=("A free module for Bitfocus Companion. Through MIDI Bridge it runs your dLive from a Stream Deck "
+              "&mdash; mutes, faders with timed fades, Scenes and Actions &mdash; and the desk&rsquo;s own state "
+              "comes back on the keys: names, colours, levels, the current Scene. Talk Light Trigger, Pilot Tone "
+              "Trigger and Time Code Tool each get their controls on keys too, lit by what the app is doing. One "
+              "module, installed from inside Companion in a minute."),
+        features=[
+            "dLive through MIDI Bridge: mutes, faders with timed fades, Scenes, Actions, sends and more",
+            "State back on the keys — channel names, colours, levels, mutes and the current Scene",
+            "Scene and Action names from your show file",
+            "Talk Light Trigger: a Talk flash page that blinks your Stream Deck when someone talks",
+            "Pilot Tone Trigger: Run, Auto / Latch, Reset, Flip A/B, with the failover state on the key",
+            "Time Code Tool: transport, outputs, generator and a four-key timecode readout",
+            "Ready-made presets for everything — drag them onto keys",
+            "Free and open source; installed from Companion's Modules tab",
+        ],
+        specs=["Bitfocus Companion", "Stream Deck", "state feedback", "presets", "free"],
+        # Long-form page copy. Source: the module's companion/HELP.md and
+        # dylanmaudio-marketing copy bank. Written 25 Sept 2026, module 1.0.1.
+        longform=dict(
+            story=dict(
+                kicker="What it is",
+                paras=[
+                    "<a href=\"https://bitfocus.io/companion\" target=\"_blank\" rel=\"noopener\">Bitfocus "
+                    "Companion</a> is free, open-source software that turns a Stream Deck &mdash; or a web page on a "
+                    "phone or tablet &mdash; into a control surface for almost anything in a show: consoles, video "
+                    "switchers, playback, lighting. Each thing it controls comes from a <em>module</em>. This is "
+                    "mine: one module that controls the dLive through MIDI Bridge and every dylanmaudio app on the "
+                    "same Mac.",
+                    "What makes it worth having is the feedback. A key doesn&rsquo;t just send a mute; it shows the "
+                    "channel&rsquo;s name and colour off the desk and goes red when it&rsquo;s muted &mdash; whoever "
+                    "muted it. Pilot Tone Trigger&rsquo;s key goes amber when it&rsquo;s latched on the backup. Time "
+                    "Code Tool&rsquo;s readout goes amber in freewheel. The keys tell you the truth.",
+                ],
+            ),
+            howto=dict(
+                kicker="How to install",
+                intro=["Never used Companion? This is the whole setup, start to finish. About ten minutes the "
+                       "first time; a minute once Companion is installed."],
+                items=[
+                    ("Install Companion.",
+                     "Download it free from <a href=\"https://bitfocus.io/companion\" target=\"_blank\" "
+                     "rel=\"noopener\">bitfocus.io/companion</a> and install it on the same Mac as the dylanmaudio "
+                     "apps. You need <strong>version 5.0 or later</strong>. Launch it and click <strong>Launch "
+                     "GUI</strong> &mdash; Companion is set up in a browser window."),
+                    ("Install the module.",
+                     "In Companion, open the <strong>Modules</strong> tab, search for <code>dylanmaudio</code>, "
+                     "and install the latest version. (No internet on the show machine? <a href=\"/discord\">Ask me on Discord</a> for "
+                     "the module package and use <strong>Import module package</strong> in the same tab.)"),
+                    ("Switch on Companion control in the app.",
+                     "In each dylanmaudio app you want on keys, open its menu-bar popover and turn on "
+                     "<strong>Allow Companion control</strong>. For the dLive, have MIDI Bridge running and "
+                     "connected to the console first."),
+                    ("Add a connection for each app.",
+                     "In the <strong>Connections</strong> tab, search <code>dylanmaudio</code>, click it, and pick "
+                     "the app under <strong>App</strong>. Give each connection a short label &mdash; "
+                     "<code>dlive</code>, <code>tlt</code>, <code>ptt</code>, <code>tct</code> &mdash; because "
+                     "the label becomes the variable prefix. Leave the port at 0 and the address at "
+                     "<code>127.0.0.1</code>; the module knows each app&rsquo;s standard port. The connection "
+                     "goes green when it&rsquo;s talking to the app (for MIDI Bridge: when the bridge <em>and</em> "
+                     "the console are both up)."),
+                    ("Drag presets onto keys.",
+                     "Open the <strong>Buttons</strong> tab, then <strong>Presets</strong> on the right. Each "
+                     "connection has ready-made keys &mdash; mute and level keys that label themselves from the "
+                     "desk, Scene keys, each app&rsquo;s Run and status keys, styled keys in the app&rsquo;s own "
+                     "look. Drag one onto a key and it works. No Stream Deck yet? Companion&rsquo;s "
+                     "<strong>Emulator</strong> and web buttons work the same way."),
+                    ("For the dLive: load your show file.",
+                     "Scene names only exist in the show file &mdash; the console can&rsquo;t send them over MIDI. "
+                     "The MIDI Bridge connection&rsquo;s settings have a link to its own upload page: choose the "
+                     "<code>.tar.gz</code> the console writes to USB, or a Director export, and the Scene names and "
+                     "named Actions arrive. Only those names are kept; the show itself isn&rsquo;t stored."),
+                ],
+                outro=["On the console, MIDI must be on: <strong>Utility &rarr; Control &rarr; MIDI</strong>, mode "
+                       "<strong>On</strong> (not Secure), Global MIDI Send and Receive enabled &mdash; the same "
+                       "setup MIDI Bridge already needs. The module&rsquo;s full help, with every action, feedback "
+                       "and variable, is one click away in Companion (the <strong>?</strong> next to the "
+                       "connection) and <a href=\"https://github.com/bitfocus/companion-module-dylanmaudio-apps/blob/main/companion/HELP.md\" target=\"_blank\" "
+                       "rel=\"noopener\">on GitHub</a>."],
+            ),
+            what=dict(
+                kicker="In detail",
+                items=[
+                    ("The dLive, with its state on the keys.",
+                     "Through MIDI Bridge: mute, fader (set, nudge, or fade over a time you choose), send level, "
+                     "main / DCA / mute-group assign, preamp gain, pad and 48 V, PEQ and HPF, names and colours, "
+                     "Scene recall and Go / Next / Previous, and named console Actions. Mutes and Scene changes "
+                     "come back the moment the desk makes them; fader levels as soon as a move settles; names and "
+                     "colours on connect and whenever a strip is renamed."),
+                    ("One connection to the console, shared.",
+                     "The module never opens its own connection to the desk. It joins MIDI Bridge alongside your "
+                     "DAW and the other apps, and shows up by name in the bridge&rsquo;s MIDI Monitor &mdash; so "
+                     "you can see exactly which key sent what. It can also start, stop and restart the bridge "
+                     "itself."),
+                    ("Talk Light Trigger: Talk flash.",
+                     "When someone talks, your Stream Deck jumps to a TALK page whose keys all blink, and goes back "
+                     "to where it was when they stop. EXIT dismisses a call with a cooldown so the next one "
+                     "doesn&rsquo;t drag you straight back. It ships as a <a href=\"https://github.com/bitfocus/companion-module-dylanmaudio-apps/blob/main/companion/"
+                     "talk-flash.companionconfig\" target=\"_blank\" rel=\"noopener\">ready-made page</a> to "
+                     "import."),
+                    ("Pilot Tone Trigger: the failover on a key.",
+                     "Run, Auto / Latch, Reset and Flip A/B, the tone generator, and a status tile that goes red "
+                     "on a lost tone, amber when latched on the backup and violet when Signal Integrity sees "
+                     "damage."),
+                    ("Time Code Tool: timecode you can read across the room.",
+                     "Start / Stop, Read / Generate, input and outputs, the generator&rsquo;s start time and rate, "
+                     "and a four-key HH MM SS FF readout &mdash; green while locked, amber in freewheel, dashes "
+                     "with no signal."),
+                    ("Keys that read at a glance.",
+                     "Every preset has a short label sized to fit, on its menu&rsquo;s colour, with a red bar "
+                     "across the top when the control is show-critical. Green when on, blue for the chosen "
+                     "option, amber when it needs a look. Each app also gets styled keys in its own look: its "
+                     "logo, its menu-bar icon mirroring every state, a round Run key and a level meter."),
+                    ("Show-safe.",
+                     "Each app has a <strong>Lock show-critical controls</strong> switch: while it&rsquo;s on, "
+                     "Companion can&rsquo;t stop the app or change Pilot Tone&rsquo;s failback mode. When an app "
+                     "says no, its reason goes to Companion&rsquo;s log word for word. And if an app isn&rsquo;t "
+                     "running, its keys stay put and say so when pressed."),
+                    ("Console Control, when it launches.",
+                     "The module is already built for Console Control, the show-automation app I&rsquo;m "
+                     "working on; it gets its own keys and presets the day it launches."),
+                    ("New app features appear by themselves.",
+                     "Each app tells the module what controls it has. A feature added in an app update shows up "
+                     "as actions, feedbacks and presets without a new version of the module."),
+                ],
+            ),
+            who=dict(
+                kicker="Who uses it",
+                paras=[
+                    "Anyone who wants the show-critical controls on physical keys rather than in a menu-bar "
+                    "popover: FOH and monitor engineers who want talkback, failover and a timecode readout "
+                    "within reach; playback techs who want the backup state lit up where they can see it; and "
+                    "anyone who already runs Companion for video or lighting and wants the console on the same "
+                    "deck.",
+                ],
+            ),
+            faq=dict(
+                kicker="Questions",
+                items=[
+                    ("Do I need a Stream Deck?",
+                     "No. Companion has a built-in emulator and serves its buttons as a web page you can open on "
+                     "a phone or tablet. A Stream Deck is nicer to press; it isn&rsquo;t required."),
+                    ("Does it cost anything?",
+                     "No. Companion is free and open source, and so is this module (MIT). It controls the "
+                     "dylanmaudio apps, so the paid apps still need their own licence to do their job &mdash; "
+                     "MIDI Bridge is free."),
+                    ("Which versions of the apps does it need?",
+                     "Any current version: MIDI Bridge 1.1.9 or later, Talk Light Trigger 1.0.7 or later, Pilot "
+                     "Tone Trigger 1.0.5 or later, Time Code Tool 1.1.5 or later. If an app and the module ever "
+                     "disagree, the connection&rsquo;s status says so &mdash; update whichever is older."),
+                    ("Does Companion have to run on the same Mac?",
+                     "Yes, for the apps &mdash; the module reaches each one on this Mac. Companion itself also "
+                     "runs on Windows and Linux, and MIDI Bridge can be reached across the network with a token "
+                     "for more advanced setups; the module&rsquo;s help explains how."),
+                    ("There&rsquo;s already a dLive module in Companion. Why this one?",
+                     "The existing Allen &amp; Heath dLive module talks to the console directly, and it&rsquo;s "
+                     "good at what it does. This one goes through MIDI Bridge instead, which is what gives it the "
+                     "state feedback &mdash; names, colours, levels and mutes back on the keys, whoever changed "
+                     "them &mdash; and lets it share one console connection with your DAW and the other apps. "
+                     "Several of its value tables were derived from that module&rsquo;s work, and are credited in "
+                     "the source. Use whichever fits your rig."),
+                    ("What can&rsquo;t it do?",
+                     "Metering &mdash; meters travel on Allen &amp; Heath&rsquo;s own network protocol, not MIDI. "
+                     "Scene names need the show file, because the console doesn&rsquo;t send them. SoftKeys "
+                     "can&rsquo;t be pressed over MIDI; use a console Action instead. And sends, assigns, preamps "
+                     "and HPF show changes made from Companion, but not changes made on the surface &mdash; the "
+                     "module lists those in a variable so it&rsquo;s never a surprise."),
+                    ("Does it work with Avantis?",
+                     "It&rsquo;s built and tested on dLive. Users report MIDI Bridge works on Avantis, but I "
+                     "haven&rsquo;t tested the module there myself &mdash; <a href=\"/#contact\">tell me</a> how "
+                     "it goes."),
+                    ("Is it made by Bitfocus?",
+                     "No &mdash; the module is mine. Bitfocus reviewed it and publishes it in Companion&rsquo;s "
+                     "module store. Companion is Bitfocus&rsquo;s software, and Stream Deck is Elgato&rsquo;s; "
+                     "neither is affiliated with dylanmaudio."),
+                ],
+            ),
+        ),
+    ),
     "midi-bridge": dict(
         name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
         icon="midi-bridge.png", affiliated=True, status="free",
@@ -150,9 +340,11 @@ PRODUCTS = {
                     ("Set it and forget it.",
                      "Starts at login, an optional Dock icon, Check for updates only when you press it, and the "
                      "Quick Reference installed with the app."),
-                    ("Stream Deck control &mdash; coming soon.",
-                     "Start, stop and restart the bridge, and run the console, from Bitfocus Companion buttons that "
-                     "show the bridge&rsquo;s state."),
+                    ("Stream Deck control.",
+                     "Run the dLive from a Stream Deck through Bitfocus Companion &mdash; mutes, faders with timed "
+                     "fades, Scenes and Actions &mdash; with names, colours, levels and the current Scene back on "
+                     "the keys, and the bridge itself started, stopped and watched from a key. With the "
+                     "<a href=\"/products/companion/\">free dylanmaudio Companion module</a>."),
                 ],
             ),
             who=dict(
@@ -261,8 +453,10 @@ PRODUCTS = {
                      "Direct TCP to the console with nothing else installed, or through the free MIDI Bridge. "
                      "(The Cancel SoftKey needs a connection that can receive &mdash; Direct TCP, or a two-way "
                      "MIDI port.)"),
-                    ("Stream Deck control &mdash; coming soon.",
-                     "Run and Threshold as Bitfocus Companion buttons, with the talk state fed back."),
+                    ("Stream Deck control &mdash; and a Stream Deck that flashes too.",
+                     "Run and Threshold on Bitfocus Companion keys with the talk state fed back, and a Talk flash "
+                     "page: when someone talks your Stream Deck jumps to a page of blinking keys, and goes back when "
+                     "they stop. With the <a href=\"/products/companion/\">free dylanmaudio Companion module</a>."),
                 ],
             ),
             who=dict(
@@ -387,9 +581,10 @@ PRODUCTS = {
                      "tone lost, degraded, and restored but still on the backup."),
                     ("Gentle on the show interface.",
                      "One input channel, a large buffer, and it never changes the sample rate."),
-                    ("Stream Deck control &mdash; coming soon.",
-                     "Run, failback mode, Reset and the tone generator as Bitfocus Companion buttons, with the "
-                     "app&rsquo;s state shown back."),
+                    ("Stream Deck control.",
+                     "Run, Auto / Latch, Reset, Flip A/B and the tone generator on Bitfocus Companion keys, with a "
+                     "status tile that goes red on a lost tone, amber when latched on the backup and violet when "
+                     "Signal Integrity sees damage. With the <a href=\"/products/companion/\">free dylanmaudio Companion module</a>."),
                 ],
             ),
             who=dict(
@@ -508,9 +703,10 @@ PRODUCTS = {
                      "An optional virtual audio device carries LTC in and out, and virtual MIDI ports carry "
                      "MTC in and out. No loopback cables, no separate routing utility. (The virtual audio "
                      "device needs macOS 13 or later.)"),
-                    ("Stream Deck control &mdash; coming soon.",
-                     "Transport, mode, inputs and outputs and the generator as Bitfocus Companion buttons, "
-                     "with the live timecode, lock state and frame rate shown back on the deck."),
+                    ("Stream Deck control.",
+                     "Transport, mode, inputs and outputs and the generator on Bitfocus Companion keys, and a "
+                     "four-key HH MM SS FF readout &mdash; green while locked, amber in freewheel. With the "
+                     "<a href=\"/products/companion/\">free dylanmaudio Companion module</a>."),
                 ],
             ),
             who=dict(

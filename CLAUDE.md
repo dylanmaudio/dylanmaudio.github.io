@@ -37,9 +37,18 @@ then commit + push. Editing `index.html`, `about.html` or
 Menubar Utilities** (the same plus Time Code Tool). Those are the store's
 product names (operator, 2026-09-21); use them exactly.
 
-**Not public:** Console Control (`status="coming"` in `PRODUCTS`) and the
-Bitfocus Companion module. Their pages and CTAs must not imply availability
-unless the operator says an item has shipped. **Console Control has no
+**Also public — the Bitfocus Companion module** (free, MIT, in Companion's
+module store since 25 Sept 2026, operator): its page is
+`products/companion/` (`status="module"` in `PRODUCTS` — install steps and a
+"Get Companion" link instead of a store checkout; icon from
+`build/build_companion_icon.py`). The app pages' "Stream Deck control"
+sections link to it.
+
+**Not public:** Console Control (`status="coming"` in `PRODUCTS`). Its page
+and CTAs must not imply availability until the operator says it has
+shipped — including its Companion features. One exception: the Companion
+page may say the module supports "Console Control, when it launches"
+(operator, 25 Sept) — no feature detail. **Console Control has no
 product page until launch** (operator, 2026-09-21): it's left out of
 `build_products.BUILD`; the home page's "Coming soon" flagship card stays.
 Add the slug back to `BUILD` (and `INDEXED`, and `build_seo.PAGES`) at launch.

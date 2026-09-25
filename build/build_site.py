@@ -173,6 +173,18 @@ __SEO__
   .bundle .b-price { font-family: var(--mono); font-size: 17px; font-variant-numeric: tabular-nums; }
   .bundle .b-price .was { color: var(--dim); text-decoration: line-through; font-size: 0.78em; margin-right: 4px; }
 
+  /* Companion module strip */
+  .companion { margin-top: 18px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px; transition: border-color .18s; }
+  .companion:hover { border-color: color-mix(in srgb, var(--green) 45%, var(--border)); }
+  .companion img { width: 56px; height: 56px; border-radius: 13px; flex-shrink: 0; }
+  .companion .c-main { flex: 1; min-width: 240px; }
+  .companion h4 { margin: 0; font-size: 1.05rem; font-weight: 600; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .companion p { margin: 6px 0 0; color: var(--muted); font-size: 0.9rem; }
+  .companion .new { font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--green); border: 1px solid color-mix(in srgb, var(--green) 40%, var(--border));
+    background: rgba(98,210,122,0.10); padding: 2px 7px; border-radius: 999px; }
+
   .note { margin-top: 30px; font-family: var(--mono); font-size: 12px; color: var(--dim); display: flex; align-items: center; gap: 9px; }
   .note .d { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
 
@@ -367,6 +379,15 @@ __SEO__
         <div class="b-buy"><div class="b-price"><span class="was">$147</span> $109</div><a href="__BUY_ALL_MENUBAR__" class="card-link" style="color: var(--green);">Get bundle <span class="arw">&rarr;</span></a></div>
       </div>
     </div>
+
+    <a class="companion" href="products/companion/">
+      <img src="assets/companion.png" alt="Companion module icon" width="56" height="56" />
+      <div class="c-main">
+        <h4>Stream Deck control for every app <span class="new">New &middot; free</span></h4>
+        <p>The dylanmaudio module for Bitfocus Companion: your dLive and every app on Stream Deck keys, with the state back on the keys &mdash; names, colours, levels, the current Scene, talkback and failover.</p>
+      </div>
+      <span class="card-link">Learn more <span class="arw">&rarr;</span></span>
+    </a>
 
     <div class="note"><span class="d" aria-hidden="true"></span> All apps: macOS 11+ &middot; Apple Silicon &middot; paid apps include a full-featured 20-minute trial. Independent software, not affiliated with Allen&nbsp;&amp;&nbsp;Heath.</div>
   </div>

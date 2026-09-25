@@ -14,12 +14,12 @@ import common as C
 # Console Control is not in BUILD: its product page stays down until it
 # launches (operator, 2026-09-21). The home page's "Coming soon" flagship
 # card is separate (build_site.py) and stays. Add the slug back at launch.
-BUILD = ["midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool"]
+BUILD = ["midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool", "companion"]
 
 # Slugs allowed into search results. Empty = every product page is parked
 # (noindex + absent from sitemap). At launch, add the slug here AND to
 # build_seo.PAGES so Google can index it.
-INDEXED = {"talk-light-trigger", "midi-bridge", "pilot-tone-trigger", "time-code-tool"}
+INDEXED = {"talk-light-trigger", "midi-bridge", "pilot-tone-trigger", "time-code-tool", "companion"}
 
 CSS = """
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
@@ -121,7 +121,15 @@ CSS = """
   .lf p{color:var(--muted);margin:0 0 16px;max-width:68ch;} .lf p:last-child{margin-bottom:0;}
   .lf h3{font-size:1.05rem;font-weight:620;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--text);}
   .lf .lf-item:first-of-type h3{margin-top:0;}
-  .lf em{color:var(--text);font-style:italic;} .lf a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
+  .lf em{color:var(--text);font-style:italic;}
+  .lf-steps{counter-reset:step;list-style:none;padding:0;margin:0 0 16px;}
+  .lf-steps li{counter-increment:step;position:relative;padding-left:44px;margin-bottom:18px;}
+  .lf-steps li::before{content:counter(step);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+    display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--blue);
+    border:1px solid color-mix(in srgb,var(--blue) 40%,var(--border));background:rgba(79,163,247,0.08);}
+  .lf-steps li h3{margin-top:2px;}
+  .lf code{font-family:var(--mono);font-size:0.9em;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 6px;}
+  #install{scroll-margin-top:80px;} .lf a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
   /* cta band */
   .p-band{border-top:1px solid var(--hairline);text-align:center;}
   .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
@@ -167,6 +175,8 @@ PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
 
 
 def video_block(p):
+    if p.get("video") is False:        # e.g. the Companion module page: no intro video planned yet
+        return ""
     if p["youtube"]:
         # Direct (lazy) embed: the viewer's single click lands on YouTube's own
         # play button and starts with sound every time — no autoplay-policy
@@ -181,7 +191,17 @@ def video_block(p):
     return f'<section><div class="video-wrap"><div class="video-frame">{inner}</div></div></section>'
 
 
+def module_ctas(p, discord_label="Get help"):
+    """A free module installed from inside a host app (Companion): the primary
+    button jumps to the install steps on this page, the second fetches the host."""
+    return (f'<a href="#install" class="btn btn-primary">How to install <span class="arw">&darr;</span></a>'
+            f'<a href="{p["host_url"]}" target="_blank" rel="noopener" class="btn btn-ghost">{p["host_label"]} &#8599;</a>'
+            f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} {discord_label}</a>')
+
+
 def hero_cta(p):
+    if p["status"] == "module":
+        return module_ctas(p)
     if p["status"] == "free":
         return (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
@@ -201,7 +221,11 @@ def hero_cta(p):
 
 
 def band(p):
-    if p["status"] == "free":
+    if p["status"] == "module":
+        h = f"{p['name']} is free."
+        sub = p.get("band_sub", "Install it from inside Companion, and drop into the Discord if you hit a snag.")
+        cta = module_ctas(p, "Join the Discord")
+    elif p["status"] == "free":
         h, sub = f"{p['name']} is free.", "Download it, and drop into the Discord if you hit a snag or have a request."
         cta = (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download &mdash; Free <span class="arw">&rarr;</span></a>'
                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
@@ -235,7 +259,7 @@ def band(p):
 
 
 def status_row(p):
-    if p["status"] == "free":
+    if p["status"] in ("free", "module"):
         return '<div class="srow"><span class="k">Price</span><span class="v g">Free</span></div>'
     if p["status"] == "buy":
         sale = p.get("sale")
@@ -257,12 +281,20 @@ def longform(p):
     def kick(t): return f'<div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; {t}</div>'
     def paras(b): return "".join(f"<p>{x}</p>" for x in b["paras"])
     def items(b): return "".join(f'<div class="lf-item"><h3>{h}</h3><p>{t}</p></div>' for h, t in b["items"])
+    def steps(b):
+        intro = "".join(f"<p>{x}</p>" for x in b.get("intro", []))
+        lis = "".join(f'<li><h3>{h}</h3><p>{t}</p></li>' for h, t in b["items"])
+        outro = "".join(f"<p>{x}</p>" for x in b.get("outro", []))
+        return f'{intro}<ol class="lf-steps">{lis}</ol>{outro}'
     blocks = []
     if "story" in lf: blocks.append(kick(lf["story"]["kicker"]) + paras(lf["story"]))
+    if "howto" in lf: blocks.append(kick(lf["howto"]["kicker"]) + steps(lf["howto"]))
     if "what" in lf:  blocks.append(kick(lf["what"]["kicker"]) + items(lf["what"]))
     if "who" in lf:   blocks.append(kick(lf["who"]["kicker"]) + paras(lf["who"]))
     if "faq" in lf:   blocks.append(kick(lf["faq"]["kicker"]) + items(lf["faq"]))
-    inner = "".join(f'<div class="lf-block">{b}</div>' for b in blocks)
+    ids = [("howto" if "lf-steps" in b else "") for b in blocks]
+    inner = "".join((f'<div class="lf-block" id="install">{b}</div>' if i == "howto" else f'<div class="lf-block">{b}</div>')
+                    for b, i in zip(blocks, ids))
     return f'<section class="lf"><div class="wrap">{inner}</div></section>'
 
 
@@ -290,10 +322,10 @@ def build_page(slug, p):
     p_desc = p.get("seo_desc") or f"{p['name']} — {p['tagline']}"      # <meta name=description>
     og_desc = p.get("seo_desc") or p["tagline"]                          # og / twitter description
     ld = {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": p["name"],
-          "operatingSystem": "macOS 11+", "applicationCategory": "MultimediaApplication",
+          "operatingSystem": p.get("os", "macOS 11+"), "applicationCategory": "MultimediaApplication",
           "description": htmlmod.unescape(p["tagline"]), "url": C.abs_url(f"products/{slug}/"),
           "author": {"@type": "Person", "name": "Dylan Mitrovich", "url": C.SITE_ROOT + "/"}}
-    if p["status"] == "free":
+    if p["status"] in ("free", "module"):
         ld["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     elif p["status"] == "buy" and p.get("price"):
         sale = p.get("sale")
@@ -309,8 +341,11 @@ def build_page(slug, p):
                    f'<span class="s-hi">Intro sale &mdash; {sale["now"]}</span>'
                    f'<span class="s-sub"><s>was {sale["was"]}</s> &middot; code <b>{sale["code"]}</b> &middot; until {sale["until_label"]}</span>'
                    f'</div>')
-    manual_btn = (f'<a class="btn btn-ghost" href="/guides/{slug}-quick-reference.pdf" '
-                  f'target="_blank" rel="noopener">Manual (PDF) &#8599;</a>')
+    manual_btn = (f'<a class="btn btn-ghost" href="{p.get("manual_url") or f"/guides/{slug}-quick-reference.pdf"}" '
+                  f'target="_blank" rel="noopener">{p.get("manual_label", "Manual (PDF)")} &#8599;</a>')
+    glance = p.get("glance") or [("Platform", "macOS 11+"), ("Chip", "Apple Silicon")]
+    glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
+                          for k, v in glance)
     fld = faq_ld(p)
     if fld:
         ld = {"@context": "https://schema.org", "@graph": [{k: v for k, v in ld.items() if k != "@context"}, fld]}
@@ -362,8 +397,7 @@ def build_page(slug, p):
     <div class="side" style="margin-top:24px;">
       <div class="h">// At a glance</div>
       {status_row(p)}
-      <div class="srow"><span class="k">Platform</span><span class="v">macOS 11+</span></div>
-      <div class="srow"><span class="k">Chip</span><span class="v">Apple Silicon</span></div>
+      {glance_rows}
       {trial}
       {maker}
       <div class="chips">{chips}</div>

@@ -371,11 +371,14 @@ PRODUCTS = {
                      "They connect through it, share its console connection and show up by name in the monitor "
                      "and the log."),
                     ("Does it work with other consoles?",
-                     "It&rsquo;s built for the dLive, and users report it works on Allen &amp; Heath Avantis as "
-                     "well &mdash; I haven&rsquo;t tested that myself yet. Other consoles are being looked into "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> and say which desk."),
+                     "The dLive is the first console, not the only one &mdash; more consoles, from more "
+                     "manufacturers, are on the way. Users already report it works on Allen &amp; Heath "
+                     "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
+                     "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free download and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
+                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
                      "licence and no trial timer."),
@@ -489,11 +492,14 @@ PRODUCTS = {
                      "talkback signal on any audio input; and two Scenes on the console with different Surface "
                      "Illumination."),
                     ("Does it work with other consoles?",
-                     "It&rsquo;s built for the dLive, and users report it works on Allen &amp; Heath Avantis as "
-                     "well &mdash; I haven&rsquo;t tested that myself yet. Other consoles are being looked into "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> and say which desk."),
+                     "The dLive is the first console, not the only one &mdash; more consoles, from more "
+                     "manufacturers, are on the way. Users already report it works on Allen &amp; Heath "
+                     "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
+                     "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
+                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for "
                      "updates runs only when you press it. A licence covers two Macs &mdash; show machine and "
@@ -621,12 +627,15 @@ PRODUCTS = {
                      "pilot-tone feed into any audio input, and the backup &mdash; a Scene, an Action, or both "
                      "&mdash; built on the console."),
                     ("Does it work with other consoles?",
-                     "It&rsquo;s built for the dLive. Users report it works on Allen &amp; Heath Avantis with "
-                     "Scene recall &mdash; Actions are a dLive feature &mdash; though I haven&rsquo;t tested that "
-                     "myself yet. Other consoles are being looked into &mdash; <a href=\"/#contact\">register "
-                     "your interest</a> and say which desk. (Time Code Tool already works with anything.)"),
+                     "The dLive is the first console, not the only one &mdash; more consoles, from more "
+                     "manufacturers, are on the way. Users already report it works on Allen &amp; Heath "
+                     "Avantis with Scene recall &mdash; Actions are a dLive feature &mdash; though I "
+                     "haven&rsquo;t tested that myself yet. <a href=\"/#contact\">Register your interest</a> "
+                     "and say which desk you&rsquo;d like next. (Time Code Tool already works with anything.)"),
                     ("Windows? Intel Macs?",
-                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
+                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
                      "runs only when you press it, and nothing goes online while a trigger is armed. A licence "
@@ -741,7 +750,9 @@ PRODUCTS = {
                     ("Can I just make an LTC WAV file?",
                      "Yes, offline, at any frame rate including drop-frame."),
                     ("Windows? Intel Macs?",
-                     "Built for Apple Silicon. From this version the app also installs and runs on Intel Macs &mdash; verified so far in a VM, with testing on Intel hardware in October &mdash; so if you&rsquo;re on Intel, try the free trial and tell me how it goes. Windows is being looked into &mdash; <a href=\"/#contact\">register your interest</a>."),
+                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
+                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "
                      "licence covers two Macs &mdash; the show machine and the spare."),

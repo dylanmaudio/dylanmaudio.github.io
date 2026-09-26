@@ -310,8 +310,8 @@ __SEO__
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker"><span class="tick">//</span>&nbsp; Software</div>
-      <h2>Tools I build for the dLive.</h2>
-      <p>From a complete automation platform to focused menu-bar utilities &mdash; designed on tour, tested at showtime.</p>
+      <h2>Tools I build for the console &mdash; starting with the dLive.</h2>
+      <p>From a complete automation platform to focused menu-bar utilities &mdash; designed on tour, tested at showtime. The dLive is the first console; more manufacturers are on the way.</p>
     </div>
 
     <article class="flagship">
@@ -389,7 +389,7 @@ __SEO__
       <span class="card-link">Learn more <span class="arw">&rarr;</span></span>
     </a>
 
-    <div class="note"><span class="d" aria-hidden="true"></span> All apps: macOS 11+ &middot; Apple Silicon &middot; paid apps include a full-featured 20-minute trial. Independent software, not affiliated with Allen&nbsp;&amp;&nbsp;Heath.</div>
+    <div class="note"><span class="d" aria-hidden="true"></span> All apps: macOS 11+ &middot; Apple Silicon (Windows coming) &middot; paid apps include a full-featured 20-minute trial. Independent software, not affiliated with Allen&nbsp;&amp;&nbsp;Heath.</div>
   </div>
 </section>
 

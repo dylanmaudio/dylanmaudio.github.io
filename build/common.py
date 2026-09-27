@@ -81,7 +81,7 @@ PRODUCTS = {
     ),
     "companion": dict(
         name="Companion Module", abbr="", tag="Free", accent="green",
-        icon="companion.png", affiliated=True, status="module", youtube=None, video=False,
+        icon="companion.png", gallery=True, affiliated=True, status="module", youtube=None, video=False,
         store=None, host_url="https://bitfocus.io/companion", host_label="Get Companion",
         manual_url="https://github.com/bitfocus/companion-module-dylanmaudio-apps/blob/main/companion/HELP.md", manual_label="Module help",
         os="Windows, macOS, Linux (Bitfocus Companion 5.0+)",

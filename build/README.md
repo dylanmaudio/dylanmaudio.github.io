@@ -34,9 +34,13 @@ when its page is ready to ship.
   its Lemon Squeezy images (1600×1200, tiny on the store listing) into
   `/assets/cards/<slug>/`. The page shows them in a scrolling window (swipe / arrows
   / dots) just below the intro video — **every `*.png` in the folder, in filename
-  order**, so name them `01-…`, `02-…` (hero first). No `gallery` flag, or an empty
-  folder, = no gallery (e.g. the Companion page). Source images live in
-  `dylanmaudio-marketing/store-assets/<product>/` and `…/heroes/`.
+  order**, so name them `01-…`, `02-…` (hero first). An `.mp4` with the same name
+  as a PNG plays in its place (the PNG is its poster). The window advances by
+  itself every 5 s while it's on screen, holds under the pointer, stops for good
+  once someone uses it, and stays still with "reduce motion" on. No `gallery`
+  flag, or an empty folder, = no gallery. The folders are filled by
+  `dylanmaudio-marketing/store-assets/publish_site_cards.py` (the card order
+  lives there); the Companion page shows every app's Stream Deck card.
 - **When a product page goes live,** switch its home-page card CTA from the
   `Coming soon` badge / Download link to a `Learn more →` link pointing at
   `/products/<slug>/` (in `build_site.py`).

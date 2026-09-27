@@ -108,7 +108,7 @@ CSS = """
     -webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .g-track::-webkit-scrollbar{display:none;}
   .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
-  .g-slide img{display:block;width:100%;height:auto;}
+  .g-slide img,.g-slide video{display:block;width:100%;height:auto;background:#0b0e12;}
   .g-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
     border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);
     background:rgba(11,14,18,0.66);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(6px);
@@ -204,23 +204,56 @@ PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
 
 # Store-image gallery: a scroll-snap strip driven by prev/next buttons and dots.
 # No dependencies; works as a plain horizontal scroller (swipe / trackpad) even
-# with JS off — the script only adds the buttons' behaviour and the dot state.
-GALLERY_JS = (
-    "(function(){var rm=matchMedia('(prefers-reduced-motion: reduce)');"
-    "document.querySelectorAll('[data-gallery]').forEach(function(g){"
-    "var track=g.querySelector('.g-track'),n=track.children.length,"
-    "dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next');"
-    "function at(){return Math.round(track.scrollLeft/track.clientWidth);}"
-    "function go(i){i=Math.max(0,Math.min(n-1,i));"
-    "track.scrollTo({left:i*track.clientWidth,behavior:rm.matches?'auto':'smooth'});}"
-    "prev.addEventListener('click',function(){go(at()-1);});"
-    "next.addEventListener('click',function(){go(at()+1);});"
-    "dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);});});"
-    "var t;track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){"
-    "var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});"
-    "prev.disabled=c<=0;next.disabled=c>=n-1;},60);},{passive:true});"
-    "prev.disabled=true;});})();"
-)
+# with JS off — the script adds the buttons, the dot state, the animated cards
+# and the auto-advance:
+# - Advances every 5 s while at least half the gallery is on screen, wrapping
+#   from the last card to the first. An animated card plays from the start and
+#   the gallery moves on when it ends (after 5 s at least — short clips repeat).
+# - Holds while the pointer or keyboard focus is on it; stops for good the
+#   moment someone uses it (arrow, dot, swipe, sideways scroll, a key).
+# - With "reduce motion" set, nothing moves by itself: no auto-advance, and the
+#   animated cards get play controls instead of autoplaying.
+GALLERY_JS = """
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,DWELL=5000;
+document.querySelectorAll('[data-gallery]').forEach(function(g){
+  var track=g.querySelector('.g-track'),slides=[].slice.call(track.children),n=slides.length,
+      dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next'),
+      cur=0,auto=!reduce,inView=!('IntersectionObserver' in window),held=false,timer=null,plays=0,t;
+  function vid(i){return slides[i].querySelector('video');}
+  function at(){return Math.round(track.scrollLeft/track.clientWidth);}
+  function show(i){track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'});}
+  function running(){return auto&&inView&&!held&&!document.hidden;}
+  function advance(){if(running())show((cur+1)%n);}
+  function schedule(){clearTimeout(timer);if(running()&&!vid(cur))timer=setTimeout(advance,DWELL);}
+  function play(v){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){clearTimeout(timer);timer=setTimeout(advance,DWELL);});}
+  function activate(){slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(j===cur&&inView&&!reduce){v.currentTime=0;plays=0;play(v);}else v.pause();});
+    var nv=vid((cur+1)%n);if(nv)nv.preload='auto';}
+  function stop(){auto=false;clearTimeout(timer);}
+  slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(reduce){v.controls=true;v.preload='metadata';}
+    v.addEventListener('ended',function(){plays++;
+      if(running()&&plays*v.duration*1000>=DWELL)advance();else if(!reduce){v.currentTime=0;play(v);}});});
+  prev.addEventListener('click',function(){stop();show(Math.max(0,at()-1));});
+  next.addEventListener('click',function(){stop();show(Math.min(n-1,at()+1));});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);});});
+  ['pointerdown','touchstart','keydown'].forEach(function(e){track.addEventListener(e,stop,{passive:true});});
+  track.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))stop();},{passive:true});
+  g.addEventListener('mouseenter',function(){held=true;schedule();});
+  g.addEventListener('mouseleave',function(){held=false;schedule();});
+  g.addEventListener('focusin',function(){held=true;schedule();});
+  g.addEventListener('focusout',function(){held=false;schedule();});
+  document.addEventListener('visibilitychange',schedule);
+  if(!inView)new IntersectionObserver(function(es){inView=es[0].isIntersecting;activate();schedule();},{threshold:0.5}).observe(g);
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){
+    var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});
+    prev.disabled=c<=0;next.disabled=c>=n-1;
+    if(c!==cur){cur=c;activate();}schedule();},60);},{passive:true});
+  prev.disabled=true;activate();schedule();
+});
+})();
+"""
 
 
 def video_block(p):
@@ -248,7 +281,9 @@ def gallery_block(slug, p):
     """A scrolling window of the product's store images (the same 1600x1200
     slides that are tiny on the Lemon Squeezy listing). Set `gallery=True` in
     common.PRODUCTS and drop the images into /assets/cards/<slug>/ — every image
-    there is shown, in filename order. Skipped for products without a gallery."""
+    there is shown, in filename order; an MP4 with the same name as a PNG plays
+    in its place, the PNG as its poster. Skipped for products without a gallery.
+    The marketing repo's store-assets/publish_site_cards.py fills the folders."""
     if not p.get("gallery"):
         return ""
     folder = C.ROOT / "assets" / "cards" / slug
@@ -257,9 +292,14 @@ def gallery_block(slug, p):
         return ""
     slides, dots = [], []
     for i, name in enumerate(imgs):
-        slides.append(f'<figure class="g-slide"><img src="/assets/cards/{slug}/{name}" '
-                      f'alt="{p["name"]} — image {i + 1} of {len(imgs)}" width="1600" height="1200" '
-                      f'loading="{"eager" if i == 0 else "lazy"}" decoding="async"></figure>')
+        src, label = f"/assets/cards/{slug}/{name}", f'{p["name"]} — image {i + 1} of {len(imgs)}'
+        if (folder / name).with_suffix(".mp4").exists():      # an animated card: the PNG is its poster
+            media = (f'<video src="{src[:-4]}.mp4" poster="{src}" muted playsinline preload="none" '
+                     f'width="1600" height="1200" aria-label="{label}"></video>')
+        else:
+            media = (f'<img src="{src}" alt="{label}" width="1600" height="1200" '
+                     f'loading="{"eager" if i == 0 else "lazy"}" decoding="async">')
+        slides.append(f'<figure class="g-slide">{media}</figure>')
         dots.append(f'<button class="g-dot" type="button" aria-label="Go to image {i + 1}"'
                     f'{" aria-current=\"true\"" if i == 0 else ""}></button>')
     if len(imgs) == 1:                    # a single image needs no controls

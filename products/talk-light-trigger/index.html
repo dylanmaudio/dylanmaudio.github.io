@@ -109,7 +109,7 @@
     -webkit-overflow-scrolling:touch;scrollbar-width:none;}
   .g-track::-webkit-scrollbar{display:none;}
   .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
-  .g-slide img{display:block;width:100%;height:auto;}
+  .g-slide img,.g-slide video{display:block;width:100%;height:auto;background:#0b0e12;}
   .g-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
     border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);
     background:rgba(11,14,18,0.66);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(6px);
@@ -208,7 +208,7 @@
 
 <section><div class="video-wrap"><div class="video-frame"><iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/jP2Yyvd1uq4?rel=0" title="Talk Light Trigger intro video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></section>
 
-<section class="p-gallery" aria-label="Talk Light Trigger gallery"><div class="wrap"><div class="g-wrap" data-gallery><div class="gallery"><div class="g-track" tabindex="0"><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/01-hero.png" alt="Talk Light Trigger — image 1 of 8" width="1600" height="1200" loading="eager" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/02-shout-bus.png" alt="Talk Light Trigger — image 2 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/03-flash.png" alt="Talk Light Trigger — image 3 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/04-cancel.png" alt="Talk Light Trigger — image 4 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/05-sensitivity.png" alt="Talk Light Trigger — image 5 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/06-connection.png" alt="Talk Light Trigger — image 6 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/07-stream-deck.png" alt="Talk Light Trigger — image 7 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/08-requirements.png" alt="Talk Light Trigger — image 8 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure></div><button class="g-nav g-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="g-nav g-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="g-dots"><button class="g-dot" type="button" aria-label="Go to image 1" aria-current="true"></button><button class="g-dot" type="button" aria-label="Go to image 2"></button><button class="g-dot" type="button" aria-label="Go to image 3"></button><button class="g-dot" type="button" aria-label="Go to image 4"></button><button class="g-dot" type="button" aria-label="Go to image 5"></button><button class="g-dot" type="button" aria-label="Go to image 6"></button><button class="g-dot" type="button" aria-label="Go to image 7"></button><button class="g-dot" type="button" aria-label="Go to image 8"></button></div></div></div></section>
+<section class="p-gallery" aria-label="Talk Light Trigger gallery"><div class="wrap"><div class="g-wrap" data-gallery><div class="gallery"><div class="g-track" tabindex="0"><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/01-hero.png" alt="Talk Light Trigger — image 1 of 8" width="1600" height="1200" loading="eager" decoding="async"></figure><figure class="g-slide"><video src="/assets/cards/talk-light-trigger/02-shout-bus.mp4" poster="/assets/cards/talk-light-trigger/02-shout-bus.png" muted playsinline preload="none" width="1600" height="1200" aria-label="Talk Light Trigger — image 2 of 8"></video></figure><figure class="g-slide"><video src="/assets/cards/talk-light-trigger/03-flash.mp4" poster="/assets/cards/talk-light-trigger/03-flash.png" muted playsinline preload="none" width="1600" height="1200" aria-label="Talk Light Trigger — image 3 of 8"></video></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/04-cancel.png" alt="Talk Light Trigger — image 4 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/05-sensitivity.png" alt="Talk Light Trigger — image 5 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/06-connection.png" alt="Talk Light Trigger — image 6 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><video src="/assets/cards/talk-light-trigger/07-stream-deck.mp4" poster="/assets/cards/talk-light-trigger/07-stream-deck.png" muted playsinline preload="none" width="1600" height="1200" aria-label="Talk Light Trigger — image 7 of 8"></video></figure><figure class="g-slide"><img src="/assets/cards/talk-light-trigger/08-requirements.png" alt="Talk Light Trigger — image 8 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure></div><button class="g-nav g-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="g-nav g-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="g-dots"><button class="g-dot" type="button" aria-label="Go to image 1" aria-current="true"></button><button class="g-dot" type="button" aria-label="Go to image 2"></button><button class="g-dot" type="button" aria-label="Go to image 3"></button><button class="g-dot" type="button" aria-label="Go to image 4"></button><button class="g-dot" type="button" aria-label="Go to image 5"></button><button class="g-dot" type="button" aria-label="Go to image 6"></button><button class="g-dot" type="button" aria-label="Go to image 7"></button><button class="g-dot" type="button" aria-label="Go to image 8"></button></div></div></div></section>
 
 <section><div class="wrap p-grid">
   <div class="p-body">
@@ -247,7 +247,47 @@
   (function(){var s=document.getElementById('whats-new');if(!s)return;fetch('/updates/'+s.dataset.slug+'.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(m){if(!m||m.version!==s.dataset.version)return;if(m.released){var d=new Date(m.released+'T12:00:00');s.querySelector('.wn-date').textContent=' · released '+d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}s.hidden=false;if(location.hash==='#whats-new')s.scrollIntoView();}).catch(function(){});})();
   (function(){var s=document.querySelector('[data-sale-until]');if(!s)return;var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');if(Date.now()>end.getTime()){document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();
   (function(){try{var q=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'],got=[];keys.forEach(function(k){var v=q.get(k);if(v){got.push([k,v.slice(0,100)]);}});if(!got.length)return;document.querySelectorAll('a[href^="https://store.dylanmaudio.com/checkout/"]').forEach(function(a){var u=new URL(a.href);got.forEach(function(kv){u.searchParams.set('checkout[custom]['+kv[0]+']',kv[1]);});a.href=u.toString();});}catch(e){}})();
-  (function(){var rm=matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('[data-gallery]').forEach(function(g){var track=g.querySelector('.g-track'),n=track.children.length,dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next');function at(){return Math.round(track.scrollLeft/track.clientWidth);}function go(i){i=Math.max(0,Math.min(n-1,i));track.scrollTo({left:i*track.clientWidth,behavior:rm.matches?'auto':'smooth'});}prev.addEventListener('click',function(){go(at()-1);});next.addEventListener('click',function(){go(at()+1);});dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);});});var t;track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});prev.disabled=c<=0;next.disabled=c>=n-1;},60);},{passive:true});prev.disabled=true;});})();
+  
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,DWELL=5000;
+document.querySelectorAll('[data-gallery]').forEach(function(g){
+  var track=g.querySelector('.g-track'),slides=[].slice.call(track.children),n=slides.length,
+      dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next'),
+      cur=0,auto=!reduce,inView=!('IntersectionObserver' in window),held=false,timer=null,plays=0,t;
+  function vid(i){return slides[i].querySelector('video');}
+  function at(){return Math.round(track.scrollLeft/track.clientWidth);}
+  function show(i){track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'});}
+  function running(){return auto&&inView&&!held&&!document.hidden;}
+  function advance(){if(running())show((cur+1)%n);}
+  function schedule(){clearTimeout(timer);if(running()&&!vid(cur))timer=setTimeout(advance,DWELL);}
+  function play(v){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){clearTimeout(timer);timer=setTimeout(advance,DWELL);});}
+  function activate(){slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(j===cur&&inView&&!reduce){v.currentTime=0;plays=0;play(v);}else v.pause();});
+    var nv=vid((cur+1)%n);if(nv)nv.preload='auto';}
+  function stop(){auto=false;clearTimeout(timer);}
+  slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(reduce){v.controls=true;v.preload='metadata';}
+    v.addEventListener('ended',function(){plays++;
+      if(running()&&plays*v.duration*1000>=DWELL)advance();else if(!reduce){v.currentTime=0;play(v);}});});
+  prev.addEventListener('click',function(){stop();show(Math.max(0,at()-1));});
+  next.addEventListener('click',function(){stop();show(Math.min(n-1,at()+1));});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);});});
+  ['pointerdown','touchstart','keydown'].forEach(function(e){track.addEventListener(e,stop,{passive:true});});
+  track.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))stop();},{passive:true});
+  g.addEventListener('mouseenter',function(){held=true;schedule();});
+  g.addEventListener('mouseleave',function(){held=false;schedule();});
+  g.addEventListener('focusin',function(){held=true;schedule();});
+  g.addEventListener('focusout',function(){held=false;schedule();});
+  document.addEventListener('visibilitychange',schedule);
+  if(!inView)new IntersectionObserver(function(es){inView=es[0].isIntersecting;activate();schedule();},{threshold:0.5}).observe(g);
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){
+    var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});
+    prev.disabled=c<=0;next.disabled=c>=n-1;
+    if(c!==cur){cur=c;activate();}schedule();},60);},{passive:true});
+  prev.disabled=true;activate();schedule();
+});
+})();
+
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>
 </body>

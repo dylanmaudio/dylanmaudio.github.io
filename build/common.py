@@ -271,12 +271,12 @@ PRODUCTS = {
     ),
     "midi-bridge": dict(
         name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
-        icon="midi-bridge.png", affiliated=True, status="free",
+        icon="midi-bridge.png", gallery=True, affiliated=True, status="free",
         store=CHECKOUT["midi-bridge"], youtube="2M57Z-v7fs0",
         seo_title="MIDI Bridge — free dLive MIDI bridge with a decoded monitor",
         seo_desc=("Free MIDI between your Mac and the dLive, with real connection status, plain-language "
                   "errors and a live MIDI Monitor that decodes what's on the wire."),
-        tagline="Free MIDI between your Mac and the dLive — with a status light that means it.",
+        tagline="Free MIDI between your Mac and the dLive, monitored — and with full Stream Deck control.",
         lead=("Real connection status, plain-language errors, and a monitor that reads every fader, mute, "
               "Scene, EQ and send in console language instead of hex. One connection your DAW, the other "
               "dylanmaudio apps and Bitfocus Companion all share. The bridging half of Allen &amp; Heath's "
@@ -391,7 +391,7 @@ PRODUCTS = {
     ),
     "talk-light-trigger": dict(
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
-        icon="talk-light-trigger.png", affiliated=True, status="buy", trial=True, price="$19",
+        icon="talk-light-trigger.png", gallery=True, affiliated=True, status="buy", trial=True, price="$19",
         store=CHECKOUT["talk-light-trigger"], trial_store=CHECKOUT["talk-light-trigger-trial"], youtube="jP2Yyvd1uq4",
         sale=dict(now="$9", was="$19", code="TLTINTROSALE",
                   until="2026-10-31", until_label="31 October 2026"),
@@ -513,7 +513,7 @@ PRODUCTS = {
     ),
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
-        icon="pilot-tone-trigger.png", affiliated=True, status="buy", trial=True, price="$59",
+        icon="pilot-tone-trigger.png", gallery=True, affiliated=True, status="buy", trial=True, price="$59",
         store=CHECKOUT["pilot-tone-trigger"], trial_store=CHECKOUT["pilot-tone-trigger-trial"], youtube="GOfFZzGTEuA",
         seo_title="Pilot Tone Trigger — playback &amp; Waves failover for dLive",
         seo_desc=("Automatic failover for Allen & Heath dLive. A pilot tone drops and the console switches to "
@@ -649,7 +649,7 @@ PRODUCTS = {
     ),
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
-        icon="time-code-tool.png", affiliated=False, status="buy", trial=True, price="$69",
+        icon="time-code-tool.png", gallery=True, affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         # Search-facing title/description (the page <title> and meta description).
         seo_title="Time Code Tool — SMPTE timecode generator &amp; monitor for Mac",

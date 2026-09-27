@@ -100,6 +100,26 @@
   .video-soon .ring{width:64px;height:64px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);}
   .video-soon .ring svg{width:26px;height:26px;fill:currentColor;margin-left:3px;}
   .video-soon .lbl{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;}
+  /* store gallery (the LS product images, shown at a proper size in a scroller) */
+  .p-gallery .wrap{display:flex;justify-content:center;}
+  .g-wrap{width:100%;max-width:760px;}
+  .gallery{position:relative;width:100%;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:0 18px 48px rgba(0,0,0,0.5);}
+  .g-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .g-track::-webkit-scrollbar{display:none;}
+  .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
+  .g-slide img{display:block;width:100%;height:auto;}
+  .g-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
+    border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);
+    background:rgba(11,14,18,0.66);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);transition:background .15s,opacity .15s;}
+  .g-nav:hover{background:rgba(11,14,18,0.85);} .g-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .g-nav:disabled{opacity:0;pointer-events:none;} .g-prev{left:12px;} .g-next{right:12px;}
+  .g-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
+  .g-dot{width:8px;height:8px;padding:0;border-radius:50%;cursor:pointer;border:0;background:var(--border);transition:background .15s,transform .15s;}
+  .g-dot[aria-current="true"]{background:var(--blue);transform:scale(1.25);}
+  @media (hover:none){.g-nav{display:none;}}
   /* overview */
   .p-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(28px,5vw,60px);align-items:start;}
   @media (max-width:820px){.p-grid{grid-template-columns:1fr;gap:28px;}}
@@ -188,6 +208,8 @@
 
 <section><div class="video-wrap"><div class="video-frame"><iframe class="video-embed" src="https://www.youtube-nocookie.com/embed/A6iKjxHxXA4?rel=0" title="Time Code Tool intro video" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div></section>
 
+<section class="p-gallery" aria-label="Time Code Tool gallery"><div class="wrap"><div class="g-wrap" data-gallery><div class="gallery"><div class="g-track" tabindex="0"><figure class="g-slide"><img src="/assets/cards/time-code-tool/01-hero.png" alt="Time Code Tool — image 1 of 8" width="1600" height="1200" loading="eager" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/02-health.png" alt="Time Code Tool — image 2 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/03-convert.png" alt="Time Code Tool — image 3 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/04-generate.png" alt="Time Code Tool — image 4 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/05-wav.png" alt="Time Code Tool — image 5 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/06-virtual.png" alt="Time Code Tool — image 6 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/07-stream-deck.png" alt="Time Code Tool — image 7 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/time-code-tool/08-requirements.png" alt="Time Code Tool — image 8 of 8" width="1600" height="1200" loading="lazy" decoding="async"></figure></div><button class="g-nav g-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="g-nav g-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="g-dots"><button class="g-dot" type="button" aria-label="Go to image 1" aria-current="true"></button><button class="g-dot" type="button" aria-label="Go to image 2"></button><button class="g-dot" type="button" aria-label="Go to image 3"></button><button class="g-dot" type="button" aria-label="Go to image 4"></button><button class="g-dot" type="button" aria-label="Go to image 5"></button><button class="g-dot" type="button" aria-label="Go to image 6"></button><button class="g-dot" type="button" aria-label="Go to image 7"></button><button class="g-dot" type="button" aria-label="Go to image 8"></button></div></div></div></section>
+
 <section><div class="wrap p-grid">
   <div class="p-body">
     <div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; What it does</div>
@@ -225,6 +247,7 @@
   (function(){var s=document.getElementById('whats-new');if(!s)return;fetch('/updates/'+s.dataset.slug+'.json',{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(m){if(!m||m.version!==s.dataset.version)return;if(m.released){var d=new Date(m.released+'T12:00:00');s.querySelector('.wn-date').textContent=' · released '+d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}s.hidden=false;if(location.hash==='#whats-new')s.scrollIntoView();}).catch(function(){});})();
   (function(){var s=document.querySelector('[data-sale-until]');if(!s)return;var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');if(Date.now()>end.getTime()){document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();
   (function(){try{var q=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'],got=[];keys.forEach(function(k){var v=q.get(k);if(v){got.push([k,v.slice(0,100)]);}});if(!got.length)return;document.querySelectorAll('a[href^="https://store.dylanmaudio.com/checkout/"]').forEach(function(a){var u=new URL(a.href);got.forEach(function(kv){u.searchParams.set('checkout[custom]['+kv[0]+']',kv[1]);});a.href=u.toString();});}catch(e){}})();
+  (function(){var rm=matchMedia('(prefers-reduced-motion: reduce)');document.querySelectorAll('[data-gallery]').forEach(function(g){var track=g.querySelector('.g-track'),n=track.children.length,dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next');function at(){return Math.round(track.scrollLeft/track.clientWidth);}function go(i){i=Math.max(0,Math.min(n-1,i));track.scrollTo({left:i*track.clientWidth,behavior:rm.matches?'auto':'smooth'});}prev.addEventListener('click',function(){go(at()-1);});next.addEventListener('click',function(){go(at()+1);});dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);});});var t;track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});prev.disabled=c<=0;next.disabled=c>=n-1;},60);},{passive:true});prev.disabled=true;});})();
 </script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>
 </body>

@@ -99,6 +99,26 @@ CSS = """
   .video-soon .ring{width:64px;height:64px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);}
   .video-soon .ring svg{width:26px;height:26px;fill:currentColor;margin-left:3px;}
   .video-soon .lbl{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;}
+  /* store gallery (the LS product images, shown at a proper size in a scroller) */
+  .p-gallery .wrap{display:flex;justify-content:center;}
+  .g-wrap{width:100%;max-width:760px;}
+  .gallery{position:relative;width:100%;border-radius:16px;overflow:hidden;
+    border:1px solid var(--border);box-shadow:0 18px 48px rgba(0,0,0,0.5);}
+  .g-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .g-track::-webkit-scrollbar{display:none;}
+  .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
+  .g-slide img{display:block;width:100%;height:auto;}
+  .g-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
+    border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);
+    background:rgba(11,14,18,0.66);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);transition:background .15s,opacity .15s;}
+  .g-nav:hover{background:rgba(11,14,18,0.85);} .g-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .g-nav:disabled{opacity:0;pointer-events:none;} .g-prev{left:12px;} .g-next{right:12px;}
+  .g-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
+  .g-dot{width:8px;height:8px;padding:0;border-radius:50%;cursor:pointer;border:0;background:var(--border);transition:background .15s,transform .15s;}
+  .g-dot[aria-current="true"]{background:var(--blue);transform:scale(1.25);}
+  @media (hover:none){.g-nav{display:none;}}
   /* overview */
   .p-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(28px,5vw,60px);align-items:start;}
   @media (max-width:820px){.p-grid{grid-template-columns:1fr;gap:28px;}}
@@ -182,6 +202,26 @@ FOOTER = f"""<footer class="site">
 CK = '<span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>'
 PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
 
+# Store-image gallery: a scroll-snap strip driven by prev/next buttons and dots.
+# No dependencies; works as a plain horizontal scroller (swipe / trackpad) even
+# with JS off — the script only adds the buttons' behaviour and the dot state.
+GALLERY_JS = (
+    "(function(){var rm=matchMedia('(prefers-reduced-motion: reduce)');"
+    "document.querySelectorAll('[data-gallery]').forEach(function(g){"
+    "var track=g.querySelector('.g-track'),n=track.children.length,"
+    "dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next');"
+    "function at(){return Math.round(track.scrollLeft/track.clientWidth);}"
+    "function go(i){i=Math.max(0,Math.min(n-1,i));"
+    "track.scrollTo({left:i*track.clientWidth,behavior:rm.matches?'auto':'smooth'});}"
+    "prev.addEventListener('click',function(){go(at()-1);});"
+    "next.addEventListener('click',function(){go(at()+1);});"
+    "dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);});});"
+    "var t;track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){"
+    "var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});"
+    "prev.disabled=c<=0;next.disabled=c>=n-1;},60);},{passive:true});"
+    "prev.disabled=true;});})();"
+)
+
 
 def video_block(p):
     if p.get("video") is False:        # e.g. the Companion module page: no intro video planned yet
@@ -198,6 +238,40 @@ def video_block(p):
         inner = (f'<div class="video-soon"><span class="ring">{PLAY}</span>'
                  f'<span class="lbl">Intro video coming soon</span></div>')
     return f'<section><div class="video-wrap"><div class="video-frame">{inner}</div></div></section>'
+
+
+CHEV_L = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>'
+CHEV_R = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>'
+
+
+def gallery_block(slug, p):
+    """A scrolling window of the product's store images (the same 1600x1200
+    slides that are tiny on the Lemon Squeezy listing). Set `gallery=True` in
+    common.PRODUCTS and drop the images into /assets/cards/<slug>/ — every image
+    there is shown, in filename order. Skipped for products without a gallery."""
+    if not p.get("gallery"):
+        return ""
+    folder = C.ROOT / "assets" / "cards" / slug
+    imgs = sorted(q.name for q in folder.glob("*.png")) if folder.is_dir() else []
+    if not imgs:
+        return ""
+    slides, dots = [], []
+    for i, name in enumerate(imgs):
+        slides.append(f'<figure class="g-slide"><img src="/assets/cards/{slug}/{name}" '
+                      f'alt="{p["name"]} — image {i + 1} of {len(imgs)}" width="1600" height="1200" '
+                      f'loading="{"eager" if i == 0 else "lazy"}" decoding="async"></figure>')
+        dots.append(f'<button class="g-dot" type="button" aria-label="Go to image {i + 1}"'
+                    f'{" aria-current=\"true\"" if i == 0 else ""}></button>')
+    if len(imgs) == 1:                    # a single image needs no controls
+        return (f'<section class="p-gallery"><div class="wrap"><div class="g-wrap"><div class="gallery">'
+                f'<div class="g-track">{"".join(slides)}</div></div></div></div></section>')
+    return (f'<section class="p-gallery" aria-label="{p["name"]} gallery"><div class="wrap">'
+            f'<div class="g-wrap" data-gallery>'
+            f'<div class="gallery">'
+            f'<div class="g-track" tabindex="0">{"".join(slides)}</div>'
+            f'<button class="g-nav g-prev" type="button" aria-label="Previous image">{CHEV_L}</button>'
+            f'<button class="g-nav g-next" type="button" aria-label="Next image">{CHEV_R}</button>'
+            f'</div><div class="g-dots">{"".join(dots)}</div></div></div></section>')
 
 
 def module_ctas(p, discord_label="Get help"):
@@ -465,6 +539,8 @@ def build_page(slug, p):
 
 {video_block(p)}
 
+{gallery_block(slug, p)}
+
 <section><div class="wrap p-grid">
   <div class="p-body">
     <div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; What it does</div>
@@ -495,6 +571,7 @@ def build_page(slug, p):
   {WHATS_NEW_JS}
   {C.SALE_GUARD_JS}
   {C.UTM_PASS_JS}
+  {GALLERY_JS}
 </script>
 </body>
 </html>"""

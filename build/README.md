@@ -30,6 +30,13 @@ when its page is ready to ship.
 - **Intro videos:** set a product's `youtube` field in `common.py` to the 11-char
   YouTube id. The page's placeholder turns into a lazy-loaded, click-to-play
   `youtube-nocookie` embed automatically (no id = "Intro video coming soon").
+- **Store image gallery:** set a product's `gallery=True` in `common.py` and drop
+  its Lemon Squeezy images (1600×1200, tiny on the store listing) into
+  `/assets/cards/<slug>/`. The page shows them in a scrolling window (swipe / arrows
+  / dots) just below the intro video — **every `*.png` in the folder, in filename
+  order**, so name them `01-…`, `02-…` (hero first). No `gallery` flag, or an empty
+  folder, = no gallery (e.g. the Companion page). Source images live in
+  `dylanmaudio-marketing/store-assets/<product>/` and `…/heroes/`.
 - **When a product page goes live,** switch its home-page card CTA from the
   `Coming soon` badge / Download link to a `Learn more →` link pointing at
   `/products/<slug>/` (in `build_site.py`).

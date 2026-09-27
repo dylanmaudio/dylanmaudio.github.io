@@ -347,8 +347,11 @@ PRODUCTS = {
                      "dylanmaudio apps, so the paid apps still need their own licence to do their job &mdash; "
                      "MIDI Bridge is free."),
                     ("Which versions of the apps does it need?",
-                     "Any current version: MIDI Bridge 1.1.9 or later, Talk Light Trigger 1.0.7 or later, Pilot "
-                     "Tone Trigger 1.0.5 or later, Time Code Tool 1.1.5 or later. If an app and the module ever "
+                     "It connects to MIDI Bridge 1.1.9 or later, Talk Light Trigger 1.0.7 or later, Pilot Tone "
+                     "Trigger 1.0.5 or later and Time Code Tool 1.1.5 or later &mdash; but the newest keys come with "
+                     "the newest apps: Pilot Tone&rsquo;s Flip A/B and Signal Integrity need 1.2.0, for example. "
+                     "Update to the current version of each (MIDI Bridge 1.3.0, Talk Light Trigger 1.2.0, Pilot Tone "
+                     "Trigger 1.2.0, Time Code Tool 1.3.0) and everything is there. If an app and the module ever "
                      "disagree, the connection&rsquo;s status says so &mdash; update whichever is older."),
                     ("Does Companion have to run on the same Mac?",
                      "Yes, for the apps &mdash; the module reaches each one on this Mac. Companion itself also "

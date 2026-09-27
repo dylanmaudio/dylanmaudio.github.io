@@ -102,10 +102,12 @@ CSS = """
   /* store gallery (the LS product images, shown at a proper size in a scroller) */
   .p-gallery .wrap{display:flex;justify-content:center;}
   .g-wrap{width:100%;max-width:760px;}
-  .gallery{position:relative;width:100%;border-radius:16px;overflow:hidden;
+  /* isolation + translateZ: iOS Safari can leave part of an image unpainted inside a
+     rounded overflow:hidden box around a scroller; its own layer avoids that. */
+  .gallery{position:relative;width:100%;border-radius:16px;overflow:hidden;isolation:isolate;transform:translateZ(0);
     border:1px solid var(--border);box-shadow:0 18px 48px rgba(0,0,0,0.5);}
   .g-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    scrollbar-width:none;}
   .g-track::-webkit-scrollbar{display:none;}
   .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
   .g-slide img,.g-slide video{display:block;width:100%;height:auto;background:#0b0e12;}
@@ -305,8 +307,8 @@ def gallery_block(slug, p):
             media = (f'<video src="{src[:-4]}.mp4" poster="{src}" muted playsinline preload="none" '
                      f'width="{w}" height="{h}" aria-label="{label}"></video>')
         else:
-            media = (f'<img src="{src}" alt="{label}" width="{w}" height="{h}" '
-                     f'loading="{"eager" if i == 0 else "lazy"}" decoding="async">')
+            media = (f'<img src="{src}" alt="{label}" width="{w}" height="{h}"'
+                     + (' loading="eager" fetchpriority="high">' if i == 0 else ' loading="lazy" decoding="async">'))
         slides.append(f'<figure class="g-slide">{media}</figure>')
         dots.append(f'<button class="g-dot" type="button" aria-label="Go to image {i + 1}"'
                     f'{" aria-current=\"true\"" if i == 0 else ""}></button>')

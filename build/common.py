@@ -398,7 +398,7 @@ PRODUCTS = {
         seo_title="Talk Light Trigger — talkback light for dLive, no hardware",
         seo_desc=("Turn your dLive's own surface lights into a talkback or shout light: someone talks on the "
                   "shout bus, the desk flashes. Cancel from a SoftKey. Free trial."),
-        tagline="A talkback light for your dLive, from the console's own lights.",
+        tagline="A call light for your dLive, from the console's surface.",
         lead=("Someone talks on the shout bus, the surface flashes, you put the headphones on. Nothing to rig; "
               "one SoftKey to cancel. Talk Light Trigger watches a talkback mic or the shout bus and flashes "
               "the dLive's own surface lights while someone is talking &mdash; a talkback light, shout light "

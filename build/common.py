@@ -761,7 +761,7 @@ PRODUCTS = {
         ),
     ),
     "time-code-tool": dict(
-        name="Time Code Tool", abbr="TxT", tag="Universal", accent="blue",
+        name="Time Code Tool", abbr="TCT", tag="Universal", accent="blue",
         icon="time-code-tool.png", gallery=True, affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         # Search-facing title/description (the page <title> and meta description).

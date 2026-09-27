@@ -376,8 +376,8 @@ PRODUCTS = {
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
-                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
+                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
@@ -497,8 +497,8 @@ PRODUCTS = {
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
-                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
+                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for "
@@ -633,8 +633,8 @@ PRODUCTS = {
                      "haven&rsquo;t tested that myself yet. <a href=\"/#contact\">Register your interest</a> "
                      "and say which desk you&rsquo;d like next. (Time Code Tool already works with anything.)"),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
-                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
+                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
@@ -750,8 +750,8 @@ PRODUCTS = {
                     ("Can I just make an LTC WAV file?",
                      "Yes, offline, at any frame rate including drop-frame."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. A Windows version is coming, "
-                     "and Intel Macs after that &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
+                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "

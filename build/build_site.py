@@ -319,10 +319,10 @@ __SEO__
       <div class="fl-main">
         <span class="fl-badge">Flagship</span>
         <h3>Console Control</h3>
-        <p>A complete timeline-based automation control platform for the dLive &mdash; lay cues and moves on a timeline, rehearse against the desk, and fire the whole show with confidence.</p>
-        <div class="specs"><span class="spec">timeline</span><span class="spec">automation</span><span class="spec">show control</span><span class="spec">dLive</span></div>
+        <p>Console cues on a timeline, locked to timecode &mdash; faders, mutes, Scenes, Actions and sends programmed against your show&rsquo;s own audio, and fired exactly when the show gets there. Drop in anywhere and the desk is right. The dLive is the first console; more are on the way.</p>
+        <div class="specs"><span class="spec">timeline</span><span class="spec">timecode</span><span class="spec">show automation</span><span class="spec">dLive first</span></div>
       </div>
-      <div class="fl-cta"><span class="soon">Coming soon</span></div>
+      <div class="fl-cta"><span class="soon">Coming soon</span><a href="__NOTIFY_CC__" target="_blank" rel="noopener" class="card-link">Get notified <span class="arw">&rarr;</span></a></div>
     </article>
 
     <div class="sub-head"><span class="kicker"><span class="tick">//</span>&nbsp; The Utility Apps</span><span class="sub-note">Small menu-bar tools that each do one job well.</span></div>
@@ -575,7 +575,8 @@ out = (HTML.replace("__TITLE__", TITLE)
            .replace("__NONAFFIL__", C.NONAFFIL)
            .replace("__SALE_GUARD__", C.SALE_GUARD_JS + "\n  " + C.UTM_PASS_JS)
            .replace("__BUY_DLIVE_MENUBAR__", C.CHECKOUT["dlive-menubar"])
-           .replace("__BUY_ALL_MENUBAR__", C.CHECKOUT["all-menubar"]))
+           .replace("__BUY_ALL_MENUBAR__", C.CHECKOUT["all-menubar"])
+           .replace("__NOTIFY_CC__", C.CHECKOUT["console-control-notify"]))
 
 if __name__ == "__main__":
     C.write("index.html", C.inject_analytics(out))

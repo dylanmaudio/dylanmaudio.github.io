@@ -65,19 +65,129 @@ DISCORD_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" fill="currentCol
 # status: "free" | "coming" | "buy". store = checkout URL or None.
 PRODUCTS = {
     "console-control": dict(
-        name="Console Control", abbr="", tag="Flagship", accent="blue",
+        # Announced 26 Sept 2026: public as coming, never for sale; no price or
+        # date until the operator sets them. Name under review — a rename lands
+        # at launch (keep this slug and redirect, or add a redirect from it).
+        # Copy: dylanmaudio-marketing copy/app-descriptions.md (Console Control)
+        # and briefs/console-control-copy-draft.md; the origin story from
+        # copy/how-i-use-it.md.
+        name="Console Control", abbr="", tag="Coming soon", accent="blue",
         icon="console-control.png", affiliated=True, status="coming", store=None, youtube=None,
-        tagline="A complete timeline-based automation control platform for the dLive.",
-        lead=("Console Control turns show automation into a timeline you can see. Lay cues, moves and "
-              "recalls on a scrubber-driven timeline, rehearse them against the desk, and fire the whole "
-              "show with frame-accurate confidence — a proper automation platform, not a pile of scenes."),
+        video=False, gallery=True, manual=False, notify=CHECKOUT["console-control-notify"],
+        seo_title="Console Control — timecode show automation for your console",
+        seo_desc=("Complete console automation, locked to timecode: faders, mutes, Scenes, Actions and sends "
+                  "programmed against your show's own audio. Coming soon — get notified."),
+        tagline="Complete console automation, locked to timecode.",
+        lead=("Every fader, mute, Scene, Action and send, programmed on a timeline against your show&rsquo;s own "
+              "audio and fired exactly when the show gets there. Drop in anywhere and the desk is right. "
+              "The dLive is the first console; more manufacturers are on the way."),
         features=[
-            "Timeline-based cue &amp; automation sequencing",
-            "Drives the dLive live, in sync with your show",
-            "Rehearse, scrub and refine before showtime",
-            "Built by a working FOH engineer",
+            "Fader, mute, Scene, Action and send cues on a timeline, locked to LTC or MTC",
+            "Import a live recording and every track lands at its real timecode — a whole set in under a minute",
+            "A tempo map from your click in seconds; snap cues to the beat",
+            "Your console's own Scene names, channel names and colours",
+            "Chase: locate anywhere and the console conforms",
+            "Preflight before doors, Show Mode during, Panic always",
+            "Works with MIDI Bridge, Time Code Tool and your Stream Deck",
         ],
-        specs=["timeline", "automation", "show control", "dLive"],
+        specs=["timeline", "timecode", "show automation", "chase", "dLive first"],
+        glance=[("Platform", "macOS 11+"), ("Chip", "Apple Silicon"), ("Consoles", "dLive first"),
+                ("Beta", "With engineers now")],
+        longform=dict(
+            story=dict(kicker="Why I built it", paras=[
+                "I&rsquo;ve been automating cues on the dLive for years &mdash; first from QLab, then from Reaper as "
+                "the shows got bigger. For music, a timeline makes far more sense than a cue list: punching in "
+                "timecode by hand is fine for a dozen cues and punishing for hundreds, and nudging or relocating "
+                "a run of them is worse.",
+                "Reaper is the tool that made this possible. I was recalling a Scene for every move, until I had "
+                "hundreds of Scenes whose only job was to move one fader a little. So I went into the dLive&rsquo;s "
+                "MIDI manual, down to the NRPN messages, and wrote a script that turned a simple cue into a fader "
+                "move &mdash; then a plugin per track, one for each console channel, that pulled the channel names "
+                "and colours from the desk. On one project I programmed over a thousand cues in a few days.",
+                "In the end I&rsquo;d scripted more features than I was using of the DAW itself, so it became its "
+                "own app: quick to install, fast to program and light &mdash; the same session runs at about a third "
+                "of the CPU Reaper needs (3% against 10%, on a Mac mini M4). That app is Console Control.",
+            ]),
+            what=dict(kicker="In detail", items=[
+                ("Console cues on a timeline, locked to timecode.",
+                 "Fader, mute, Scene, Action, mute-group and send-level cues play against LTC or MTC from any "
+                 "interface &mdash; or the app&rsquo;s own clock while you program. Cues sit at timecode, not bars, "
+                 "so a vamp or a dropped click moves nothing."),
+                ("Bring the show in and program against it.",
+                 "Record your reference through the virtual audio device, or import a whole set from a live "
+                 "recording: the LTC decoder places every track at its real timecode &mdash; four one-hour files in "
+                 "under a minute. Reference audio is locked in place by default, so nothing moves by accident."),
+                ("A tempo map without touching a file.",
+                 "Import or record a click and it maps the tempo in seconds &mdash; no warping, no moving audio "
+                 "&mdash; so markers and cues snap to a beat grid while everything stays on timecode."),
+                ("The console&rsquo;s own names.",
+                 "Import the show file for Scene names and Action data; sync to the connected console and channel "
+                 "names and colours come across live. You program with the names already on the desk."),
+                ("Any channel, any parameter.",
+                 "Add a track for any input, aux, FX send or return, DCA, group, master or matrix for fader and mute "
+                 "control, and send lanes for deeper automation. A cue is an absolute value &mdash; &ldquo;fader to "
+                 "&minus;6&nbsp;dB&rdquo; &mdash; so the desk lands in the same state whatever came before."),
+                ("Fades, multi-select, nudge, relocate.",
+                 "A transition between two cues is a duration and a curve. Select a run of cues and drag them, nudge "
+                 "by your own increment, or move the lot when the show changes."),
+                ("Drop in anywhere and the desk is right.",
+                 "Chase works out what every lane should be at the playhead and sends it &mdash; one Scene per track, "
+                 "not every Scene in between &mdash; so a cold locate into the second chorus lands the console "
+                 "correctly. Switch chase off per lane, or leave it off and Conform Console when you choose. Only "
+                 "what you&rsquo;ve automated is touched; everything else stays as the engineer set it."),
+                ("Timecode glitches don&rsquo;t reach the console.",
+                 "It freewheels through dropouts, starts only on valid timecode, and a single bad frame can&rsquo;t "
+                 "move the playhead or the desk."),
+                ("Built for show day.",
+                 "Preflight runs every check at once and says what&rsquo;s wrong in words; Show Mode locks editing "
+                 "behind a large timecode display with status and upcoming cues; Panic is always one press away."),
+                ("Automate what&rsquo;s beside the console too.",
+                 "Aux MIDI lanes drive external software &mdash; Waves SoundGrid, LiveProfessor and the like &mdash; "
+                 "with example maps included."),
+                ("Start from what you have.",
+                 "Import a Reaper project or a MIDI show as a starting point, and export audio &mdash; with "
+                 "generated timecode in the render &mdash; for any rig that chases."),
+                ("Works with the apps you already have.",
+                 "Every cue reaches the console through the free <a href=\"/products/midi-bridge/\">MIDI Bridge</a>, "
+                 "which holds the one connection to the desk and names each cue in its monitor. Console Control "
+                 "chases <a href=\"/products/time-code-tool/\">Time Code Tool</a> over LTC or MTC &mdash; no cables on "
+                 "the same Mac &mdash; and every keyboard shortcut is a Stream Deck key through the free "
+                 "<a href=\"/products/companion/\">Companion module</a>, with sync lock and chase fed back."),
+            ]),
+            who=dict(kicker="Who it&rsquo;s for", paras=[
+                "FOH and monitor engineers running timecode shows; playback and show-control operators; theatre and "
+                "touring productions with hundreds of console moves; anyone who has hit the ceiling of a cue list "
+                "&mdash; or of a DAW session full of Scenes that each move one fader.",
+            ]),
+            faq=dict(kicker="Questions", items=[
+                ("When is it out, and what will it cost?",
+                 "Soon &mdash; it&rsquo;s in beta with a small group of engineers now. The release date and the price "
+                 "go to the notify list first: press Get notified on this page. It&rsquo;s free, and there&rsquo;s "
+                 "nothing to download yet."),
+                ("Which consoles does it work with?",
+                 "The dLive is the first console, not the only one &mdash; more consoles, from more manufacturers, "
+                 "are on the way. Tell me which desk you&rsquo;d like next, in the Discord or through the contact form."),
+                ("Do I need a console to program?",
+                 "No. On the internal clock you move the playhead yourself and program against your reference audio; "
+                 "the console only needs to be there when you run the show."),
+                ("What happens if the app quits mid-show?",
+                 "Nothing more is sent, so the console stays exactly where it was."),
+                ("What if timecode drops out?",
+                 "It freewheels through short dropouts and only starts on valid timecode, and a single bad frame "
+                 "can&rsquo;t move the playhead or the console."),
+                ("Does it replace Scenes?",
+                 "No &mdash; it fires them, and does the small moves you&rsquo;d otherwise build a Scene for. When you "
+                 "locate, it recalls one Scene per track, not every Scene in between."),
+                ("How does it talk to the console?",
+                 "Through the free MIDI Bridge, which holds the one network connection to the desk. Your DAW, the other "
+                 "dylanmaudio apps and Companion share it, and MIDI Bridge&rsquo;s monitor shows every cue Console "
+                 "Control sends under its own name."),
+                ("Can I bring my Reaper sessions in?",
+                 "Yes: import a Reaper project (RPP) or a MIDI show as a starting point."),
+                ("Windows? Intel Macs?",
+                 "Apple Silicon Macs on macOS 11 or later. Intel Macs are next, then a Windows version."),
+            ]),
+        ),
     ),
     "companion": dict(
         name="Companion Module", abbr="", tag="Free", accent="green",

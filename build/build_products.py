@@ -15,12 +15,12 @@ import common as C
 # Console Control is not in BUILD: its product page stays down until it
 # launches (operator, 2026-09-21). The home page's "Coming soon" flagship
 # card is separate (build_site.py) and stays. Add the slug back at launch.
-BUILD = ["midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool", "companion"]
+BUILD = ["console-control", "midi-bridge", "talk-light-trigger", "pilot-tone-trigger", "time-code-tool", "companion"]
 
 # Slugs allowed into search results. Empty = every product page is parked
 # (noindex + absent from sitemap). At launch, add the slug here AND to
 # build_seo.PAGES so Google can index it.
-INDEXED = {"talk-light-trigger", "midi-bridge", "pilot-tone-trigger", "time-code-tool", "companion"}
+INDEXED = {"console-control", "talk-light-trigger", "midi-bridge", "pilot-tone-trigger", "time-code-tool", "companion"}
 
 CSS = """
   :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
@@ -209,8 +209,9 @@ PLAY = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'
 # - Advances every 5 s while at least half the gallery is on screen, wrapping
 #   from the last card to the first. An animated card plays from the start and
 #   the gallery moves on when it ends (after 5 s at least — short clips repeat).
-# - Holds while the pointer or keyboard focus is on it; stops for good the
-#   moment someone uses it (arrow, dot, swipe, sideways scroll, a key).
+# - Holds while the mouse or keyboard focus is on it; stops for good the
+#   moment someone uses it (arrow, dot, sideways swipe or scroll, a key). A
+#   vertical page scroll that starts on it doesn't count (phones).
 # - With "reduce motion" set, nothing moves by itself: no auto-advance, and the
 #   animated cards get play controls instead of autoplaying.
 GALLERY_JS = """
@@ -238,10 +239,15 @@ document.querySelectorAll('[data-gallery]').forEach(function(g){
   prev.addEventListener('click',function(){stop();show(Math.max(0,at()-1));});
   next.addEventListener('click',function(){stop();show(Math.min(n-1,at()+1));});
   dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);});});
-  ['pointerdown','touchstart','keydown'].forEach(function(e){track.addEventListener(e,stop,{passive:true});});
+  var tx=0,ty=0;
+  track.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+  track.addEventListener('touchmove',function(e){var dx=Math.abs(e.touches[0].clientX-tx),dy=Math.abs(e.touches[0].clientY-ty);
+    if(dx>10&&dx>dy)stop();},{passive:true});
+  track.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse')stop();});
+  track.addEventListener('keydown',stop);
   track.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))stop();},{passive:true});
-  g.addEventListener('mouseenter',function(){held=true;schedule();});
-  g.addEventListener('mouseleave',function(){held=false;schedule();});
+  g.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){held=true;schedule();}});
+  g.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){held=false;schedule();}});
   g.addEventListener('focusin',function(){held=true;schedule();});
   g.addEventListener('focusout',function(){held=false;schedule();});
   document.addEventListener('visibilitychange',schedule);
@@ -292,12 +298,14 @@ def gallery_block(slug, p):
         return ""
     slides, dots = [], []
     for i, name in enumerate(imgs):
+        head = (folder / name).read_bytes()[16:24]                 # PNG IHDR: width, height
+        w, h = int.from_bytes(head[:4], "big"), int.from_bytes(head[4:], "big")
         src, label = f"/assets/cards/{slug}/{name}", f'{p["name"]} — image {i + 1} of {len(imgs)}'
         if (folder / name).with_suffix(".mp4").exists():      # an animated card: the PNG is its poster
             media = (f'<video src="{src[:-4]}.mp4" poster="{src}" muted playsinline preload="none" '
-                     f'width="1600" height="1200" aria-label="{label}"></video>')
+                     f'width="{w}" height="{h}" aria-label="{label}"></video>')
         else:
-            media = (f'<img src="{src}" alt="{label}" width="1600" height="1200" '
+            media = (f'<img src="{src}" alt="{label}" width="{w}" height="{h}" '
                      f'loading="{"eager" if i == 0 else "lazy"}" decoding="async">')
         slides.append(f'<figure class="g-slide">{media}</figure>')
         dots.append(f'<button class="g-dot" type="button" aria-label="Go to image {i + 1}"'
@@ -339,6 +347,9 @@ def hero_cta(p):
         return (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
     # coming
+    if p.get("notify"):
+        return (f'<a href="{p["notify"]}" target="_blank" rel="noopener" class="btn btn-primary">Get notified &mdash; free <span class="arw">&rarr;</span></a>'
+                f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
     return ('<span class="btn btn-ghost disabled">Coming soon</span>'
             f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>')
 
@@ -372,6 +383,12 @@ def band(p):
         else:
             cta = (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                    f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
+    elif p.get("notify"):
+        h = f"{p['name']} is coming soon."
+        sub = ("Get notified &mdash; it&rsquo;s free. You&rsquo;ll hear the moment it launches, plus a few previews "
+               "on the way. Nothing to pay, and you can unsubscribe any time.")
+        cta = (f'<a href="{p["notify"]}" target="_blank" rel="noopener" class="btn btn-primary">Get notified &mdash; free <span class="arw">&rarr;</span></a>'
+               f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Join the Discord</a>')
     else:
         h, sub = f"{p['name']} is coming soon.", "Join the Discord to hear the moment it lands — and help shape it."
         cta = (f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>'
@@ -533,7 +550,8 @@ def build_page(slug, p):
                    f'<span class="s-hi">Intro sale &mdash; {sale["now"]}</span>'
                    f'<span class="s-sub"><s>was {sale["was"]}</s> &middot; code <b>{sale["code"]}</b> &middot; until {sale["until_label"]}</span>'
                    f'</div>')
-    manual_btn = (f'<a class="btn btn-ghost" href="{p.get("manual_url") or f"/guides/{slug}-quick-reference.pdf"}" '
+    manual_btn = ("" if p.get("manual") is False else
+                  f'<a class="btn btn-ghost" href="{p.get("manual_url") or f"/guides/{slug}-quick-reference.pdf"}" '
                   f'target="_blank" rel="noopener">{p.get("manual_label", "Manual (PDF)")} &#8599;</a>')
     glance = p.get("glance") or [("Platform", "macOS 11+"), ("Chip", "Apple Silicon")]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'

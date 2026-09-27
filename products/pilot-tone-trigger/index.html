@@ -272,10 +272,15 @@ document.querySelectorAll('[data-gallery]').forEach(function(g){
   prev.addEventListener('click',function(){stop();show(Math.max(0,at()-1));});
   next.addEventListener('click',function(){stop();show(Math.min(n-1,at()+1));});
   dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);});});
-  ['pointerdown','touchstart','keydown'].forEach(function(e){track.addEventListener(e,stop,{passive:true});});
+  var tx=0,ty=0;
+  track.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+  track.addEventListener('touchmove',function(e){var dx=Math.abs(e.touches[0].clientX-tx),dy=Math.abs(e.touches[0].clientY-ty);
+    if(dx>10&&dx>dy)stop();},{passive:true});
+  track.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse')stop();});
+  track.addEventListener('keydown',stop);
   track.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))stop();},{passive:true});
-  g.addEventListener('mouseenter',function(){held=true;schedule();});
-  g.addEventListener('mouseleave',function(){held=false;schedule();});
+  g.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){held=true;schedule();}});
+  g.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){held=false;schedule();}});
   g.addEventListener('focusin',function(){held=true;schedule();});
   g.addEventListener('focusout',function(){held=false;schedule();});
   document.addEventListener('visibilitychange',schedule);

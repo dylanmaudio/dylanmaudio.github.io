@@ -322,7 +322,7 @@ __SEO__
         <p><strong>Complete console automation, locked to timecode.</strong> Every fader, mute, Scene, Action and send, programmed against your show&rsquo;s own audio and fired exactly when the show gets there &mdash; drop in anywhere and the desk is right. The dLive is the first console; more are on the way.</p>
         <div class="specs"><span class="spec">timeline</span><span class="spec">timecode</span><span class="spec">show automation</span><span class="spec">dLive first</span></div>
       </div>
-      <div class="fl-cta"><span class="soon">Coming soon</span><a href="__NOTIFY_CC__" target="_blank" rel="noopener" class="card-link">Get notified <span class="arw">&rarr;</span></a></div>
+      <div class="fl-cta"><span class="soon">Coming soon</span><a href="products/console-control/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
     </article>
 
     <div class="sub-head"><span class="kicker"><span class="tick">//</span>&nbsp; The Utility Apps</span><span class="sub-note">Small menu-bar tools that each do one job well.</span></div>

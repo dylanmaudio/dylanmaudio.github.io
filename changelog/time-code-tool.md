@@ -15,10 +15,8 @@ those entries are kept below as the history of what launched.
 
 v1.3.0
 - Now runs on macOS 11 Big Sur or later, as the store page has always
-  said, and natively on Intel Macs as well as Apple Silicon. Earlier
-  versions needed macOS 13.3 or later — on macOS 11 to 13.2 the app
-  failed to open, with no message — and on an Intel Mac they installed
-  but could not run.
+  said. Earlier versions needed macOS 13.3 or later — on macOS 11 to
+  13.2 the app failed to open, with no message.
 - The app's two virtual MIDI ports are now named "Time Code Tool MTC
   Out" and "Time Code Tool MTC In", matching the "Time Code Tool LTC"
   audio device (they were "TCT MTC Out" and "TCT MTC In"). Nothing about

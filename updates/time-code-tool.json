@@ -1,0 +1,8 @@
+{
+  "version": "1.3.0",
+  "url": "https://store.dylanmaudio.com",
+  "released": "2026-09-27",
+  "notes": "Runs on macOS 11 or later; MIDI ports renamed “Time Code Tool MTC Out/In”",
+  "app": "Time Code Tool",
+  "slug": "time-code-tool"
+}

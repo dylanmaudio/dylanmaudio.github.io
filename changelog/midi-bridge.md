@@ -11,9 +11,6 @@ six bullets, so the most important go first) and in every build's
 changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 
 v1.3.0
-- Now runs natively on Intel Macs as well as Apple Silicon, on macOS 11
-  Big Sur or later. Earlier builds installed on an Intel Mac but would
-  not open there.
 - Fixed: "Connected" now means the console is answering. Before, the
   bridge showed Connected as soon as anything accepted a network
   connection on the console's port, and could stay Connected, with

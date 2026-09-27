@@ -7,6 +7,7 @@ product's `youtube` field in common.py and the facade becomes a lazy-loaded,
 privacy-mode embed automatically.
 """
 import html as htmlmod
+import re
 import common as C
 
 # Which product pages to generate this run. All are built; nothing on the site
@@ -130,6 +131,14 @@ CSS = """
   .lf-steps li h3{margin-top:2px;}
   .lf code{font-family:var(--mono);font-size:0.9em;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 6px;}
   #install{scroll-margin-top:80px;} .lf a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
+  /* what's new */
+  .wn{border-top:1px solid var(--hairline);}
+  .wn .wrap{max-width:820px;}
+  .wn-h{font-size:1.3rem;font-weight:640;letter-spacing:-0.01em;margin:0 0 16px;}
+  .wn-date{color:var(--dim);font-weight:500;font-size:0.8em;}
+  .wn-list{margin:0;padding-left:20px;color:var(--muted);}
+  .wn-list li{margin:0 0 10px;max-width:68ch;}
+  .wn-more summary{cursor:pointer;color:var(--blue);font-family:var(--mono);font-size:13px;margin:6px 0 14px;}
   /* cta band */
   .p-band{border-top:1px solid var(--hairline);text-align:center;}
   .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
@@ -298,6 +307,75 @@ def longform(p):
     return f'<section class="lf"><div class="wrap">{inner}</div></section>'
 
 
+# ------------------------------------------------------------ what's new
+# changelog/<slug>.md is a copy of the app's CHANGELOG.md from the apps repo
+# (customer-facing; its top entry is the release being prepared). The page
+# carries that entry hidden, and a few lines of script show it only when the
+# live update manifest (updates/<slug>.json, published by the apps repo's
+# /release-live on release day) has the same version — so notes for a build
+# that isn't on the store yet never show, and the release-day push of the
+# manifest switches them on with no rebuild.
+
+WHATS_NEW_VISIBLE = 6       # bullets before "All changes" (the Quick Reference cover shows six too)
+_VER_RE = re.compile(r"^v(\d+\.\d+\.\d+)( - .*)?$")
+
+
+def changelog_top(slug):
+    """(version, [bullet, ...]) for the top entry of changelog/<slug>.md, or None."""
+    f = C.ROOT / "changelog" / f"{slug}.md"
+    if not f.exists():
+        return None
+    version, bullets, cur = None, [], None
+    for line in f.read_text(encoding="utf-8").splitlines():
+        m = _VER_RE.match(line.strip())
+        if m:
+            if version:
+                break
+            version = m.group(1)
+            continue
+        if not version:
+            continue
+        if line.startswith("- "):
+            cur = [line[2:].strip()]
+            bullets.append(cur)
+        elif line.startswith("  ") and cur is not None and line.strip():
+            cur.append(line.strip())
+        elif not line.strip():
+            cur = None
+    if not version or not bullets:
+        return None
+    return version, [" ".join(b) for b in bullets]
+
+
+def whats_new(slug, p):
+    top = changelog_top(slug)
+    if not top:
+        return ""
+    version, bullets = top
+    esc = lambda t: htmlmod.escape(t, quote=False)
+    lis = [f"<li>{esc(b)}</li>" for b in bullets]
+    shown, rest = lis[:WHATS_NEW_VISIBLE], lis[WHATS_NEW_VISIBLE:]
+    more = (f'<details class="wn-more"><summary>All {len(lis)} changes in {version}</summary>'
+            f'<ul class="wn-list">{"".join(rest)}</ul></details>') if rest else ""
+    return (f'<section class="wn" id="whats-new" data-slug="{slug}" data-version="{version}" hidden>'
+            f'<div class="wrap"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; What&rsquo;s new</div>'
+            f'<h2 class="wn-h">{htmlmod.escape(p["name"])} {version}<span class="wn-date"></span></h2>'
+            f'<ul class="wn-list">{"".join(shown)}</ul>{more}</div></section>')
+
+
+WHATS_NEW_JS = (
+    "(function(){var s=document.getElementById('whats-new');if(!s)return;"
+    "fetch('/updates/'+s.dataset.slug+'.json',{cache:'no-store'})"
+    ".then(function(r){return r.ok?r.json():null;})"
+    ".then(function(m){if(!m||m.version!==s.dataset.version)return;"
+    "if(m.released){var d=new Date(m.released+'T12:00:00');"
+    "s.querySelector('.wn-date').textContent=' \u00b7 released '+d.toLocaleDateString('en-GB',"
+    "{day:'numeric',month:'long',year:'numeric'});}"
+    "s.hidden=false;if(location.hash==='#whats-new')s.scrollIntoView();})"
+    ".catch(function(){});})();"
+)
+
+
 def faq_ld(p):
     """schema.org FAQPage for a product's long-form FAQ, or None."""
     items = (p.get("longform") or {}).get("faq", {}).get("items")
@@ -407,11 +485,14 @@ def build_page(slug, p):
 
 {longform(p)}
 
+{whats_new(slug, p)}
+
 {band(p)}
 
 {FOOTER}
 
 <script>
+  {WHATS_NEW_JS}
   {C.SALE_GUARD_JS}
   {C.UTM_PASS_JS}
 </script>

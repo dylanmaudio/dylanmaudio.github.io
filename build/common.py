@@ -286,7 +286,7 @@ PRODUCTS = {
                     ("The dLive, with its state on the keys.",
                      "Through MIDI Bridge: mute, fader (set, nudge, or fade over a time you choose), send level, "
                      "main / DCA / mute-group assign, preamp gain, pad and 48 V, PEQ and HPF, names and colours, "
-                     "Scene recall and Go / Next / Previous, and named console Actions. Mutes and Scene changes "
+                     "Scene recall, and named console Actions. Mutes and Scene changes "
                      "come back the moment the desk makes them; fader levels as soon as a move settles; names and "
                      "colours on connect and whenever a strip is renamed."),
                     ("One connection to the console, shared.",

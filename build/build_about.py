@@ -280,7 +280,7 @@ __SEO__
 <footer class="site">
   <div class="foot-inner">
     <div class="wordmark"><img class="logo-mark" src="assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
-    <div class="fl"><a href="index.html#software">Software</a><a href="#top">About</a><a href="index.html#book">Book</a><a href="index.html#contact">Contact</a><a class="di" href="__DISCORD_URL__" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a></div>
+    <div class="fl"><a href="index.html#software">Software</a><a href="#top">About</a><a href="index.html#book">Book</a><a href="index.html#contact">Contact</a><a class="di" href="__DISCORD_URL__" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a><a href="/privacy/">Privacy</a></div>
     <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
   </div>
   <div class="foot-legal">__NONAFFIL__</div>

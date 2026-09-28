@@ -17,6 +17,7 @@ PAGES = [
     ("products/pilot-tone-trigger/", "0.7"),
     ("products/time-code-tool/", "0.7"),
     ("products/console-control/", "0.7"),
+    ("privacy/", "0.2"),
     ("products/companion/", "0.6"),
 ]
 

@@ -35,6 +35,10 @@ CHECKOUT = {
     # Console Control "COMING SOON": a $0 product with email marketing on — the
     # notify-me list for the launch (operator, 27 Sept 2026). Nothing to download.
     "console-control-notify": f"{STORE_URL}/checkout/buy/978cd546-2a2f-442e-8c7b-a6f98c1d3515",
+    # Console Control BETA: a hidden $0 product that serves the current beta build
+    # (dylanmaudio-marketing briefs/console-control-beta-distribution.md). Given
+    # to testers only, from the unlisted beta page at /cc-beta (build_beta.py).
+    "console-control-beta": f"{STORE_URL}/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4",
     # Talk Light Trigger: two variants (licence 2024669, free trial 2006006); validated 23 Sept.
     "talk-light-trigger": f"{STORE_URL}/checkout/buy/178c7256-4ba5-4269-9c0f-79876a37aee7?enabled=2024669",
     "talk-light-trigger-trial": f"{STORE_URL}/checkout/buy/5700dc17-83ae-4e2a-8534-29eaddbf51b6?enabled=2006006",

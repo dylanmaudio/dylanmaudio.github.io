@@ -53,6 +53,8 @@ product page until launch** (operator, 2026-09-21): it's left out of
 `build_products.BUILD`; the home page's "Coming soon" flagship card stays.
 Add the slug back to `BUILD` (and `INDEXED`, and `build_seo.PAGES`) at launch.
 
+**The Console Control beta page** (`/cc-beta`, `build/build_beta.py`, 30 Sept 2026): for testers the operator invites, so it's unlisted — noindex, not in the sitemap, and nothing on the site links to it. `/cc-beta` was a redirect to the checkout before; testers' old links now land on the page. Its Download button is the hidden $0 beta product (`CHECKOUT["console-control-beta"]`). It describes the build on that product (`VERSION` in the script, 0.2.1 from 30 Sept) — change it with each beta.
+
 ## Sources of truth — read them, don't copy them
 
 The prices and names above are a convenience copy. What the site says has to

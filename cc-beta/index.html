@@ -2,37 +2,318 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex, follow">
-<meta http-equiv="refresh" content="0; url=https://store.dylanmaudio.com/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4">
+<meta name="description" content="The Console Control beta: timecode show automation for your console, free until 31 October 2026. What it does, what's new, how to get it, and your first session.">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon-180.png">
 <link rel="icon" href="/assets/logo.png">
-<title>Redirecting to the beta download — Dylan [M] Audio</title>
+<title>Console Control beta — Dylan [M] Audio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://dylanmaudio.com/cc-beta/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Dylan [M] Audio">
+<meta property="og:title" content="Console Control beta — Dylan [M] Audio">
+<meta property="og:description" content="The Console Control beta: timecode show automation for your console, free until 31 October 2026. What it does, what's new, how to get it, and your first session.">
+<meta property="og:url" content="https://dylanmaudio.com/cc-beta/">
+<meta property="og:image" content="https://dylanmaudio.com/assets/console-control.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Console Control beta — Dylan [M] Audio">
+<meta name="twitter:description" content="The Console Control beta: timecode show automation for your console, free until 31 October 2026. What it does, what's new, how to get it, and your first session.">
+<meta name="twitter:image" content="https://dylanmaudio.com/assets/console-control.png">
 <style>
-  :root { --bg:#0b0e12; --text:#e6edf3; --muted:#8b949e; --blue:#4fa3f7;
+  :root{--bg:#0b0e12;--surface:#12171d;--surface-2:#161b21;--border:#232b34;--hairline:#1a212a;
+    --text:#e6edf3;--muted:#8b949e;--dim:#5a6573;--blue:#4fa3f7;--green:#62d27a;--amber:#e89e3c;--red:#e85c5c;
     --sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Helvetica Neue",Arial,sans-serif;
-    --mono:ui-monospace,"SF Mono",Menlo,Monaco,Consolas,monospace; }
-  html,body { margin:0; height:100%; }
-  body { background:var(--bg); color:var(--text); font-family:var(--sans); font-size:16px;
-    -webkit-font-smoothing:antialiased; display:flex; align-items:center; justify-content:center;
-    text-align:center; padding:24px; }
-  .logo-mark { width:44px; height:44px; border-radius:50%; display:block; margin:0 auto 20px; }
-  .kicker { font-family:var(--mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
-    color:var(--blue); margin:0 0 10px; }
-  p { margin:0; color:var(--muted); line-height:1.6; }
-  a { color:var(--blue); text-decoration:none; }
-  a:hover { text-decoration:underline; }
+    --mono:ui-monospace,"SF Mono",Menlo,Monaco,Consolas,monospace;--maxw:1120px;--pad:clamp(20px,5vw,48px);}
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;} html,body{margin:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;} ::selection{background:rgba(79,163,247,0.28);}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad);}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);}
+  .kicker .tick{color:var(--dim);}
+  /* toolbar */
+  header.bar{position:sticky;top:0;z-index:50;background:rgba(11,14,18,0.82);backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline);}
+  .bar-inner{max-width:var(--maxw);margin:0 auto;padding:12px var(--pad);display:flex;align-items:center;gap:20px;}
+  .wordmark{font-weight:600;font-size:15px;letter-spacing:0.09em;text-transform:uppercase;display:flex;align-items:center;gap:10px;white-space:nowrap;}
+  .wordmark .logo-mark{width:26px;height:26px;border-radius:50%;display:block;}
+  .wordmark .br{color:var(--blue);font-weight:700;letter-spacing:0;margin:0 -0.18em;}
+  .bar nav{margin-left:auto;display:flex;align-items:center;gap:6px;}
+  .bar nav a{font-size:13px;color:var(--muted);padding:6px 12px;border-radius:7px;transition:color .15s,background .15s;}
+  .bar nav a:hover{color:var(--text);background:var(--surface-2);} .bar nav a.active{color:var(--text);}
+  .nav-icon{display:inline-flex;align-items:center;padding:6px 9px;}
+  .nav-icon:hover{color:#5865F2;background:var(--surface-2);}
+  .bar .store-btn{font-family:var(--mono);font-size:12px;letter-spacing:0.03em;color:var(--text);border:1px solid var(--border);
+    padding:7px 13px;border-radius:8px;margin-left:6px;transition:border-color .15s,color .15s;}
+  .bar .store-btn:hover{border-color:var(--blue);color:var(--blue);}
+  @media (max-width:760px){.bar nav a:not(.store-btn):not(.nav-icon){display:none;}}
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:500;padding:11px 18px;border-radius:9px;
+    border:1px solid transparent;cursor:pointer;transition:all .15s;font-family:inherit;}
+  .btn .arw{transition:transform .18s;} .btn:hover .arw{transform:translateX(3px);}
+  .btn-primary{background:var(--blue);color:#06121f;font-weight:600;} .btn-primary:hover{background:#6cb4fa;}
+  .btn-ghost{border-color:var(--border);color:var(--text);} .btn-ghost:hover{border-color:var(--muted);background:var(--surface);}
+  .btn-discord{background:#5865F2;color:#fff;font-weight:600;} .btn-discord:hover{background:#6b76f0;}
+  .btn.disabled{opacity:.55;pointer-events:none;}
+  [hidden]{display:none!important;}
+  .sale-banner{display:inline-flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin:22px 0 0;padding:12px 16px;
+    border-radius:11px;border:1px solid color-mix(in srgb,var(--green) 40%,var(--border));background:rgba(98,210,122,0.08);}
+  .sale-banner .s-hi{font-weight:640;color:var(--green);font-size:1.02rem;}
+  .sale-banner .s-sub{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:0.02em;}
+  .sale-banner code, .p-band code{font-family:var(--mono);color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:5px;padding:1px 6px;}
+  .srow s, .p-band s{color:var(--dim);}
+  section{padding-block:clamp(52px,8vw,96px);}
+  /* product hero */
+  .p-hero{border-bottom:1px solid var(--hairline);position:relative;overflow:hidden;}
+  .p-hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(90% 60% at 20% 0%,rgba(79,163,247,0.10),transparent 55%);}
+  .p-hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:clamp(40px,6vw,64px) var(--pad) clamp(36px,5vw,56px);}
+  .crumb{font-family:var(--mono);font-size:12px;color:var(--dim);display:inline-flex;gap:7px;align-items:center;letter-spacing:0.03em;}
+  .crumb:hover{color:var(--blue);}
+  .p-id{display:flex;align-items:center;gap:18px;margin-top:22px;}
+  .p-id img{width:72px;height:72px;border-radius:16px;box-shadow:0 6px 18px rgba(0,0,0,0.45);flex-shrink:0;}
+  .p-id h1{margin:0;font-size:clamp(2rem,4.6vw,3rem);letter-spacing:-0.02em;font-weight:650;}
+  .p-id .abbr{color:var(--dim);font-weight:500;font-size:0.5em;margin-left:8px;letter-spacing:0.04em;}
+  .p-badges{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:999px;
+    border:1px solid color-mix(in srgb,var(--blue) 32%,var(--border));color:var(--blue);background:rgba(79,163,247,0.08);}
+  .tag.free{border-color:color-mix(in srgb,var(--green) 38%,var(--border));color:var(--green);background:rgba(98,210,122,0.08);}
+  .soon{font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber);
+    border:1px solid color-mix(in srgb,var(--amber) 38%,var(--border));background:rgba(232,158,60,0.09);border-radius:999px;padding:4px 10px;}
+  .p-tagline{margin:24px 0 0;max-width:56ch;font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.4;color:var(--text);}
+  .p-cta-row{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;}
+  /* video */
+  .video-wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--pad);}
+  .video-frame{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--border);
+    background:linear-gradient(180deg,#10151b,#0b0e12);}
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-facade{position:absolute;inset:0;display:grid;place-items:center;cursor:pointer;}
+  .video-facade img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .video-facade .play{position:relative;z-index:2;width:76px;height:76px;border-radius:50%;display:grid;place-items:center;
+    background:rgba(11,14,18,0.7);border:1px solid rgba(255,255,255,0.25);backdrop-filter:blur(4px);}
+  .video-facade .play svg{width:30px;height:30px;fill:#fff;margin-left:4px;}
+  .video-soon{position:absolute;inset:0;display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center;color:var(--dim);}
+  .video-soon .ring{width:64px;height:64px;border-radius:50%;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);}
+  .video-soon .ring svg{width:26px;height:26px;fill:currentColor;margin-left:3px;}
+  .video-soon .lbl{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;}
+  /* store gallery (the LS product images, shown at a proper size in a scroller) */
+  .p-gallery .wrap{display:flex;justify-content:center;}
+  .g-wrap{width:100%;max-width:760px;}
+  /* isolation + translateZ: iOS Safari can leave part of an image unpainted inside a
+     rounded overflow:hidden box around a scroller; its own layer avoids that. */
+  .gallery{position:relative;width:100%;border-radius:16px;overflow:hidden;isolation:isolate;transform:translateZ(0);
+    border:1px solid var(--border);box-shadow:0 18px 48px rgba(0,0,0,0.5);}
+  .g-track{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+    scrollbar-width:none;}
+  .g-track::-webkit-scrollbar{display:none;}
+  .g-slide{flex:0 0 100%;scroll-snap-align:start;margin:0;}
+  .g-slide img,.g-slide video{display:block;width:100%;height:auto;background:#0b0e12;}
+  .g-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;
+    border-radius:50%;display:grid;place-items:center;cursor:pointer;color:var(--text);
+    background:rgba(11,14,18,0.66);border:1px solid rgba(255,255,255,0.22);backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);transition:background .15s,opacity .15s;}
+  .g-nav:hover{background:rgba(11,14,18,0.85);} .g-nav svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .g-nav:disabled{opacity:0;pointer-events:none;} .g-prev{left:12px;} .g-next{right:12px;}
+  .g-dots{display:flex;gap:8px;justify-content:center;margin-top:16px;}
+  .g-dot{width:8px;height:8px;padding:0;border-radius:50%;cursor:pointer;border:0;background:var(--border);transition:background .15s,transform .15s;}
+  .g-dot[aria-current="true"]{background:var(--blue);transform:scale(1.25);}
+  @media (hover:none){.g-nav{display:none;}}
+  /* overview */
+  .p-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:clamp(28px,5vw,60px);align-items:start;}
+  @media (max-width:820px){.p-grid{grid-template-columns:1fr;gap:28px;}}
+  .p-lead{font-size:1.14rem;line-height:1.55;color:var(--text);margin:0 0 22px;}
+  .p-body p{color:var(--muted);margin:0 0 16px;max-width:60ch;}
+  .p-sec-k{margin-bottom:16px;}
+  .feature-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;}
+  .feature-list li{display:flex;gap:12px;align-items:flex-start;color:var(--text);font-size:0.98rem;}
+  .feature-list .ck{color:var(--green);flex-shrink:0;margin-top:2px;}
+  .feature-list .ck svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.4;}
+  .side{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;font-family:var(--mono);font-size:13px;}
+  .side .h{color:var(--dim);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid var(--hairline);}
+  .srow{display:flex;justify-content:space-between;gap:14px;padding:6px 0;}
+  .srow .k{color:var(--dim);} .srow .v{color:var(--text);text-align:right;} .srow .v.g{color:var(--green);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
+  .chips .spec{font-family:var(--mono);font-size:11px;color:var(--dim);border:1px solid var(--hairline);border-radius:6px;padding:3px 8px;background:var(--bg);}
+  /* long-form (optional per product: common.PRODUCTS[slug]["longform"]) */
+  .lf{border-top:1px solid var(--hairline);}
+  .lf .wrap{max-width:820px;}
+  .lf-block{margin-bottom:clamp(40px,6vw,64px);} .lf-block:last-child{margin-bottom:0;}
+  .lf p{color:var(--muted);margin:0 0 16px;max-width:68ch;} .lf p:last-child{margin-bottom:0;}
+  .lf h3{font-size:1.05rem;font-weight:620;letter-spacing:-0.01em;margin:26px 0 8px;color:var(--text);}
+  .lf .lf-item:first-of-type h3{margin-top:0;}
+  .lf em{color:var(--text);font-style:italic;}
+  .lf-steps{counter-reset:step;list-style:none;padding:0;margin:0 0 16px;}
+  .lf-steps li{counter-increment:step;position:relative;padding-left:44px;margin-bottom:18px;}
+  .lf-steps li::before{content:counter(step);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+    display:grid;place-items:center;font-family:var(--mono);font-size:13px;color:var(--blue);
+    border:1px solid color-mix(in srgb,var(--blue) 40%,var(--border));background:rgba(79,163,247,0.08);}
+  .lf-steps li h3{margin-top:2px;}
+  .lf code{font-family:var(--mono);font-size:0.9em;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:5px;padding:1px 6px;}
+  #install{scroll-margin-top:80px;} .lf a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
+  /* what's new */
+  .wn{border-top:1px solid var(--hairline);}
+  .wn .wrap{max-width:820px;}
+  .wn-h{font-size:1.3rem;font-weight:640;letter-spacing:-0.01em;margin:0 0 16px;}
+  .wn-date{color:var(--dim);font-weight:500;font-size:0.8em;}
+  .wn-list{margin:0;padding-left:20px;color:var(--muted);}
+  .wn-list li{margin:0 0 10px;max-width:68ch;}
+  .wn-more summary{cursor:pointer;color:var(--blue);font-family:var(--mono);font-size:13px;margin:6px 0 14px;}
+  /* cta band */
+  .p-band{border-top:1px solid var(--hairline);text-align:center;}
+  .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
+  .p-band p{color:var(--muted);margin:14px auto 0;max-width:46ch;}
+  .p-band .p-cta-row{justify-content:center;}
+  /* footer */
+  footer.site{border-top:1px solid var(--hairline);padding:34px var(--pad);}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);}
+  .foot-inner .fl{display:flex;gap:20px;flex-wrap:wrap;} .foot-inner a:hover{color:var(--text);}
+  .foot-inner .fl .di:hover{color:#5865F2;}
+  .foot-mono{font-family:var(--mono);font-size:12px;}
+  .foot-legal{max-width:78ch;margin:20px auto 0;padding-top:18px;border-top:1px solid var(--hairline);font-size:11.5px;line-height:1.5;color:var(--dim);}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important;}}
+
+  .beta-note{margin-top:18px;max-width:62ch;font-size:0.95rem;color:var(--muted);}
+  .beta-note b{color:var(--text);font-weight:600;}
+  .beta-note a{color:var(--blue);}
+  .lf a, .p-band p a{color:var(--blue);} .lf a:hover{text-decoration:underline;}
+  .lf b{color:var(--text);font-weight:600;}
+  kbd{font-family:var(--mono);font-size:0.82em;color:var(--text);background:var(--surface-2);
+    border:1px solid var(--border);border-bottom-width:2px;border-radius:6px;padding:1px 7px;white-space:nowrap;}
+  .states{border-top:1px solid var(--hairline);margin:0 0 18px;}
+  .state{display:grid;grid-template-columns:14px minmax(150px,210px) 1fr;gap:16px;align-items:baseline;
+    padding:13px 0;border-bottom:1px solid var(--hairline);}
+  .state .dot{width:12px;height:12px;border-radius:50%;transform:translateY(1px);}
+  .state .l{font-weight:600;color:var(--text);}
+  .state .d{color:var(--muted);}
+  @media (max-width:620px){.state{grid-template-columns:14px 1fr;}.state .d{grid-column:2;}}
+  .keys{display:grid;grid-template-columns:1fr 1fr;column-gap:36px;border-top:1px solid var(--hairline);}
+  .key{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--hairline);}
+  .key .c{flex:none;width:118px;display:flex;gap:5px;flex-wrap:wrap;}
+  .key .a{color:var(--muted);font-size:0.95rem;}
+  @media (max-width:700px){.keys{grid-template-columns:1fr;}}
 </style>
 </head>
-<body>
-<main>
-  <img class="logo-mark" src="/assets/logo.png" alt="" width="44" height="44">
-  <p class="kicker">Redirecting</p>
-  <p>Taking you to the beta download.<br>
-  Not moving? <a href="https://store.dylanmaudio.com/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4" rel="noopener">Open it here</a>.</p>
-</main>
-<script>location.replace("https://store.dylanmaudio.com/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4");</script>
+<body class="product">
+<header class="bar">
+  <div class="bar-inner">
+    <a href="/" class="wordmark"><img class="logo-mark" src="/assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</a>
+    <nav>
+      <a href="/#software" class="active">Software</a>
+      <a href="/about.html">About</a>
+      <a href="/#book">Book</a>
+      <a href="/#contact">Contact</a>
+      <a href="https://discord.gg/zBkPrFhzPQ" class="nav-icon" aria-label="Join the Discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg></a>
+      <a href="https://store.dylanmaudio.com" class="store-btn">Store&nbsp;&#8599;</a>
+    </nav>
+  </div>
+</header>
+
+<section class="p-hero">
+  <div class="p-hero-inner">
+    <a class="crumb" href="/products/console-control/">&larr; Console Control</a>
+    <div class="p-id">
+      <img src="/assets/console-control.png" alt="Console Control app icon" width="72" height="72" />
+      <div>
+        <h1>Console Control</h1>
+        <div class="p-badges"><span class="tag">Beta &middot; 0.2.1</span></div>
+      </div>
+    </div>
+    <p class="p-tagline">Complete console automation, locked to timecode. Free to try until 31 October 2026.</p>
+    <div class="p-cta-row"><a href="https://store.dylanmaudio.com/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4" target="_blank" rel="noopener" class="btn btn-primary">Download the beta &mdash; free <span class="arw">&rarr;</span></a><a href="/products/midi-bridge/" class="btn btn-ghost">Get MIDI Bridge (free)</a><a href="https://discord.gg/zBkPrFhzPQ" class="btn btn-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg> Beta feedback</a></div>
+    <p class="beta-note">The download is a free checkout on the store: the link comes by email, and I&rsquo;ll email
+      you when a new beta is out. <b>You also need the free MIDI Bridge</b>: every cue reaches the console through it.
+      Then see <a href="#new">what&rsquo;s new</a>, or start with <a href="#start">your first session</a>.</p>
+  </div>
+</section>
+
+<section class="p-gallery" aria-label="Console Control gallery"><div class="wrap"><div class="g-wrap" data-gallery><div class="gallery"><div class="g-track" tabindex="0"><figure class="g-slide"><img src="/assets/cards/console-control-beta/01-hero.png" alt="Console Control — image 1 of 11" width="1600" height="1200" loading="eager" fetchpriority="high"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/02-whats-new.png" alt="Console Control — image 2 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/03-what-it-is.png" alt="Console Control — image 3 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/04-first-session.png" alt="Console Control — image 4 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/05-how-it-thinks.png" alt="Console Control — image 5 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/06-sync.png" alt="Console Control — image 6 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/07-keys.png" alt="Console Control — image 7 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/08-show-day.png" alt="Console Control — image 8 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><video src="/assets/cards/console-control-beta/09-stream-deck.mp4" poster="/assets/cards/console-control-beta/09-stream-deck.png" muted playsinline preload="none" width="1600" height="1200" aria-label="Console Control — image 9 of 11"></video></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/10-if-something-is-wrong.png" alt="Console Control — image 10 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure><figure class="g-slide"><img src="/assets/cards/console-control-beta/11-the-beta.png" alt="Console Control — image 11 of 11" width="1600" height="1200" loading="lazy" decoding="async"></figure></div><button class="g-nav g-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button><button class="g-nav g-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button></div><div class="g-dots"><button class="g-dot" type="button" aria-label="Go to image 1" aria-current="true"></button><button class="g-dot" type="button" aria-label="Go to image 2"></button><button class="g-dot" type="button" aria-label="Go to image 3"></button><button class="g-dot" type="button" aria-label="Go to image 4"></button><button class="g-dot" type="button" aria-label="Go to image 5"></button><button class="g-dot" type="button" aria-label="Go to image 6"></button><button class="g-dot" type="button" aria-label="Go to image 7"></button><button class="g-dot" type="button" aria-label="Go to image 8"></button><button class="g-dot" type="button" aria-label="Go to image 9"></button><button class="g-dot" type="button" aria-label="Go to image 10"></button><button class="g-dot" type="button" aria-label="Go to image 11"></button></div></div></div></section>
+
+<section><div class="wrap p-grid">
+  <div class="p-body">
+    <div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; What it does</div>
+    <p class="p-lead">Every fader, mute, Scene, Action and send, programmed on a timeline against your show&rsquo;s own audio and fired exactly when the show gets there. Drop in anywhere and the desk is right. The dLive is the first console; more manufacturers are on the way.</p>
+  </div>
+  <div>
+    <ul class="feature-list"><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Fader, mute, Scene, Action and send cues on a timeline, locked to LTC or MTC</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Import a live recording and every track lands at its real timecode — a whole set in under a minute</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>A tempo map from your click in seconds; snap cues to the beat</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Your console's own Scene names, channel names and colours</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Chase: locate anywhere and the console conforms</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Preflight before doors, Show Mode during, Panic always</span></li><li><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Works with MIDI Bridge, Time Code Tool and your Stream Deck</span></li></ul>
+    <div class="side" style="margin-top:24px;">
+      <div class="h">// The beta</div>
+      <div class="srow"><span class="k">Version</span><span class="v">0.2.1 BETA</span></div><div class="srow"><span class="k">Beta until</span><span class="v">31 October 2026</span></div><div class="srow"><span class="k">Price</span><span class="v">Free during the beta</span></div><div class="srow"><span class="k">Platform</span><span class="v">macOS 11+</span></div><div class="srow"><span class="k">Chip</span><span class="v">Apple Silicon</span></div><div class="srow"><span class="k">Console</span><span class="v">dLive first</span></div><div class="srow"><span class="k">Needs</span><span class="v"><a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+</span></div><div class="srow"><span class="k">Stream Deck</span><span class="v"><a href="/products/companion/" style="color:var(--blue)">via Companion</a></span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="lf"><div class="wrap"><div class="lf-block" id="new"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; New in 0.2.1</div><p>Since 0.1.19, the build the first testers had. The full list comes with the download.</p><div class="lf-item"><h3>The keys are laid out afresh.</h3><p>Single keys are cue programming and getting around; <kbd>⇧</kbd> is the pair of a single key; <kbd>⌥</kbd> is markers and regions; <kbd>⌘</kbd> is files, clipboard, undo and zoom; <kbd>⌃⌥</kbd> is the console and the view. If you used 0.1.19, many have moved &mdash; the <a href="#keys">keys below</a> are the new ones, and every button shows its key when you hover over it.</p></div><div class="lf-item"><h3>Show Mode shows what&rsquo;s coming next.</h3><p>The region you&rsquo;re in and how long is left of it, then the next cues, markers and regions, each with a countdown and its timecode. The countdown turns amber inside ten seconds and red inside three.</p></div><div class="lf-item"><h3>Sync from Console.</h3><p>Reads every channel&rsquo;s name and colour from the desk through MIDI Bridge, and shows what would change before anything does. New console channels are offered as tracks; nothing is added or deleted unless you say so.</p></div><div class="lf-item"><h3>A Mixer with EQ, compressor and limiter.</h3><p>For the reference audio: an equaliser and an SSL-style bus compressor on every track, and a limiter on the master. Saved with the show and in every export.</p></div><div class="lf-item"><h3>Export Audio built for a show.</h3><p>Master and timecode as separate files or one two-channel file, or every reference track; WAV up to 96 kHz and 32-bit float, or MP3; one region, every region, or the time selection. Timecode is generated at the export&rsquo;s own sample rate.</p></div><div class="lf-item"><h3>Tempo detection follows the click.</h3><p>A click that changes tempo gets a span for each steady stretch, and a ramp is followed beat by beat. Clicks are placed to a fraction of a frame.</p></div><div class="lf-item"><h3>Faster, sharper, more precise editing.</h3><p>Select and move audio clips with a preview of where they land, zoom down to single frames, sharp waveforms on recordings hours long, and clip moves heard straight away instead of after a pause.</p></div><div class="lf-item"><h3>Runs on macOS 11 Big Sur or later.</h3><p>Earlier betas needed macOS 13.3.</p></div></div><div class="lf-block" id="start"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; Your first session, in eight steps</div><p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console until the bridge line is green.</p><ol class="lf-steps"><li><h3>Start the dLive MIDI Bridge</h3><p>Console Control talks to the console through the free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later). Wait for the green line at the bottom of the window.</p></li><li><h3>Match the base MIDI channel</h3><p>Settings (<kbd>⌘,</kbd>) &mdash; the same number as Utility &rarr; Control &rarr; MIDI on the console.</p></li><li><h3>Add your tracks</h3><p><b>+ Track</b> (<kbd>⌘T</kbd>), pick a type and a range. &ldquo;1-16&rdquo; makes sixteen input tracks in one step.</p></li><li><h3>Bring in the console&rsquo;s names</h3><p>Sync from Console (<kbd>⌃⌥R</kbd>) for channel names and colours, straight from the desk. File &rarr; Import Console Show File for Scene names and Actions.</p></li><li><h3>Import a show recording</h3><p><kbd>⌘I</kbd>. With an LTC track present, every song is placed at its own timecode and outlined as a region.</p></li><li><h3>Place cues</h3><p>Select a track, then <kbd>U</kbd>, <kbd>I</kbd> or <kbd>V</kbd> for fader cues, <kbd>M</kbd> for mute, <kbd>S</kbd> for a Scene, <kbd>A</kbd> for an Action.</p></li><li><h3>Run Preflight</h3><p><kbd>⌃⌥P</kbd> checks the bridge, the base channel, chase and routing, and says exactly what is wrong.</p></li><li><h3>Arm SYNC, press play</h3><p>The timeline waits for timecode and follows it when it locks. Then <kbd>⌘⇧L</kbd> for Show Mode.</p></li></ol></div><div class="lf-block"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; Four ideas that explain everything else</div><p>If the app ever surprises you, it is almost always one of these.</p><div class="lf-item"><h3>Time, not bars &mdash; cues sit at a timecode position.</h3><p>Live shows drift, drop the click and vamp. Tempo exists only for beat snapping and the grid &mdash; the ruler is always time.</p></div><div class="lf-item"><h3>Chase &mdash; move the playhead and the desk follows.</h3><p>Scrub, locate or play: every lane&rsquo;s value at that position is worked out and sent. Chase can be switched off for everything (<kbd>⇧C</kbd>) or per lane (<kbd>C</kbd>).</p></div><div class="lf-item"><h3>Fired vs pending &mdash; plain text was sent, a dot was not.</h3><p>A dot beside a readout means &ldquo;the console should be here, but it hasn&rsquo;t been sent&rdquo;. Conform Console sends everything pending in one pass.</p></div><div class="lf-item"><h3>One console path &mdash; everything goes through MIDI Bridge.</h3><p>Console Control never opens its own connection to the desk, so your DAW, Companion and the other apps keep working beside it.</p></div></div><div class="lf-block"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; SYNC arms, play latches, stop disarms</div><p>The button beside Record. Always this way round &mdash; a show never latches on its own when it opens.</p><div class="states"><div class="state"><span class="dot" style="background:var(--dim)"></span><span class="l">Dimmed</span><span class="d">Sync off. Internal clock, for programming and loop playback.</span></div><div class="state"><span class="dot" style="background:#6f93b8"></span><span class="l">Lit steel-blue</span><span class="d">Armed. Press play to latch.</span></div><div class="state"><span class="dot" style="background:var(--amber)"></span><span class="l">Pulsing amber</span><span class="d">Play pressed, awaiting timecode.</span></div><div class="state"><span class="dot" style="background:var(--green)"></span><span class="l">Green</span><span class="d">Locked to incoming timecode. Locate and scrub belong to the source.</span></div><div class="state"><span class="dot" style="background:var(--amber)"></span><span class="l">Steady amber</span><span class="d">Freewheeling &mdash; the signal dropped and the timeline is coasting.</span></div></div><p><b>Right-click SYNC</b> for the source (LTC or MTC), the LTC input channel, the MTC port, freewheel time, drift tolerance and offset. <b>Still pulsing while code plays?</b> It is listening to the wrong input.</p></div><div class="lf-block" id="keys"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; The keys worth learning first</div><p>Every shortcut can be changed in View &rarr; Keyboard Shortcuts (<kbd>⌃⌥K</kbd>): click one and press the keys you want. Hover over any button to see its key.</p><div class="keys"><div class="key"><div class="c"><kbd>Space</kbd></div><div class="a">Play / stop</div></div><div class="key"><div class="c"><kbd>⌘⇧Esc</kbd></div><div class="a">Panic</div></div><div class="key"><div class="c"><kbd>⌘⇧L</kbd></div><div class="a">Show Mode</div></div><div class="key"><div class="c"><kbd>⌃⌥C</kbd></div><div class="a">Conform Console</div></div><div class="key"><div class="c"><kbd>⌃⌥P</kbd></div><div class="a">Preflight</div></div><div class="key"><div class="c"><kbd>⌃⌥R</kbd></div><div class="a">Sync from Console</div></div><div class="key"><div class="c"><kbd>U</kbd><kbd>I</kbd><kbd>V</kbd></div><div class="a">Fader cue: unity / &minus;&infin; / a value</div></div><div class="key"><div class="c"><kbd>M</kbd><kbd>⇧M</kbd></div><div class="a">Mute / unmute cue</div></div><div class="key"><div class="c"><kbd>S</kbd><kbd>A</kbd></div><div class="a">Scene / Action cue</div></div><div class="key"><div class="c"><kbd>C</kbd><kbd>⇧C</kbd></div><div class="a">Chase this lane / everything</div></div><div class="key"><div class="c"><kbd>[</kbd><kbd>]</kbd></div><div class="a">Previous / next marker, region or clip edge</div></div><div class="key"><div class="c"><kbd>1</kbd><kbd>…</kbd><kbd>0</kbd></div><div class="a">Regions 1 to 10</div></div><div class="key"><div class="c"><kbd>T</kbd></div><div class="a">Go to a timecode</div></div><div class="key"><div class="c"><kbd>⌥M</kbd><kbd>⌥R</kbd></div><div class="a">Marker at playhead / region from selection</div></div><div class="key"><div class="c"><kbd>⌥←</kbd><kbd>⌥→</kbd></div><div class="a">Nudge the selection</div></div><div class="key"><div class="c"><kbd>⌃⌥Space</kbd></div><div class="a">Record armed reference tracks</div></div><div class="key"><div class="c"><kbd>⌃⌥X</kbd></div><div class="a">Mixer</div></div><div class="key"><div class="c"><kbd>⌘Z</kbd><kbd>⌘⇧Z</kbd></div><div class="a">Undo / redo</div></div></div></div><div class="lf-block"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; Built for show day</div><p>Four controls to know before doors.</p><div class="lf-item"><h3>Preflight &mdash; <kbd>⌃⌥P</kbd></h3><p>Flags problems before the show: bridge and console link, base-channel mismatches, chase switched off, send lanes the console can&rsquo;t route.</p></div><div class="lf-item"><h3>Show Mode &mdash; <kbd>⌘⇧L</kbd></h3><p>Locks editing and undo. Huge timecode, sync, chase, bridge health and live per-track readouts &mdash; and what&rsquo;s coming next, with countdowns. Asks before it enters and before it leaves.</p></div><div class="lf-item"><h3>Conform Console &mdash; <kbd>⌃⌥C</kbd></h3><p>A one-shot chase you can use at any moment. Play always conforms first, so the console enters playback in the right state.</p></div><div class="lf-item"><h3>Panic &mdash; <kbd>⌘⇧Esc</kbd></h3><p>Always available, even with everything else locked.</p></div></div><div class="lf-block" id="stream-deck"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; On your Stream Deck</div><p>Beta testers get Stream Deck control too, through Bitfocus Companion.</p><div class="lf-item"><h3>Every shortcut is a key.</h3><p>Through the free <a href="/products/companion/">Companion module</a>, Console Control&rsquo;s commands are Companion actions &mdash; play, Conform, Show Mode, Panic, cue programming &mdash; with sync lock and chase shown on the keys. A Stream Deck is the nicest way to press them; Companion&rsquo;s web buttons on a phone or tablet work too.</p></div><div class="lf-item"><h3>Set it up once.</h3><p>Install Companion on the same Mac and add the dylanmaudio module &mdash; the steps are on the <a href="/products/companion/#install">Companion page</a>. Console Control appears beside your other dylanmaudio apps.</p></div><div class="lf-item"><h3>You decide what it can touch.</h3><p>Settings &rarr; Companion: allow Companion control or switch it off, and lock the show-critical controls &mdash; Stop, Record, Conform and Show Mode are refused while locked. Panic always works.</p></div></div><div class="lf-block"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; If something is wrong</div><p>Read the line at the bottom of the window. It tells you where the chain is broken, in order.</p><div class="states"><div class="state"><span class="dot" style="background:var(--green)"></span><span class="l">Green</span><span class="d">Console connected through the bridge. Its IP is shown.</span></div><div class="state"><span class="dot" style="background:var(--amber)"></span><span class="l">Amber</span><span class="d">Bridge running, console unreachable. Check the console IP in the bridge, the network, and MIDI-over-TCP on the console.</span></div><div class="state"><span class="dot" style="background:var(--red)"></span><span class="l">Red</span><span class="d">The dLive MIDI Bridge app isn&rsquo;t running. Start it.</span></div><div class="state"><span class="dot" style="background:var(--blue)"></span><span class="l">Green, but nothing moves</span><span class="d">Check chase for everything (<kbd>⇧C</kbd>), the track&rsquo;s M, the lane&rsquo;s chase badge &mdash; or run Preflight (<kbd>⌃⌥P</kbd>).</span></div><div class="state"><span class="dot" style="background:var(--blue)"></span><span class="l">A track won&rsquo;t edit</span><span class="d">It is locked, or you are in Show Mode.</span></div></div><p><b>Something went wrong?</b> Click <b>Export log</b> in the footer &mdash; a copy of the session log lands on your Desktop. Send it with <b>Send feedback</b> beside it, or to <a href="mailto:dylan@dylanmaudio.com">dylan@dylanmaudio.com</a>. The log already records your settings, the show, every message you saw and the timecode state.</p></div><div class="lf-block" id="beta"><div class="kicker p-sec-k"><span class="tick">//</span>&nbsp; The beta, until 31 October 2026</div><p>This is 0.2.1 BETA: a full-featured beta. Nothing is switched off, and nothing is locked away afterwards.</p><div class="lf-item"><h3>Until the date, everything works.</h3><p>The window shows the end date from first launch, and for the last two weeks it reminds you each time it opens.</p></div><div class="lf-item"><h3>After the date, it opens and edits but sends nothing.</h3><p>Your shows stay yours. Console output stops until you install a newer beta.</p></div><div class="lf-item"><h3>A show is never interrupted.</h3><p>The date is only checked when the app starts, so a show that runs past midnight carries on.</p></div><div class="lf-item"><h3>You need MIDI Bridge and a current Mac.</h3><p>The free <a href="/products/midi-bridge/">dLive MIDI Bridge</a> (1.1 or later), macOS 11 or later, Apple Silicon. Companion and a Stream Deck if you want keys. No analytics, no telemetry.</p></div></div></div></section>
+
+<section class="p-band"><div class="wrap"><div class="kicker" style="display:inline-block;">
+  <span class="tick">//</span>&nbsp; Console Control beta</div>
+  <h2>Try it on your next show.</h2>
+  <p>Free until 31 October 2026. Tell me what works, what doesn&rsquo;t and what you&rsquo;d want next &mdash; in the
+    Discord, with Send feedback in the app, or at <a href="mailto:dylan@dylanmaudio.com?subject=Console%20Control%20beta">dylan@dylanmaudio.com</a>.</p>
+  <div class="p-cta-row"><a href="https://store.dylanmaudio.com/checkout/buy/c180fa12-d24c-4b2f-a8d2-817cd81d68e4" target="_blank" rel="noopener" class="btn btn-primary">Download the beta &mdash; free <span class="arw">&rarr;</span></a><a href="/products/midi-bridge/" class="btn btn-ghost">Get MIDI Bridge (free)</a><a href="https://discord.gg/zBkPrFhzPQ" class="btn btn-discord" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.21.375-.45.882-.617 1.283a18.27 18.27 0 0 0-5.535 0A12.6 12.6 0 0 0 9.11 3 19.74 19.74 0 0 0 4.677 4.37C1.9 8.48 1.14 12.49 1.52 16.44a19.9 19.9 0 0 0 6.05 3.06c.49-.67.925-1.38 1.3-2.13-.716-.27-1.4-.605-2.045-.998.171-.126.34-.257.5-.39a14.2 14.2 0 0 0 12.35 0c.163.14.332.27.5.39-.646.394-1.333.728-2.048.998.375.75.81 1.46 1.3 2.13a19.87 19.87 0 0 0 6.053-3.06c.447-4.58-.766-8.55-3.212-12.07ZM8.02 14.01c-1.183 0-2.157-1.085-2.157-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.955 2.42-2.157 2.42Zm7.96 0c-1.182 0-2.156-1.085-2.156-2.42 0-1.336.955-2.42 2.157-2.42 1.21 0 2.176 1.094 2.157 2.42 0 1.335-.946 2.42-2.157 2.42Z"/></svg> Join the Discord</a></div>
+</div></section>
+
+<footer class="site">
+  <div class="foot-inner">
+    <div class="wordmark"><img class="logo-mark" src="/assets/logo.png" alt="" width="26" height="26" /> Dylan <span class="br">[M]</span> Audio</div>
+    <div class="fl"><a href="/#software">Software</a><a href="/about.html">About</a><a href="/#book">Book</a><a href="/#contact">Contact</a><a class="di" href="https://discord.gg/zBkPrFhzPQ" target="_blank" rel="noopener">Discord</a><a href="https://store.dylanmaudio.com">Store &#8599;</a><a href="/privacy/">Privacy</a></div>
+    <div class="foot-mono">&copy; 2026 Dylan Mitrovich</div>
+  </div>
+  <div class="foot-legal">Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, used here for identification only.</div>
+</footer>
+
+<script>
+  (function(){try{var q=new URLSearchParams(location.search),keys=['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid'],got=[];keys.forEach(function(k){var v=q.get(k);if(v){got.push([k,v.slice(0,100)]);}});if(!got.length)return;document.querySelectorAll('a[href^="https://store.dylanmaudio.com/checkout/"]').forEach(function(a){var u=new URL(a.href);got.forEach(function(kv){u.searchParams.set('checkout[custom]['+kv[0]+']',kv[1]);});a.href=u.toString();});}catch(e){}})();
+  
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,DWELL=5000;
+document.querySelectorAll('[data-gallery]').forEach(function(g){
+  var track=g.querySelector('.g-track'),slides=[].slice.call(track.children),n=slides.length,
+      dots=g.querySelectorAll('.g-dot'),prev=g.querySelector('.g-prev'),next=g.querySelector('.g-next'),
+      cur=0,auto=!reduce,inView=!('IntersectionObserver' in window),held=false,timer=null,plays=0,t;
+  function vid(i){return slides[i].querySelector('video');}
+  function at(){return Math.round(track.scrollLeft/track.clientWidth);}
+  function show(i){track.scrollTo({left:i*track.clientWidth,behavior:reduce?'auto':'smooth'});}
+  function running(){return auto&&inView&&!held&&!document.hidden;}
+  function advance(){if(running())show((cur+1)%n);}
+  function schedule(){clearTimeout(timer);if(running()&&!vid(cur))timer=setTimeout(advance,DWELL);}
+  function play(v){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){clearTimeout(timer);timer=setTimeout(advance,DWELL);});}
+  function activate(){slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(j===cur&&inView&&!reduce){v.currentTime=0;plays=0;play(v);}else v.pause();});
+    var nv=vid((cur+1)%n);if(nv)nv.preload='auto';}
+  function stop(){auto=false;clearTimeout(timer);}
+  slides.forEach(function(s,j){var v=vid(j);if(!v)return;
+    if(reduce){v.controls=true;v.preload='metadata';}
+    v.addEventListener('ended',function(){plays++;
+      if(running()&&plays*v.duration*1000>=DWELL)advance();else if(!reduce){v.currentTime=0;play(v);}});});
+  prev.addEventListener('click',function(){stop();show(Math.max(0,at()-1));});
+  next.addEventListener('click',function(){stop();show(Math.min(n-1,at()+1));});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();show(i);});});
+  var tx=0,ty=0;
+  track.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;ty=e.touches[0].clientY;},{passive:true});
+  track.addEventListener('touchmove',function(e){var dx=Math.abs(e.touches[0].clientX-tx),dy=Math.abs(e.touches[0].clientY-ty);
+    if(dx>10&&dx>dy)stop();},{passive:true});
+  track.addEventListener('pointerdown',function(e){if(e.pointerType==='mouse')stop();});
+  track.addEventListener('keydown',stop);
+  track.addEventListener('wheel',function(e){if(Math.abs(e.deltaX)>Math.abs(e.deltaY))stop();},{passive:true});
+  g.addEventListener('pointerenter',function(e){if(e.pointerType==='mouse'){held=true;schedule();}});
+  g.addEventListener('pointerleave',function(e){if(e.pointerType==='mouse'){held=false;schedule();}});
+  g.addEventListener('focusin',function(){held=true;schedule();});
+  g.addEventListener('focusout',function(){held=false;schedule();});
+  document.addEventListener('visibilitychange',schedule);
+  if(!inView)new IntersectionObserver(function(es){inView=es[0].isIntersecting;activate();schedule();},{threshold:0.5}).observe(g);
+  track.addEventListener('scroll',function(){clearTimeout(t);t=setTimeout(function(){
+    var c=at();dots.forEach(function(d,i){d.setAttribute('aria-current',i===c?'true':'false');});
+    prev.disabled=c<=0;next.disabled=c>=n-1;
+    if(c!==cur){cur=c;activate();}schedule();},60);},{passive:true});
+  prev.disabled=true;activate();schedule();
+});
+})();
+
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "d20d574500344548bef2df8dba76b57d"}'></script>
 </body>
 </html>

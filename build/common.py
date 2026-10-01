@@ -354,9 +354,9 @@ PRODUCTS = {
                      "Trigger 1.2.0, Time Code Tool 1.3.0) and everything is there. If an app and the module ever "
                      "disagree, the connection&rsquo;s status says so &mdash; update whichever is older."),
                     ("Does Companion have to run on the same Mac?",
-                     "Yes, for the apps &mdash; the module reaches each one on this Mac. Companion itself also "
-                     "runs on Windows and Linux, and MIDI Bridge can be reached across the network with a token "
-                     "for more advanced setups; the module&rsquo;s help explains how."),
+                     "Yes. The module talks to MIDI Bridge and the other apps on the Mac they run on, so "
+                     "Companion runs on that Mac too. A Stream Deck somewhere else can still join it over the "
+                     "network with Bitfocus&rsquo;s Companion Satellite."),
                     ("There&rsquo;s already a dLive module in Companion. Why this one?",
                      "The existing Allen &amp; Heath dLive module talks to the console directly, and it&rsquo;s "
                      "good at what it does. This one goes through MIDI Bridge instead, which is what gives it the "

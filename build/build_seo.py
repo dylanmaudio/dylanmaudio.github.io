@@ -19,6 +19,7 @@ PAGES = [
     ("products/console-control/", "0.7"),
     ("privacy/", "0.2"),
     ("products/companion/", "0.6"),
+    ("ltc-wav/", "0.6"),
 ]
 
 def build():

@@ -20,6 +20,7 @@ Then commit + push; GitHub Pages serves `main` at dylanmaudio.com.
 | `build_products.py` | `products/<slug>/index.html` | Data-driven per-product pages. |
 | `build_404.py` | `404.html` | Not-found page. GitHub Pages serves it for any missing path, at any depth, so it uses site-root paths only. `noindex`, not in the sitemap. Its app links follow `build_products.BUILD`. |
 | `build_beta.py` | `cc-beta/index.html` | The Console Control beta page at `/cc-beta`, for invited testers: noindex, not in the sitemap, linked from nowhere. Features and gallery from `PRODUCTS`; what's new, the keys and the guide from the apps repo's CHANGELOG and Quick Reference. Update them, `VERSION` and `BETA_UNTIL` when a new beta goes out. Runs after `build_redirects.py`. |
+| `build_ltc.py` | `ltc-wav/index.html` | The free LTC WAV download page at `/ltc-wav`: an hour of LTC at every frame rate, 48 and 44.1 kHz, as zips in `downloads/ltc/`. The zips are rendered by `dylanmaudio-marketing/tools/build_ltc_downloads.py` with Time Code Tool's own encoder and verified by decoding; the build fails if one is missing. Indexed; linked from the Time Code Tool FAQ. |
 | `build_redirects.py` | `<slug>/index.html` | Short links (e.g. `/discord`). Add a row to `REDIRECTS`. |
 
 ## Product pages

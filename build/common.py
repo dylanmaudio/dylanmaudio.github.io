@@ -868,7 +868,8 @@ PRODUCTS = {
                      "It does what Lockstep did &mdash; LTC in, MTC out &mdash; and the other directions, "
                      "natively on Apple Silicon, and it&rsquo;s maintained."),
                     ("Can I just make an LTC WAV file?",
-                     "Yes, offline, at any frame rate including drop-frame."),
+                     "Yes, offline, at any frame rate including drop-frame. Or download a ready-made hour "
+                     "from the <a href=\"/ltc-wav/\">free LTC WAV files</a>."),
                     ("Windows? Intel Macs?",
                      "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
                      "version &mdash; <a href=\"/#contact\">register your interest</a> "

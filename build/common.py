@@ -198,6 +198,10 @@ PRODUCTS = {
         icon="companion.png", gallery=True, affiliated=True, status="module", youtube=None, video=False,
         store=None, host_url="https://bitfocus.io/companion", host_label="Get Companion",
         manual_url="https://github.com/bitfocus/companion-module-dylanmaudio-apps/blob/main/companion/HELP.md", manual_label="Module help",
+        # For Companion's "Import module package" on a show machine with no internet: the module's
+        # `yarn package` output, built from the release tag. Linked from the foot of the page
+        # (build_products.band) and from the install steps. Replace it with each module release.
+        offline_pkg="downloads/companion/dylanmaudio-apps-1.0.3.tgz",
         os="Windows, macOS, Linux (Bitfocus Companion 5.0+)",
         glance=[("Needs", "Companion 5.0+"), ("Surface", "Stream Deck, web, tablet"),
                 ("Apps", "on the same Mac"), ("Licence", "MIT, open source")],
@@ -251,8 +255,8 @@ PRODUCTS = {
                      "GUI</strong> &mdash; Companion is set up in a browser window."),
                     ("Install the module.",
                      "In Companion, open the <strong>Modules</strong> tab, search for <code>dylanmaudio</code>, "
-                     "and install the latest version. (No internet on the show machine? <a href=\"/discord\">Ask me on Discord</a> for "
-                     "the module package and use <strong>Import module package</strong> in the same tab.)"),
+                     "and install the latest version. (No internet on the show machine? <a href=\"#offline\">Download "
+                     "the module package</a> and use <strong>Import module package</strong> in the same tab.)"),
                     ("Switch on Companion control in the app.",
                      "In each dylanmaudio app you want on keys, open its menu-bar popover and turn on "
                      "<strong>Allow Companion control</strong>. For the dLive, have MIDI Bridge running and "

@@ -42,7 +42,9 @@ module store since 25 Sept 2026, operator): its page is
 `products/companion/` (`status="module"` in `PRODUCTS` — install steps and a
 "Get Companion" link instead of a store checkout; icon from
 `build/build_companion_icon.py`). The app pages' "Stream Deck control"
-sections link to it.
+sections link to it. Its foot links an offline package for **Import module
+package** (`downloads/companion/`, `offline_pkg`); replace it with each module
+release.
 
 **Not public:** Console Control (`status="coming"` in `PRODUCTS`). Its page
 and CTAs must not imply availability until the operator says it has

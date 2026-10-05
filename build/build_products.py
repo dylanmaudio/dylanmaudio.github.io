@@ -166,6 +166,9 @@ CSS = """
   .p-band h2{font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.02em;font-weight:640;margin:14px 0 0;text-wrap:balance;}
   .p-band p{color:var(--muted);margin:14px auto 0;max-width:46ch;}
   .p-band .p-cta-row{justify-content:center;}
+  .p-band .p-offline{max-width:62ch;margin:44px auto 0;padding-top:20px;border-top:1px solid var(--hairline);font-size:13.5px;scroll-margin-top:80px;}
+  .p-offline .k{display:block;margin-bottom:8px;font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dim);}
+  .p-offline a{color:var(--blue);font-family:var(--mono);font-size:0.95em;white-space:nowrap;} .p-offline a:hover{text-decoration:underline;}
   /* footer */
   footer.site{border-top:1px solid var(--hairline);padding:34px var(--pad);}
   .foot-inner{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim);}
@@ -356,6 +359,26 @@ def hero_cta(p):
             f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get notified</a>')
 
 
+def offline_note(p):
+    """The .tgz for Companion's Import module package, for a show machine
+    with no internet: a line under the band's buttons, which the install
+    steps link to as #offline. The build fails if the file is missing, so
+    the page never links to a 404."""
+    rel = p.get("offline_pkg")
+    if not rel:
+        return ""
+    path = C.ROOT / rel
+    if not path.exists():
+        raise SystemExit(f"build_products: {rel} is missing - run `corepack yarn package` in the "
+                         "module repo at its release tag and copy the .tgz here")
+    return (f'<p class="p-offline" id="offline"><span class="k">Offline install</span>'
+            f'No internet on the show machine? Download <a href="/{rel}" download>{path.name}</a> '
+            f'({path.stat().st_size / 1e3:.0f}&nbsp;KB) on another computer, bring it over, and choose '
+            '<strong>Import module package</strong> in Companion&rsquo;s <strong>Modules</strong> tab. If '
+            'Safari unpacks it into a folder, switch off <strong>Open &ldquo;safe&rdquo; files after '
+            'downloading</strong> in its General settings and download it again.</p>')
+
+
 def band(p):
     if p["status"] == "module":
         h = f"{p['name']} is free."
@@ -397,7 +420,7 @@ def band(p):
                f'<a href="/#contact" class="btn btn-ghost">Contact</a>')
     return (f'<section class="p-band"><div class="wrap"><div class="kicker" style="display:inline-block;">'
             f'<span class="tick">//</span>&nbsp; {p["name"]}</div><h2>{h}</h2><p>{sub}</p>'
-            f'<div class="p-cta-row">{cta}</div></div></section>')
+            f'<div class="p-cta-row">{cta}</div>{offline_note(p)}</div></section>')
 
 
 def status_row(p):

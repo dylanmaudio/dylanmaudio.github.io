@@ -1,8 +1,8 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.1",
   "url": "https://store.dylanmaudio.com",
-  "released": "2026-09-27",
-  "notes": "The lights now flash, with Flash Rate and Flash Hold; runs on macOS 11 or later",
+  "released": "2026-10-14",
+  "notes": "Fixed: on some Macs, most often older Intel Macs, opening the panel or",
   "app": "Talk Light Trigger",
   "slug": "talk-light-trigger"
 }

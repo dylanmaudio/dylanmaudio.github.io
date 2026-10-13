@@ -5,7 +5,6 @@ Copies of each app's `CHANGELOG.md` from the apps repo
 built from the top entry and shown once `updates/<slug>.json` has the same
 version.
 
-Public copy says Apple Silicon only until the operator confirms Intel on a
-physical Mac (operator, 27 Sept 2026). The September round's CHANGELOGs
-were reworded to match (apps repo 33c7f75), so these copies are verbatim
-again — keep them that way.
+Intel Macs are supported from the October patch round (MB 1.3.1, TLT
+1.2.1, PTT 1.2.6, TCT 1.3.2; operator, 14 Oct 2026), so the CHANGELOGs can
+name Intel. Keep these copies verbatim.

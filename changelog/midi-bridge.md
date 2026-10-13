@@ -10,6 +10,32 @@ with setup.py — the build prints it on the Quick Reference cover (first
 six bullets, so the most important go first) and in every build's
 changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 
+v1.3.1
+- Fixed: a fader or parameter move from QLab, Reaper or another app on
+  the "dLive Bridge" MIDI port could land on the wrong channel strip if
+  Bitfocus Companion or another app sent a move through MIDI Bridge at
+  the same moment, most likely with two fades running at once. The
+  console applies each value to the strip selected last, by anyone, and
+  one sender's move could arrive between the other's selection and its
+  value. MIDI Bridge now keeps each move together.
+- Fixed: now and then, Restart Bridge, in the panel or from Companion,
+  stopped the bridge but didn't start it again, and Stop or Restart
+  logged a "'NoneType' object has no attribute 'poll'" warning. Both now
+  finish every time.
+- Fixed: stopping or restarting the bridge at an unlucky moment could
+  freeze the console connection state MIDI Bridge shows, in the menu
+  bar, the panel and Companion, at what it was before, for the rest of
+  that session, and add a CRITICAL error to its log. It now carries on
+  checking through a restart.
+- Security: a web page open in a browser on the same Mac could send
+  commands to MIDI Bridge's Client API, the connection Bitfocus
+  Companion and the other dylanmaudio apps use, and through it to the
+  console. MIDI Bridge now refuses requests from web pages, as its
+  Companion control connection already did. Companion and the apps are
+  unaffected, and the MIDI Monitor page works as before.
+- The Console IP field is now labelled "Console IP (MixRack)": MIDI
+  Bridge needs the MixRack's address, not the Surface's.
+
 v1.3.0
 - Fixed: "Connected" now means the console is answering. Before, the
   bridge showed Connected as soon as anything accepted a network

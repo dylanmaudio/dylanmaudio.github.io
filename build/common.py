@@ -358,8 +358,8 @@ PRODUCTS = {
                      "It connects to MIDI Bridge 1.1.9 or later, Talk Light Trigger 1.0.7 or later, Pilot Tone "
                      "Trigger 1.0.5 or later and Time Code Tool 1.1.5 or later &mdash; but the newest keys come with "
                      "the newest apps: Pilot Tone&rsquo;s Flip A/B and Signal Integrity need 1.2.0, for example. "
-                     "Update to the current version of each (MIDI Bridge 1.3.0, Talk Light Trigger 1.2.0, Pilot Tone "
-                     "Trigger 1.2.0, Time Code Tool 1.3.0) and everything is there. If an app and the module ever "
+                     "Update to the current version of each (MIDI Bridge 1.3.1, Talk Light Trigger 1.2.1, Pilot Tone "
+                     "Trigger 1.2.6, Time Code Tool 1.3.2) and everything is there. If an app and the module ever "
                      "disagree, the connection&rsquo;s status says so &mdash; update whichever is older."),
                     ("Does Companion have to run on the same Mac?",
                      "Yes. The module talks to MIDI Bridge and the other apps on the Mac they run on, so "
@@ -500,8 +500,8 @@ PRODUCTS = {
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
-                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
@@ -621,8 +621,8 @@ PRODUCTS = {
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
-                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for "
@@ -757,8 +757,8 @@ PRODUCTS = {
                      "haven&rsquo;t tested that myself yet. <a href=\"/#contact\">Register your interest</a> "
                      "and say which desk you&rsquo;d like next. (Time Code Tool already works with anything.)"),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
-                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
@@ -875,8 +875,8 @@ PRODUCTS = {
                      "Yes, offline, at any frame rate including drop-frame. Or download a ready-made hour "
                      "from the <a href=\"/ltc-wav/\">free LTC WAV files</a>."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon Macs on macOS 11 or later, today. Intel Macs are next, then a Windows "
-                     "version &mdash; <a href=\"/#contact\">register your interest</a> "
+                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
+                     "&mdash; <a href=\"/#contact\">register your interest</a> "
                      "and you&rsquo;ll hear first."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "
@@ -887,7 +887,7 @@ PRODUCTS = {
     ),
 }
 
-REQUIREMENTS = "macOS 11 or later &middot; Apple Silicon"
+REQUIREMENTS = "macOS 11 or later &middot; Apple Silicon and Intel"
 NONAFFIL = ("Developed independently by dylanmaudio and not affiliated with, endorsed by, or supported by "
             "Allen&nbsp;&amp;&nbsp;Heath Ltd. dLive, Avantis, SQ and Qu are trademarks of Allen&nbsp;&amp;&nbsp;Heath Ltd, "
             "used here for identification only.")

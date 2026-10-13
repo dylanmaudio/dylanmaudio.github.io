@@ -13,6 +13,38 @@ changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 Note: the public launch was v1.1.5. Everything before it was internal —
 those entries are kept below as the history of what launched.
 
+v1.3.2
+- LTC output now goes to the output channel you choose. Until now it
+  always went to outputs 1 and 2, which on a Dante or MADI interface
+  could land on top of other audio. The LTC OUTPUT section has a new
+  Output channel menu: "1 + 2", as before and the default, or any single
+  channel the device has. Reading LTC and regenerating it on the same
+  device now works too, as long as they use different channels.
+- Fixed: when generating, if the Mac's audio system reset (an audio
+  driver install, or sleep and wake), Time Code Tool restarted itself
+  but went back to its Start time, so anything chasing it jumped back to
+  the top of the show. It now carries on from the timecode it was
+  sending, moved on by the few seconds the restart took.
+- Fixed: on some Macs, most often older Intel Macs, opening Time Code
+  Tool from the menu bar or pressing Rescan could interrupt incoming LTC
+  or the timecode output for a moment, because listing your audio and
+  MIDI devices briefly paused the app. It now lists them without that
+  pause.
+- Fixed: after you changed the Audio Device, the LTC output device or an
+  MTC MIDI port, the choice could appear to undo itself. The next time
+  you opened Time Code Tool from the menu bar, or pressed Rescan, the
+  picker went back to what it showed at launch, while the app carried on
+  using your new choice, so Start could read from, or send to, a
+  different device or port from the one on screen. The pickers now
+  always show what Start will use. Check them once after updating: one
+  may show a different device from the one you last saw there, and that
+  is the one the app has been using.
+- Fixed: when the app falls back to its backup timecode reader (it does
+  this only if its main LTC decoder can't be loaded), incoming LTC could
+  read some frames twice and briefly step backwards a frame or two at
+  regular intervals. The backup reader now reads every frame once, in
+  order, the same as the main one.
+
 v1.3.0
 - Now runs on macOS 11 Big Sur or later, as the store page has always
   said. Earlier versions needed macOS 13.3 or later — on macOS 11 to

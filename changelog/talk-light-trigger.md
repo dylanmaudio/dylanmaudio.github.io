@@ -14,6 +14,19 @@ Note: the public launch was v1.0.7 (16 September 2026), updated to
 v1.0.8 the same week. Everything from v1.0.0 to v1.0.6 was internal —
 those entries are kept below as the history of what launched.
 
+v1.2.1
+- Fixed: on some Macs, most often older Intel Macs, opening the panel or
+  pressing Rescan could interrupt the audio input for a moment, because
+  listing your audio and MIDI devices briefly paused the app. It now
+  lists them without that pause.
+- Fixed: with the MIDI Port set to dLive Bridge (MIDI Bridge) and the
+  Cancel SoftKey ticked, Start showed "Cancel SoftKey is on but this
+  connection can't receive MIDI" for the whole run, which read as an
+  error. The SoftKey can't be heard through MIDI Bridge, so the option
+  is now greyed out there, with the reason beside it: it needs Direct
+  TCP or another MIDI port. The Cancel flash button works on every
+  connection.
+
 v1.2.0
 - Now runs on macOS 11 Big Sur or later, as the store page has always
   said. Earlier versions needed macOS 13.3 or later — on macOS 11 to

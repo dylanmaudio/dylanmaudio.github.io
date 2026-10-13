@@ -200,7 +200,7 @@ def build():
   <span class="tick">//</span>&nbsp; Time Code Tool</div>
   <h2>Timecode you can see.</h2>
   <p>{TCT['tagline']} Read incoming LTC or MTC and see how healthy it is, convert between them at any frame rate,
-    or be the timecode master. For Apple Silicon Macs; a full-featured 20-minute trial is free.</p>
+    or be the timecode master. For Apple Silicon and Intel Macs; a full-featured 20-minute trial is free.</p>
   <div class="p-cta-row">{tct_ctas()}</div>
 </div></section>
 

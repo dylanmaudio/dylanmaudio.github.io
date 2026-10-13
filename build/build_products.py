@@ -578,7 +578,7 @@ def build_page(slug, p):
     manual_btn = ("" if p.get("manual") is False else
                   f'<a class="btn btn-ghost" href="{p.get("manual_url") or f"/guides/{slug}-quick-reference.pdf"}" '
                   f'target="_blank" rel="noopener">{p.get("manual_label", "Manual (PDF)")} &#8599;</a>')
-    glance = p.get("glance") or [("Platform", "macOS 11+"), ("Chip", "Apple Silicon")]
+    glance = p.get("glance") or [("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel")]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
     fld = faq_ld(p)

@@ -1,8 +1,8 @@
 {
-  "version": "1.2.0",
+  "version": "1.2.6",
   "url": "https://store.dylanmaudio.com",
-  "released": "2026-09-27",
-  "notes": "Signal Integrity and Flip A/B; runs on macOS 11 or later",
+  "released": "2026-10-14",
+  "notes": "Fixed: after the Mac's audio system reset (an audio driver install,",
   "app": "Pilot Tone Trigger",
   "slug": "pilot-tone-trigger"
 }

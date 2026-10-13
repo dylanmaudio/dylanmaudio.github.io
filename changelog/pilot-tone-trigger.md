@@ -13,6 +13,26 @@ changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 Note: the public launch was v1.0.5. Everything before it was internal —
 those entries are kept below as the history of what launched.
 
+v1.2.6
+- Fixed: after the Mac's audio system reset (an audio driver install,
+  or sleep and wake), Pilot Tone Trigger could fail to find a Dante
+  Virtual Soundcard, or another device whose driver comes back a few
+  seconds after the Mac's own, and kept retrying without ever finding
+  it: the tone stayed off and the input dead until you pressed Rescan
+  or relaunched. It now looks for the device again until it is back.
+- Fixed: once the tone generator came back after an audio-system reset,
+  the panel could go on saying "the pilot tone is NOT playing" until you
+  pressed Start, Stop or Reset. The warning now clears as soon as the
+  tone is playing again.
+- Fixed: the built-in tone generator could drop out for a moment about
+  once a second on some Macs — most often older Intel Macs — and again
+  each time the panel opened or Rescan was pressed. Two background jobs
+  (a once-a-second check for an audio-system reset, and listing your
+  audio and MIDI devices) briefly paused the app's audio; both now run
+  without that pause. On those Macs the same pause could also interrupt
+  the audio input while armed. The tone also plays with a larger audio
+  buffer, and the session log records any gaps the Mac reports.
+
 v1.2.0
 - Now runs on macOS 11 Big Sur or later, as the store page has always
   said. Earlier versions needed macOS 13.3 or later — on macOS 11 to

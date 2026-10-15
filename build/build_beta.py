@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.2.1 BETA"
+VERSION = "0.3.2 BETA"
 BETA_UNTIL = "31 October 2026"
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -48,34 +48,37 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # 0.2.1 against 0.1.19, the build the first testers had
-    ("The keys are laid out afresh.",
-     "Single keys are cue programming and getting around; <kbd>⇧</kbd> is the pair of a single key; "
-     "<kbd>⌥</kbd> is markers and regions; <kbd>⌘</kbd> is files, clipboard, undo and zoom; <kbd>⌃⌥</kbd> is the "
-     "console and the view. If you used 0.1.19, many have moved &mdash; the <a href=\"#keys\">keys below</a> are "
-     "the new ones, and every button shows its key when you hover over it."),
-    ("Show Mode shows what&rsquo;s coming next.",
-     "The region you&rsquo;re in and how long is left of it, then the next cues, markers and regions, each with a "
-     "countdown and its timecode. The countdown turns amber inside ten seconds and red inside three."),
-    ("Sync from Console.",
-     "Reads every channel&rsquo;s name and colour from the desk through MIDI Bridge, and shows what would change "
-     "before anything does. New console channels are offered as tracks; nothing is added or deleted unless you "
-     "say so."),
-    ("A Mixer with EQ, compressor and limiter.",
-     "For the reference audio: an equaliser and an SSL-style bus compressor on every track, and a limiter on the "
-     "master. Saved with the show and in every export."),
-    ("Export Audio built for a show.",
-     "Master and timecode as separate files or one two-channel file, or every reference track; WAV up to 96 kHz "
-     "and 32-bit float, or MP3; one region, every region, or the time selection. Timecode is generated at the "
-     "export&rsquo;s own sample rate."),
-    ("Tempo detection follows the click.",
-     "A click that changes tempo gets a span for each steady stretch, and a ramp is followed beat by beat. Clicks "
-     "are placed to a fraction of a frame."),
-    ("Faster, sharper, more precise editing.",
-     "Select and move audio clips with a preview of where they land, zoom down to single frames, sharp waveforms "
-     "on recordings hours long, and clip moves heard straight away instead of after a pause."),
-    ("Runs on macOS 11 Big Sur or later.",
-     "Earlier betas needed macOS 13.3."),
+NEW = [  # 0.3.2 against 0.2.1, the build the testers had before (0.3.0 and 0.3.1 never went out)
+    ("Cue list mode, for shows with no timecode.",
+     "Settings &rarr; Sync &rarr; &ldquo;This show plays as: Cue list&rdquo; and the show runs on GO: "
+     "<kbd>Space</kbd> or <kbd>Return</kbd> fires the standing moment, <kbd>⇧Space</kbd> goes back, "
+     "<kbd>⌘⇧G</kbd> jumps to any moment. Cues on a marker fire together as one GO; a marker can auto-follow. "
+     "Companion gets GO, Back, Jump and Standby."),
+    ("Cues fire to the sample.",
+     "Each cue is armed at its exact time instead of the next frame tick, and beat-snapped cues fire on the beat. "
+     "New latency settings on the Sync tab &mdash; how late the code arrives, and how early to send for the "
+     "console &mdash; with <b>Calibrate&hellip;</b> to measure both."),
+    ("Aux MIDI tracks, beyond the console.",
+     "Cues to a plugin host or any MIDI device: Waves SuperRack, LiveProfessor, a lighting desk&rsquo;s MIDI Show "
+     "Control. Program and Control Changes, ramps, notes with a piano editor, Program Changes that follow your "
+     "Scenes, and tap tempo or MIDI Beat Clock from the tempo map."),
+    ("OSC control.",
+     "Settings &rarr; Companion &rarr; OSC control: one address per command (<code>/cxc/play</code>, "
+     "<code>/cxc/go</code>, <code>/cxc/locate</code>&hellip;) and a state feed, behind the same gate as "
+     "Companion. Panic always works."),
+    ("It keeps going when the Mac&rsquo;s audio resets.",
+     "An audio driver install or a sleep and wake used to leave playback silent or chase stopped. The app now "
+     "notices within three seconds, reopens the device keeping the playhead, picks the timecode up again, and "
+     "keeps any take that was recording."),
+    ("A flaky console network can&rsquo;t stall the show.",
+     "MIDI Bridge reconnects in the background, so the playhead never freezes waiting for it, and every cue is "
+     "sent once &mdash; no more occasional doubled Scene recalls on a slower Mac."),
+    ("Check for Updates and the licence screen.",
+     "In the Console Control menu and Settings &rarr; App. Updates check only when you press it, never during a "
+     "show; the beta keeps working in full until its end date."),
+    ("Easier markers, and your keys in the menus.",
+     "Drag markers along the ruler, click to locate, <kbd>⌥</kbd>-click to delete. Rebound shortcuts show in the "
+     "menus at once. 32-bit float and RF64 WAVs import."),
 ]
 
 FIRST_SESSION = [
@@ -128,7 +131,7 @@ SYNC_NOTE = ("<b>Right-click SYNC</b> for the source (LTC or MTC), the LTC input
              "time, drift tolerance and offset. <b>Still pulsing while code plays?</b> It is listening to the wrong "
              "input.")
 
-KEYS = [  # 0.2.1's - docs/QUICK-REFERENCE.md in the apps repo has them all
+KEYS = [  # 0.3.2's (unchanged from 0.2.1) - docs/QUICK-REFERENCE.md in the apps repo has them all
     (["Space"], "Play / stop"),
     (["⌘⇧Esc"], "Panic"),
     (["⌘⇧L"], "Show Mode"),
@@ -278,7 +281,7 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon"), ("Console", "dLive first"),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive first"),
               ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+'),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
@@ -286,7 +289,7 @@ def build():
 
     guide = "".join([
         block(kick(f"New in {VERSION.replace(' BETA', '')}")
-              + "<p>Since 0.1.19, the build the first testers had. The full list comes with the download.</p>"
+              + "<p>Since 0.2.1, the build the testers had before. The full list comes with the download.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "

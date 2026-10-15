@@ -95,7 +95,7 @@ PRODUCTS = {
             "Works with MIDI Bridge, Time Code Tool and your Stream Deck",
         ],
         specs=["timeline", "timecode", "show automation", "chase", "dLive first"],
-        glance=[("Platform", "macOS 11+"), ("Chip", "Apple Silicon"), ("Consoles", "dLive first"),
+        glance=[("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Consoles", "dLive first"),
                 ("Beta", "With engineers now")],
         longform=dict(
             story=dict(kicker="Why I built it", paras=[
@@ -189,7 +189,7 @@ PRODUCTS = {
                 ("Can I bring my Reaper sessions in?",
                  "Yes: import a Reaper project (RPP) or a MIDI show as a starting point."),
                 ("Windows? Intel Macs?",
-                 "Apple Silicon Macs on macOS 11 or later. Intel Macs are next, then a Windows version."),
+                 "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing."),
             ]),
         ),
     ),

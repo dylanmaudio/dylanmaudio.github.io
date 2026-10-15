@@ -1,0 +1,9 @@
+{
+  "version": "0.3.2",
+  "url": "https://store.dylanmaudio.com",
+  "released": "2026-10-16",
+  "notes": "Fixed: on macOS 12 and 13, after inserting a scene (S, pick, Return)",
+  "app": "Console Control",
+  "slug": "console-control",
+  "channel": "beta"
+}

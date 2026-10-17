@@ -10,7 +10,7 @@ with setup.py — the build prints it on the Quick Reference cover (first
 six bullets, so the most important go first) and in every build's
 changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 
-v1.4.4
+v1.4.5
 - New: MIDI Bridge for Windows 10 and 11 (64-bit), in the system tray.
   A DAW connects through two ports made in the free loopMIDI; the Quick
   Reference shows how.
@@ -21,6 +21,8 @@ v1.4.4
 - The app is now called MIDI Bridge, ready for Windows. Installing it
   replaces "MIDI Bridge - dLive" in place: your settings, MIDI port
   names, Launch at Login and Companion connection carry on unchanged.
+  If Launch at Login is on, MIDI Bridge opens when the update finishes,
+  so it starts at your next login under its new name.
 - New: a Console drop-down in the Connection section. dLive is the only
   console for now; more are coming.
 - New installs name the MIDI ports "MIDI Bridge" and "MIDI Bridge

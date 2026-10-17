@@ -11,6 +11,9 @@ six bullets, so the most important go first) and in every build's
 changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 
 v1.4.4
+- New: MIDI Bridge for Windows 10 and 11 (64-bit), in the system tray.
+  A DAW connects through two ports made in the free loopMIDI; the Quick
+  Reference shows how.
 - Fixed: if the console's base MIDI channel didn't match MIDI Bridge's
   and the console was otherwise idle, MIDI Bridge reconnected every few
   seconds without saying why. It now asks the console which channel it's

@@ -2,7 +2,7 @@
   "version": "1.4.4",
   "url": "https://store.dylanmaudio.com",
   "released": "2026-10-19",
-  "notes": "Fixed: if the console's base MIDI channel didn't match MIDI Bridge's",
+  "notes": "New: MIDI Bridge for Windows 10 and 11 (64-bit), in the system tray.",
   "app": "MIDI Bridge",
   "slug": "midi-bridge"
 }

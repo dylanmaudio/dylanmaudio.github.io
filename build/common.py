@@ -393,11 +393,13 @@ PRODUCTS = {
     "midi-bridge": dict(
         name="MIDI Bridge", abbr="FREE", tag="Free", accent="green",
         icon="midi-bridge.png", gallery=True, affiliated=True, status="free",
+        os="macOS 11+, Windows 10 and 11",
+        glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
         store=CHECKOUT["midi-bridge"], youtube="2M57Z-v7fs0",
         seo_title="MIDI Bridge — free dLive MIDI bridge with a decoded monitor",
-        seo_desc=("Free MIDI between your Mac and the dLive, with real connection status, plain-language "
+        seo_desc=("Free MIDI between your Mac or Windows PC and the dLive, with real connection status, plain-language "
                   "errors and a live MIDI Monitor that decodes what's on the wire."),
-        tagline="Free MIDI between your Mac and the dLive, monitored — and with full Stream Deck control.",
+        tagline="Free MIDI between your Mac or PC and the dLive, monitored — and with full Stream Deck control.",
         lead=("Real connection status, plain-language errors, and a monitor that reads every fader, mute, "
               "Scene, EQ and send in console language instead of hex. One connection your DAW, the other "
               "dylanmaudio apps and Bitfocus Companion all share. The bridging half of Allen &amp; Heath's "
@@ -407,7 +409,7 @@ PRODUCTS = {
             "Errors in words — base-channel mismatch named with the fix, port clashes named with the program",
             "Live MIDI Monitor in console language, not hex — faders, mutes, Scenes, EQ, HPF, sends, preamp",
             "Colour-coded by the program that sent it; copy any row's raw MIDI",
-            "\"dLive Bridge\" virtual ports for any DAW; complete fader moves back through the Return port",
+            "MIDI ports for any DAW (on Windows, two free loopMIDI ports); complete fader moves back through the Return port",
             "One shared console connection for your DAW and the other apps",
             "Free — no licence, no trial timer",
         ],
@@ -435,7 +437,7 @@ PRODUCTS = {
                 kicker="In detail",
                 items=[
                     ("Connection status that means something.",
-                     "The menu-bar disc shows stopped, connecting, connected or error, with a flash for activity "
+                     "The menu-bar disc (a tray icon on Windows) shows stopped, connecting, connected or error, with a flash for activity "
                      "&mdash; and &ldquo;Connected&rdquo; only once the console is actually answering. The bridge "
                      "checks straight away and every few seconds, shows &ldquo;Waiting for a reply from &hellip;&rdquo; "
                      "until it does, notices within about 20 seconds if the console stops, and reconnects by itself."),
@@ -454,9 +456,11 @@ PRODUCTS = {
                      "connection to the console instead of each opening their own, so there&rsquo;s one thing to "
                      "check when something goes quiet. The log names every app that connects, when it leaves, and "
                      "any message refused after its connection closed."),
-                    ("Works with any DAW, no drivers.",
-                     "&ldquo;dLive Bridge&rdquo; MIDI ports that Reaper, Logic, Ableton Live or any MIDI app can use "
-                     "straight away. Fader moves made on the desk come back complete through the Return port, so "
+                    ("Works with any DAW.",
+                     "On the Mac, &ldquo;MIDI Bridge&rdquo; MIDI ports that Reaper, Logic, Ableton Live or any MIDI "
+                     "app can use straight away, no drivers (if you&rsquo;ve used it before, they keep their "
+                     "&ldquo;dLive Bridge&rdquo; names). On Windows, two ports made in the free loopMIDI do the "
+                     "same job. Fader moves made on the desk come back complete through the Return port, so "
                      "automation records what the engineer actually did."),
                     ("A log for afterwards.",
                      "Every session is logged; Export log puts a copy on your Desktop, so &ldquo;it stopped working "
@@ -474,7 +478,7 @@ PRODUCTS = {
             who=dict(
                 kicker="Who uses it",
                 paras=[
-                    "Anyone with a dLive and a Mac: engineers recording console automation into a DAW, show-control "
+                    "Anyone with a dLive and a Mac or a Windows PC: engineers recording console automation into a DAW, show-control "
                     "operators, anyone trying to work out why a MIDI setup has gone quiet &mdash; and everyone "
                     "running the other dylanmaudio apps, which connect through it.",
                 ],
@@ -483,7 +487,7 @@ PRODUCTS = {
                 kicker="Questions",
                 items=[
                     ("Is this a replacement for Allen &amp; Heath MIDI Control?",
-                     "For getting MIDI between a Mac and the console, yes &mdash; with connection status, error "
+                     "For getting MIDI between a computer and the console, yes &mdash; with connection status, error "
                      "reporting and a decoded monitor that MIDI Control doesn&rsquo;t have. It does not do MIDI "
                      "Control&rsquo;s HUI / Mackie Control emulation for driving a DAW from the desk surface; if you "
                      "use that, keep it."),
@@ -500,9 +504,12 @@ PRODUCTS = {
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> "
-                     "and you&rsquo;ll hear first."),
+                     "Both. MIDI Bridge runs on Windows 10 and 11 (64-bit), and on Apple Silicon and Intel Macs "
+                     "with macOS 11 or later &mdash; one free download for each. On Windows, a DAW connects "
+                     "through two ports you make in the free <a href=\"https://www.tobias-erichsen.de/software/"
+                     "loopmidi.html\" target=\"_blank\" rel=\"noopener\">loopMIDI</a> (the Quick Reference "
+                     "shows how); Bitfocus Companion works without them. The other dylanmaudio apps for Windows "
+                     "are in testing."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
                      "licence and no trial timer."),

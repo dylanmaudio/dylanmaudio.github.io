@@ -1,8 +1,8 @@
 {
-  "version": "1.3.1",
+  "version": "1.4.4",
   "url": "https://store.dylanmaudio.com",
-  "released": "2026-10-14",
-  "notes": "Fixed: a fader or parameter move from QLab, Reaper or another app on",
+  "released": "2026-10-19",
+  "notes": "Fixed: if the console's base MIDI channel didn't match MIDI Bridge's",
   "app": "MIDI Bridge",
   "slug": "midi-bridge"
 }

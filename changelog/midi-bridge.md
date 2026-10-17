@@ -10,6 +10,22 @@ with setup.py — the build prints it on the Quick Reference cover (first
 six bullets, so the most important go first) and in every build's
 changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 
+v1.4.4
+- Fixed: if the console's base MIDI channel didn't match MIDI Bridge's
+  and the console was otherwise idle, MIDI Bridge reconnected every few
+  seconds without saying why. It now asks the console which channel it's
+  on, tells you which base channel to set, and stops reconnecting.
+- The app is now called MIDI Bridge, ready for Windows. Installing it
+  replaces "MIDI Bridge - dLive" in place: your settings, MIDI port
+  names, Launch at Login and Companion connection carry on unchanged.
+- New: a Console drop-down in the Connection section. dLive is the only
+  console for now; more are coming.
+- New installs name the MIDI ports "MIDI Bridge" and "MIDI Bridge
+  Return". If you already use MIDI Bridge, your ports keep their
+  "dLive Bridge" names, so your QLab, Reaper and Companion setups work
+  as before. Talk Light Trigger, Pilot Tone Trigger and Console Control
+  find the bridge under either name.
+
 v1.3.1
 - Fixed: a fader or parameter move from QLab, Reaper or another app on
   the "dLive Bridge" MIDI port could land on the wrong channel strip if

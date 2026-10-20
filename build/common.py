@@ -509,7 +509,7 @@ PRODUCTS = {
                      "through two ports you make in the free <a href=\"https://www.tobias-erichsen.de/software/"
                      "loopmidi.html\" target=\"_blank\" rel=\"noopener\">loopMIDI</a> (the Quick Reference "
                      "shows how); Bitfocus Companion works without them. Talk Light Trigger and Pilot Tone Trigger "
-                     "run on Windows too, through it; Time Code Tool for Windows is in testing."),
+                     "run on Windows too, through it, and so does Time Code Tool."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
                      "licence and no trial timer."),
@@ -796,11 +796,13 @@ PRODUCTS = {
         name="Time Code Tool", abbr="TCT", tag="Universal", accent="blue",
         icon="time-code-tool.png", gallery=True, affiliated=False, status="buy", trial=True, price="$69",
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
+        os="macOS 11+, Windows 10 and 11",
+        glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
         # Search-facing title/description (the page <title> and meta description).
-        seo_title="Time Code Tool — SMPTE timecode generator &amp; monitor for Mac",
-        seo_desc=("SMPTE timecode generator, monitor and converter for Mac. Read LTC or MTC, check its "
+        seo_title="Time Code Tool — SMPTE timecode generator &amp; monitor for Mac and Windows",
+        seo_desc=("SMPTE timecode generator, monitor and converter for Mac and Windows. Read LTC or MTC, check its "
                   "health, convert at any frame rate, render LTC to WAV. Free trial."),
-        tagline="SMPTE timecode generator, monitor and converter — on your Mac.",
+        tagline="SMPTE timecode generator, monitor and converter — on your Mac or PC.",
         lead=("Generate, monitor and convert SMPTE timecode — LTC and MTC — with an app that does the job "
               "of a rack timecode clock and shows you what your timecode is actually doing. Read incoming LTC or MTC and "
               "see exactly how healthy it is; send it on clean as LTC, MTC or both, at the same frame "
@@ -812,8 +814,9 @@ PRODUCTS = {
             "Convert in any direction — LTC → MTC, MTC → LTC, LTC → LTC, MTC → MTC — or both outputs at once",
             "Frame-rate conversion on either output (23.976 / 24 / 25 / 29.97 DF / NDF / 30)",
             "Generate mode — LTC and MTC from one clock; render sample-accurate LTC to a WAV",
-            "Virtual audio and MIDI ports, in and out — timecode between apps on one Mac",
+            "Virtual audio and MIDI ports, in and out — timecode between apps on one Mac (on Windows, MTC through loopMIDI)",
             "Works with any console or application that needs timecode — audio, lighting, video, playback, pyro",
+            "Mac and Windows — Apple Silicon and Intel Macs, and Windows 10 and 11 in the system tray",
             "Full-featured 20-minute trial",
         ],
         specs=["LTC → MTC", "MTC → LTC", "frame-rate convert", "timecode monitor", "LTC→WAV", "universal"],
@@ -859,7 +862,8 @@ PRODUCTS = {
                     ("Passes timecode between apps on one Mac.",
                      "An optional virtual audio device carries LTC in and out, and virtual MIDI ports carry "
                      "MTC in and out. No loopback cables, no separate routing utility. (The virtual audio "
-                     "device needs macOS 13 or later.)"),
+                     "device needs macOS 13 or later. On Windows there isn&rsquo;t one, and MTC goes through "
+                     "ports you make in the free loopMIDI.)"),
                     ("Stream Deck control.",
                      "Transport, mode, inputs and outputs and the generator on Bitfocus Companion keys, and a "
                      "four-key HH MM SS FF readout &mdash; green while locked, amber in freewheel. With the "
@@ -869,7 +873,7 @@ PRODUCTS = {
             who=dict(
                 kicker="Who uses it",
                 paras=[
-                    "Anyone who sends or chases timecode from a Mac: playback engineers running Ableton Live "
+                    "Anyone who sends or chases timecode from a Mac or a PC: playback engineers running Ableton Live "
                     "or Reaper; lighting programmers whose software wants MTC when the show sends LTC; video "
                     "and media-server operators; theatre sound with QLab; pyro and show control; FOH and "
                     "monitor engineers running timecode-driven console automation. It doesn&rsquo;t care what "
@@ -884,11 +888,11 @@ PRODUCTS = {
                      "the DAW clean MTC on the virtual port, or regenerated LTC. The frame counters will also "
                      "show you whether frames are being lost on the way in."),
                     ("Can it convert LTC to MTC for lighting software that only takes MIDI timecode?",
-                     "Yes &mdash; to a virtual MIDI port for software on the same Mac, or to any MIDI interface "
-                     "for a console or another computer."),
+                     "Yes &mdash; to a virtual MIDI port for software on the same Mac (a loopMIDI port on Windows), "
+                     "or to any MIDI interface for a console or another computer."),
                     ("Is it a replacement for a hardware timecode clock such as a Rosendahl MIF4 or a CB Electronics TC-5?",
                      "For reading, converting LTC and MTC, frame-rate conversion, freewheeling and regenerating "
-                     "clean timecode, on a Mac that&rsquo;s already in your rig &mdash; that&rsquo;s what I use it "
+                     "clean timecode, on a computer that&rsquo;s already in your rig &mdash; that&rsquo;s what I use it "
                      "for. Those boxes are excellent, and they do two things this doesn&rsquo;t: word clock and "
                      "video reference. Time Code Tool is LTC and MTC only. If you need those, or timecode with "
                      "no computer involved, buy the box."),
@@ -899,12 +903,16 @@ PRODUCTS = {
                      "Yes, offline, at any frame rate including drop-frame. Or download a ready-made hour "
                      "from the <a href=\"/ltc-wav/\">free LTC WAV files</a>."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> "
-                     "and you&rsquo;ll hear first."),
+                     "Both. Time Code Tool runs on Windows 10 and 11 (64-bit), in the system tray, and on Apple "
+                     "Silicon and Intel Macs with macOS 11 or later. On Windows it reads and generates LTC and MTC "
+                     "as on the Mac, on any audio interface or Dante Virtual Soundcard channel; there&rsquo;s no "
+                     "Time Code Tool LTC device, and the MTC ports are ones you make in the free <a "
+                     "href=\"https://www.tobias-erichsen.de/software/loopmidi.html\" target=\"_blank\" "
+                     "rel=\"noopener\">loopMIDI</a> (the Quick Reference shows how). A licence&rsquo;s two "
+                     "activations can be on a Mac or a PC."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call, and a "
-                     "licence covers two Macs &mdash; the show machine and the spare."),
+                     "licence covers two computers, Mac or PC &mdash; the show machine and the spare."),
                 ],
             ),
         ),

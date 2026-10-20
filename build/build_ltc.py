@@ -191,7 +191,7 @@ def build():
   {kick("Download")}
   {downloads()}
   <p class="ltc-note">Need a different start time, length, sample rate or level? <a href="/products/time-code-tool/">Time
-    Code Tool</a> renders any of them on your Mac, and its free trial does it too.</p>
+    Code Tool</a> renders any of them on your Mac or PC, and its free trial does it too.</p>
 </div></section>
 
 <section class="lf"><div class="wrap">{guide}</div></section>

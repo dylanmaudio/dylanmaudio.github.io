@@ -508,8 +508,8 @@ PRODUCTS = {
                      "with macOS 11 or later &mdash; one free download for each. On Windows, a DAW connects "
                      "through two ports you make in the free <a href=\"https://www.tobias-erichsen.de/software/"
                      "loopmidi.html\" target=\"_blank\" rel=\"noopener\">loopMIDI</a> (the Quick Reference "
-                     "shows how); Bitfocus Companion works without them. The other dylanmaudio apps for Windows "
-                     "are in testing."),
+                     "shows how); Bitfocus Companion works without them. Talk Light Trigger and Pilot Tone Trigger "
+                     "run on Windows too, through it; Time Code Tool for Windows is in testing."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Check for updates runs only when you press it. There&rsquo;s no "
                      "licence and no trial timer."),
@@ -523,6 +523,8 @@ PRODUCTS = {
         store=CHECKOUT["talk-light-trigger"], trial_store=CHECKOUT["talk-light-trigger-trial"], youtube="jP2Yyvd1uq4",
         sale=dict(now="$9", was="$19", code="TLTINTROSALE",
                   until="2026-10-31", until_label="31 October 2026"),
+        os="macOS 11+, Windows 10 and 11",
+        glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
         seo_title="Talk Light Trigger — talkback light for dLive, no hardware",
         seo_desc=("Turn your dLive's own surface lights into a talkback or shout light: someone talks on the "
                   "shout bus, the desk flashes. Cancel from a SoftKey. Free trial."),
@@ -539,6 +541,7 @@ PRODUCTS = {
             "Threshold trigger on any audio input — Dante, SoundGrid, MADI, USB, Thunderbolt, PCIe",
             "Tunable sensitivity — no chattering on breaths and pauses",
             "Recall Filter to illumination only, so nothing else on the console changes",
+            "Mac and Windows, through the free MIDI Bridge — one connection to the console for every app",
             "Full-featured 20-minute trial",
         ],
         specs=["talkback light", "shout light", "signal → trigger", "tally", "menu bar"],
@@ -563,7 +566,7 @@ PRODUCTS = {
                 items=[
                     ("Watches the shout bus.",
                      "Any talkback mic, or a bus carrying all of them, on any input of any interface the Mac "
-                     "can see &mdash; Dante, SoundGrid, MADI, USB, Thunderbolt, PCIe."),
+                     "or PC can see &mdash; Dante, SoundGrid, MADI, USB, Thunderbolt, PCIe."),
                     ("Flashes the console&rsquo;s own lights.",
                      "When signal crosses your threshold it recalls a &ldquo;talk&rdquo; Scene; when it stops, a "
                      "&ldquo;quiet&rdquo; Scene. Each Scene carries a different Surface Illumination, and its "
@@ -578,15 +581,17 @@ PRODUCTS = {
                      "Threshold, attack, release and a minimum retrigger time, tuned to the voice and the room, "
                      "so breaths and pauses don&rsquo;t set it off."),
                     ("Tells you if the lights stop.",
-                     "If Scenes stop reaching the console the panel turns red and says why. Through MIDI Bridge "
-                     "it reconnects by itself after a quiet spell. The session log records every Scene sent, "
-                     "every failure and every Cancel press, so an exported log shows what happened."),
+                     "If MIDI Bridge or the console goes away, the panel turns red and says which, and the "
+                     "menu-bar icon pulses amber. When the connection is back, the Scene for the current state is "
+                     "sent again, so the lights are right. The session log records every Scene sent, every "
+                     "failure and every Cancel press, so an exported log shows what happened."),
                     ("Gentle on the show interface.",
                      "One input channel, a large buffer, and it never changes the sample rate."),
-                    ("Connects the way you already do.",
-                     "Direct TCP to the console with nothing else installed, or through the free MIDI Bridge. "
-                     "(The Cancel SoftKey needs a connection that can receive &mdash; Direct TCP, or a two-way "
-                     "MIDI port.)"),
+                    ("Reaches the console through MIDI Bridge.",
+                     "The free <a href=\"/products/midi-bridge/\">MIDI Bridge</a> holds the one connection to the "
+                     "console for all your dylanmaudio apps; the console&rsquo;s IP address and MIDI channel are set "
+                     "once, there. The Cancel SoftKey works through it too. Start doesn&rsquo;t wait for the "
+                     "console: Talk Light arms and listens, and the lights follow as soon as MIDI Bridge connects."),
                     ("Stream Deck control &mdash; and a Stream Deck that flashes too.",
                      "Run and Threshold on Bitfocus Companion keys with the talk state fed back, and a Talk flash "
                      "page: when someone talks your Stream Deck jumps to a page of blinking keys, and goes back when "
@@ -607,7 +612,7 @@ PRODUCTS = {
                 items=[
                     ("Does it need a shout box?",
                      "No &mdash; that&rsquo;s the point. It needs a talkback mic (or the bus they&rsquo;re all on) "
-                     "reaching an input the Mac can see, and a dLive on the network."),
+                     "reaching an input the Mac or PC can see, and a dLive on the network."),
                     ("Will it change anything else on the console?",
                      "Not if the two Scenes&rsquo; Recall Filters are set to Surface Illumination only, which is "
                      "the setup the Quick Reference walks through. The Scenes then touch the lights and nothing "
@@ -619,22 +624,23 @@ PRODUCTS = {
                      "Yes. It doesn&rsquo;t know what the signal is &mdash; any input crossing the threshold "
                      "lights the desk."),
                     ("What does it need?",
-                     "A dLive; a Mac on the console&rsquo;s network (Direct TCP, or through MIDI Bridge); the "
-                     "talkback signal on any audio input; and two Scenes on the console with different Surface "
-                     "Illumination."),
+                     "A dLive; a Mac or a Windows PC on the console&rsquo;s network, with the free MIDI Bridge "
+                     "(1.4.5 or later); the talkback signal on any audio input; and two Scenes on the console with "
+                     "different Surface Illumination."),
                     ("Does it work with other consoles?",
                      "The dLive is the first console, not the only one &mdash; more consoles, from more "
                      "manufacturers, are on the way. Users already report it works on Allen &amp; Heath "
                      "Avantis (I haven&rsquo;t tested that myself yet). <a href=\"/#contact\">Register your "
                      "interest</a> and say which desk you&rsquo;d like next."),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> "
-                     "and you&rsquo;ll hear first."),
+                     "Both. Talk Light Trigger runs on Windows 10 and 11 (64-bit), in the system tray, and on Apple "
+                     "Silicon and Intel Macs with macOS 11 or later. On Windows it reaches the console through "
+                     "MIDI Bridge for Windows, and a Dante Virtual Soundcard channel shows as DVS Receive. A "
+                     "licence&rsquo;s two activations can be on a Mac or a PC."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for "
-                     "updates runs only when you press it. A licence covers two Macs &mdash; show machine and "
-                     "spare."),
+                     "updates runs only when you press it. A licence covers two computers, Mac or PC &mdash; show "
+                     "machine and spare."),
                 ],
             ),
         ),
@@ -643,6 +649,8 @@ PRODUCTS = {
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
         icon="pilot-tone-trigger.png", gallery=True, affiliated=True, status="buy", trial=True, price="$59",
         store=CHECKOUT["pilot-tone-trigger"], trial_store=CHECKOUT["pilot-tone-trigger-trial"], youtube="GOfFZzGTEuA",
+        os="macOS 11+, Windows 10 and 11",
+        glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
         seo_title="Pilot Tone Trigger — playback &amp; Waves failover for dLive",
         seo_desc=("Automatic failover for Allen & Heath dLive. A pilot tone drops and the console switches to "
                   "your backup rig or pulls the inserts-out scene. Free trial."),
@@ -660,6 +668,7 @@ PRODUCTS = {
             "Signal Integrity — catches a tone that's present but damaged, and warns or fails over",
             "Automatic failback, latch until you reset, or Flip A/B by hand",
             "Fails safe — stopping the app never fires a failover",
+            "Mac and Windows, through the free MIDI Bridge — one connection to the console for every app",
             "Full-featured 20-minute trial",
         ],
         specs=["auto-failover", "redundant playback", "Waves failover", "pilot tone", "signal integrity"],
@@ -685,8 +694,8 @@ PRODUCTS = {
                 items=[
                     ("Listens for a pilot tone.",
                      "A continuous tone on the path you can&rsquo;t afford to lose &mdash; from the app&rsquo;s own "
-                     "generator or your own. Any input on any interface the Mac can see (Dante, SoundGrid, MADI, "
-                     "Thunderbolt, USB, PCIe), on any channel."),
+                     "generator or your own. Any input on any interface the Mac or PC can see (Dante, SoundGrid, "
+                     "MADI, Thunderbolt, USB, PCIe), on any channel."),
                     ("Fires your backup when it drops.",
                      "A Scene recall, a console Action, or both, sent to the dLive in milliseconds. You build the "
                      "backup once, on the console, the way you&rsquo;d build it anyway."),
@@ -711,11 +720,18 @@ PRODUCTS = {
                     ("Catches a feed that&rsquo;s already dead.",
                      "Press Start on a path that&rsquo;s already down and it fails over immediately."),
                     ("Fails safe.",
-                     "Stopping the app, or the trial ending, sends nothing to the console. If the Mac running it "
-                     "dies, nothing is sent either &mdash; the show stays exactly where it was."),
+                     "Stopping the app, or the trial ending, sends nothing to the console. If the computer running "
+                     "it dies, nothing is sent either &mdash; the show stays exactly where it was."),
+                    ("Never switches late on its own.",
+                     "If MIDI Bridge or the console is briefly away, a failover goes the moment the connection is "
+                     "back, within 10 seconds. After that it&rsquo;s held: the tile reads Failover not delivered "
+                     "and the bar becomes Send failover now, so you decide whether the console should still "
+                     "switch. A side the console already has is never sent again."),
                     ("Know it works before doors.",
-                     "Test Connection confirms the console is answering. The menu-bar icon shows tone present, "
-                     "tone lost, degraded, and restored but still on the backup."),
+                     "The Connection line says whether the console is reached, through the free "
+                     "<a href=\"/products/midi-bridge/\">MIDI Bridge</a>. The menu-bar icon (a tray icon on "
+                     "Windows) shows tone present, tone lost, degraded, and restored but still on the backup, and "
+                     "pulses amber while the console can&rsquo;t be reached."),
                     ("Gentle on the show interface.",
                      "One input channel, a large buffer, and it never changes the sample rate."),
                     ("Stream Deck control.",
@@ -729,8 +745,8 @@ PRODUCTS = {
                 paras=[
                     "Playback engineers and techs running tracks into a dLive; FOH and monitor engineers mixing "
                     "through Waves or a native plugin host; theatre and worship productions with a backup machine "
-                    "and nobody spare to watch it. It needs a dLive, a Mac on the network, and the backup path "
-                    "already patched to the console.",
+                    "and nobody spare to watch it. It needs a dLive, a Mac or a Windows PC on the network with "
+                    "the free MIDI Bridge, and the backup path already patched to the console.",
                 ],
             ),
             faq=dict(
@@ -748,15 +764,15 @@ PRODUCTS = {
                      "If it stops passing the tone, Pilot Tone Trigger fires the Scene you&rsquo;ve built with every "
                      "insert out. Audio carries on through the console; nobody has to find the panic button."),
                     ("Isn&rsquo;t another computer just another thing that can fail?",
-                     "If Pilot Tone Trigger stops &mdash; or the Mac does &mdash; nothing is sent, and the console "
+                     "If Pilot Tone Trigger stops &mdash; or the computer does &mdash; nothing is sent, and the console "
                      "stays on the main rig exactly as it was. It can only ever fire the backup you built."),
                     ("How fast is it?",
                      "The detector&rsquo;s defaults are a 50 ms dropout hold and a 30 ms envelope release, so the "
                      "switch is sent in milliseconds. A measured end-to-end figure on a console is coming."),
                     ("What does it need?",
-                     "A dLive, a Mac on the console&rsquo;s network (Direct TCP, or through the free MIDI Bridge), a "
-                     "pilot-tone feed into any audio input, and the backup &mdash; a Scene, an Action, or both "
-                     "&mdash; built on the console."),
+                     "A dLive, a Mac or a Windows PC on the console&rsquo;s network with the free MIDI Bridge "
+                     "(1.4.5 or later), a pilot-tone feed into any audio input, and the backup &mdash; a Scene, an "
+                     "Action, or both &mdash; built on the console."),
                     ("Does it work with other consoles?",
                      "The dLive is the first console, not the only one &mdash; more consoles, from more "
                      "manufacturers, are on the way. Users already report it works on Allen &amp; Heath "
@@ -764,13 +780,14 @@ PRODUCTS = {
                      "haven&rsquo;t tested that myself yet. <a href=\"/#contact\">Register your interest</a> "
                      "and say which desk you&rsquo;d like next. (Time Code Tool already works with anything.)"),
                     ("Windows? Intel Macs?",
-                     "Apple Silicon and Intel Macs, on macOS 11 or later. A Windows version is in testing "
-                     "&mdash; <a href=\"/#contact\">register your interest</a> "
-                     "and you&rsquo;ll hear first."),
+                     "Both. Pilot Tone Trigger runs on Windows 10 and 11 (64-bit), in the system tray, and on Apple "
+                     "Silicon and Intel Macs with macOS 11 or later. On Windows it reaches the console through "
+                     "MIDI Bridge for Windows, and Dante Virtual Soundcard channels show as DVS Receive and DVS "
+                     "Transmit. A licence&rsquo;s two activations can be on a Mac or a PC."),
                     ("Does it phone home?",
                      "No analytics, no telemetry. Activating the licence is the only network call; Check for updates "
                      "runs only when you press it, and nothing goes online while a trigger is armed. A licence "
-                     "covers two Macs &mdash; show machine and spare."),
+                     "covers two computers, Mac or PC &mdash; show machine and spare."),
                 ],
             ),
         ),

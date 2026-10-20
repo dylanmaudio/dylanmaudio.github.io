@@ -371,7 +371,7 @@ __SEO__
 
     <div class="bundles">
       <div class="bundle">
-        <div class="b-main"><h4>dLive Menubar Utilities <span class="save">Save $9</span></h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the dLive menu-bar set. One key unlocks both paid apps.</p></div>
+        <div class="b-main"><h4>dLive Menubar Utilities <span class="save">Save $9</span></h4><p>Talk Light Trigger + Pilot Tone Trigger, plus MIDI Bridge &mdash; the dLive menu-bar set, on Mac and Windows. One key unlocks both paid apps.</p></div>
         <div class="b-buy"><div class="b-price"><span class="was">$78</span> $69</div><a href="__BUY_DLIVE_MENUBAR__" class="card-link">Get bundle <span class="arw">&rarr;</span></a></div>
       </div>
       <div class="bundle best">

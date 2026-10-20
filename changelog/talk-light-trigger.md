@@ -14,6 +14,33 @@ Note: the public launch was v1.0.7 (16 September 2026), updated to
 v1.0.8 the same week. Everything from v1.0.0 to v1.0.6 was internal —
 those entries are kept below as the history of what launched.
 
+v1.3.0
+- New: Talk Light Trigger for Windows 10 and 11 (64-bit), in the system
+  tray, with MIDI Bridge for Windows (1.4.5 or later). Your licence's two
+  activations can be on a Mac or a PC.
+- New: Talk Light Trigger now reaches your console through MIDI Bridge
+  (1.4.5 or later), which is free and holds the one connection to the
+  console for all your dylanmaudio apps. The Connection section is a
+  single line saying whether the console is reached, with Open MIDI
+  Bridge (or Get MIDI Bridge, if it isn't installed). The console's IP
+  address and base MIDI channel are set once, in MIDI Bridge.
+- New: the Cancel SoftKey works through MIDI Bridge. Until now it
+  needed Direct TCP or another MIDI port. The Custom MIDI string the
+  panel shows follows the base MIDI channel set in MIDI Bridge.
+- New: if MIDI Bridge or the console goes away while Talk Light is
+  running, the status tile turns red and says which, and the menu bar
+  icon pulses amber, the colour MIDI Bridge shows while it connects.
+  When the connection is back, the Scene for the current state is sent
+  again, so the lights are right.
+- New: on MIDI Bridge, Start doesn't wait for the console. It arms and
+  listens, says in red that the console can't be reached yet, and the
+  lights follow as soon as MIDI Bridge connects.
+- Changed: Direct TCP and Existing MIDI Port still work in this
+  version for setups that already use them, with a Move to MIDI Bridge
+  button beside them. They will be removed in the next version. A setup
+  already pointed at MIDI Bridge's MIDI port moves over by itself, and
+  a new install starts on MIDI Bridge.
+
 v1.2.1
 - Fixed: on some Macs, most often older Intel Macs, opening the panel or
   pressing Rescan could interrupt the audio input for a moment, because

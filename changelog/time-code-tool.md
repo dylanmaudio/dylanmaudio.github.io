@@ -13,6 +13,30 @@ changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 Note: the public launch was v1.1.5. Everything before it was internal —
 those entries are kept below as the history of what launched.
 
+v1.4.1
+- New: Time Code Tool for Windows 10 and 11 (64-bit), in the system
+  tray. It reads and generates LTC and MTC as on the Mac, on any audio
+  interface or Dante Virtual Soundcard channel. Your licence's two
+  activations can be on a Mac or a PC. On Windows there's no Time Code
+  Tool LTC device, and the MTC ports are ones you create in the free
+  loopMIDI; the Quick Reference's "On Windows" page has the details.
+- New: changing the LTC output device or channel while Time Code Tool is
+  running now moves the running LTC there, carrying on from the current
+  timecode. Until now the new choice was saved and shown, but the LTC
+  kept going to the old device until the next Stop and Start.
+- Fixed: if the Mac's audio system restarted while Time Code Tool was
+  sending LTC, the LTC could carry on out of the Mac's default output,
+  such as its speakers, while the panel still showed your chosen device.
+  Time Code Tool now silences the LTC the moment the audio system goes
+  away and reopens your chosen device when it's back, carrying on from
+  the timecode it was sending. If that device isn't there, it stops and
+  says so: it never plays to a different device. Now and then macOS
+  leaves the app's audio stuck after such a restart; Time Code Tool then
+  stays silent and asks you to quit and open it again.
+- Fixed: a second audio interruption soon after Time Code Tool had
+  recovered from one could leave the output silent for up to 30 seconds.
+  It now recovers straight away each time.
+
 v1.3.2
 - LTC output now goes to the output channel you choose. Until now it
   always went to outputs 1 and 2, which on a Dante or MADI interface

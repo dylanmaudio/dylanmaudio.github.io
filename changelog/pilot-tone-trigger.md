@@ -13,6 +13,41 @@ changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 Note: the public launch was v1.0.5. Everything before it was internal —
 those entries are kept below as the history of what launched.
 
+v1.3.0
+- New: Pilot Tone Trigger for Windows 10 and 11 (64-bit), in the system
+  tray, with MIDI Bridge for Windows (1.4.5 or later). Your licence's two
+  activations can be on a Mac or a PC.
+- New: Pilot Tone Trigger now reaches your console through MIDI Bridge
+  (1.4.5 or later), which is free and holds the one connection to the
+  console for all your dylanmaudio apps. The Connection section is a
+  single line saying whether the console is reached, with Open MIDI
+  Bridge (or Get MIDI Bridge, if it isn't installed). The console's IP
+  address and base MIDI channel are set once, in MIDI Bridge.
+- New: a failover that can't reach the console straight away, because
+  MIDI Bridge or the console is briefly away, is sent as soon as the
+  connection is back, if that is within 10 seconds.
+- New: after 10 seconds it is held, not sent. The tile reads "Failover
+  not delivered" and the Primary / Backup bar becomes Send failover
+  now, so you decide whether the console should still switch. Nothing
+  is sent later on its own. Signal OK works the same way.
+- New: after an outage, a side the console already has is not sent
+  again, so an Action set to toggle can't be switched back by mistake.
+  If the tone drops and returns while MIDI Bridge restarts, nothing is
+  sent.
+- New: while running and not reaching the console, the status tile is
+  red with the reason, and the menu bar icon pulses amber, the colour
+  MIDI Bridge shows while it connects (a steady amber still means
+  latched). On MIDI Bridge, Start doesn't wait for the console: it arms
+  and watches the tone, and sends as soon as MIDI Bridge connects.
+- Changed: Direct TCP and Existing MIDI Port still work in this
+  version for setups that already use them, with a Move to MIDI Bridge
+  button beside them. They will be removed in the next version. A setup
+  already pointed at MIDI Bridge's MIDI port moves over by itself, and
+  a new install starts on MIDI Bridge.
+- The MIDI Output section now says what a dLive Action needs: it fires
+  only on its exact value, so map two, one on value 0 (tone lost) and
+  one on value 127 (tone back).
+
 v1.2.6
 - Fixed: after the Mac's audio system reset (an audio driver install,
   or sleep and wake), Pilot Tone Trigger could fail to find a Dante

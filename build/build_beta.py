@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.9 BETA"           # on the beta product (operator, 23 Oct 2026)
+VERSION = "0.3.10 BETA"          # on the beta product (operator, 23 Oct 2026)
 BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -48,12 +48,16 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # 0.3.9 against 0.3.2, the build the testers had before: the Console Control thread's
-         # docs/release-0.3.9-beta.md, from its CHANGELOG. No 1.0 date: it's private.
+NEW = [  # 0.3.10 against 0.3.2, the build the testers had before: the Console Control thread's
+         # docs/release-0.3.9-beta.md and the 0.3.9 / 0.3.10 CHANGELOG. No 1.0 date: it's private.
     ("The Allen &amp; Heath SQ.",
      "Settings &rarr; MIDI &rarr; Console chooses the console a show is for: dLive or SQ. On an SQ: faders and "
      "mutes on every strip, sends, Scenes 1&ndash;300, and Sync from Console for its names and colours. It needs "
      "MIDI Bridge 1.5, which is next out."),
+    ("The Behringer Wing.",
+     "Settings &rarr; MIDI &rarr; Console &rarr; Wing: faders and mutes on channels, buses, mains, matrices and "
+     "DCAs, mute groups, and Scene recalls, through MIDI Bridge 1.4.108 or later, set to the Wing. Aux inputs, "
+     "sends, Actions and HPF / EQ lanes aren&rsquo;t on the Wing yet."),
     ("HPF and EQ lanes.",
      "On dLive inputs: HPF in/out and frequency, and each EQ band&rsquo;s gain, in Hz and dB. They insert, ramp, "
      "conform and chase like a fader; a frequency sweeps evenly by octave."),
@@ -119,7 +123,7 @@ SYNC_NOTE = ("<b>Right-click SYNC</b> for the source (LTC or MTC), the LTC input
              "time, drift tolerance and offset. <b>Still pulsing while code plays?</b> It is listening to the wrong "
              "input.")
 
-KEYS = [  # 0.3.9's (unchanged since 0.2.1) - docs/QUICK-REFERENCE.md in the apps repo has them all
+KEYS = [  # 0.3.10's (unchanged since 0.2.1) - docs/QUICK-REFERENCE.md in the apps repo has them all
     (["Space"], "Play / stop"),
     (["⌘⇧Esc"], "Panic"),
     (["⌘⇧L"], "Show Mode"),
@@ -193,7 +197,7 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is only checked when the app starts, so a show that runs past midnight carries on."),
     ("You need MIDI Bridge and a current Mac.",
-     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later; 1.5 for an SQ), macOS 11 or later, '
+     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later; 1.5 for an SQ or a Wing), macOS 11 or later, '
      "Apple Silicon or Intel. Companion and a Stream Deck if you want keys. No analytics, no telemetry."),
 ]
 
@@ -269,7 +273,7 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ with MIDI Bridge 1.5"),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ and Wing with MIDI Bridge 1.5"),
               ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+'),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'

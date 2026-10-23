@@ -50,14 +50,11 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 
 NEW = [  # 0.3.10 against 0.3.2, the build the testers had before: the Console Control thread's
          # docs/release-0.3.9-beta.md and the 0.3.9 / 0.3.10 CHANGELOG. No 1.0 date: it's private.
-    ("The Allen &amp; Heath SQ.",
-     "Settings &rarr; MIDI &rarr; Console chooses the console a show is for: dLive or SQ. On an SQ: faders and "
-     "mutes on every strip, sends, Scenes 1&ndash;300, and Sync from Console for its names and colours. It needs "
-     "MIDI Bridge 1.5, which is next out."),
-    ("The Behringer Wing.",
-     "Settings &rarr; MIDI &rarr; Console &rarr; Wing: faders and mutes on channels, buses, mains, matrices and "
-     "DCAs, mute groups, and Scene recalls, through MIDI Bridge 1.4.108 or later, set to the Wing. Aux inputs, "
-     "sends, Actions and HPF / EQ lanes aren&rsquo;t on the Wing yet."),
+    # Other consoles, said as the operator wants (23 Oct): support in this version, for a future
+    # release; not named, not promised now.
+    ("Ready for more consoles.",
+     "This version adds support for other consoles, for a future release. Until a MIDI Bridge that supports "
+     "them is out, the dLive is the console to use."),
     ("HPF and EQ lanes.",
      "On dLive inputs: HPF in/out and frequency, and each EQ band&rsquo;s gain, in Hz and dB. They insert, ramp, "
      "conform and chase like a fader; a frequency sweeps evenly by octave."),
@@ -197,7 +194,7 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is only checked when the app starts, so a show that runs past midnight carries on."),
     ("You need MIDI Bridge and a current Mac.",
-     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later; 1.5 for an SQ or a Wing), macOS 11 or later, '
+     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later), macOS 11 or later, '
      "Apple Silicon or Intel. Companion and a Stream Deck if you want keys. No analytics, no telemetry."),
 ]
 
@@ -273,7 +270,7 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ and Wing with MIDI Bridge 1.5"),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive first; more in a future release"),
               ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+'),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'

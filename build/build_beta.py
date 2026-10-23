@@ -34,8 +34,8 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.2 BETA"
-BETA_UNTIL = "31 October 2026"
+VERSION = "0.3.9 BETA"           # on the beta product (operator, 23 Oct 2026)
+BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
 # copied there by dylanmaudio-marketing store-assets/publish_site_cards.py.
@@ -48,47 +48,35 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # 0.3.2 against 0.2.1, the build the testers had before (0.3.0 and 0.3.1 never went out)
-    ("Cue list mode, for shows with no timecode.",
-     "Settings &rarr; Sync &rarr; &ldquo;This show plays as: Cue list&rdquo; and the show runs on GO: "
-     "<kbd>Space</kbd> or <kbd>Return</kbd> fires the standing moment, <kbd>⇧Space</kbd> goes back, "
-     "<kbd>⌘⇧G</kbd> jumps to any moment. Cues on a marker fire together as one GO; a marker can auto-follow. "
-     "Companion gets GO, Back, Jump and Standby."),
-    ("Cues fire to the sample.",
-     "Each cue is armed at its exact time instead of the next frame tick, and beat-snapped cues fire on the beat. "
-     "New latency settings on the Sync tab &mdash; how late the code arrives, and how early to send for the "
-     "console &mdash; with <b>Calibrate&hellip;</b> to measure both."),
-    ("Aux MIDI tracks, beyond the console.",
-     "Cues to a plugin host or any MIDI device: Waves SuperRack, LiveProfessor, a lighting desk&rsquo;s MIDI Show "
-     "Control. Program and Control Changes, ramps, notes with a piano editor, Program Changes that follow your "
-     "Scenes, and tap tempo or MIDI Beat Clock from the tempo map."),
-    ("OSC control.",
-     "Settings &rarr; Companion &rarr; OSC control: one address per command (<code>/cxc/play</code>, "
-     "<code>/cxc/go</code>, <code>/cxc/locate</code>&hellip;) and a state feed, behind the same gate as "
-     "Companion. Panic always works."),
-    ("It keeps going when the Mac&rsquo;s audio resets.",
-     "An audio driver install or a sleep and wake used to leave playback silent or chase stopped. The app now "
-     "notices within three seconds, reopens the device keeping the playhead, picks the timecode up again, and "
-     "keeps any take that was recording."),
-    ("A flaky console network can&rsquo;t stall the show.",
-     "MIDI Bridge reconnects in the background, so the playhead never freezes waiting for it, and every cue is "
-     "sent once &mdash; no more occasional doubled Scene recalls on a slower Mac."),
-    ("Check for Updates and the licence screen.",
-     "In the Console Control menu and Settings &rarr; App. Updates check only when you press it, never during a "
-     "show; the beta keeps working in full until its end date."),
-    ("Easier markers, and your keys in the menus.",
-     "Drag markers along the ruler, click to locate, <kbd>⌥</kbd>-click to delete. Rebound shortcuts show in the "
-     "menus at once. 32-bit float and RF64 WAVs import."),
+NEW = [  # 0.3.9 against 0.3.2, the build the testers had before: the Console Control thread's
+         # docs/release-0.3.9-beta.md, from its CHANGELOG. No 1.0 date: it's private.
+    ("The Allen &amp; Heath SQ.",
+     "Settings &rarr; MIDI &rarr; Console chooses the console a show is for: dLive or SQ. On an SQ: faders and "
+     "mutes on every strip, sends, Scenes 1&ndash;300, and Sync from Console for its names and colours. It needs "
+     "MIDI Bridge 1.5, which is next out."),
+    ("HPF and EQ lanes.",
+     "On dLive inputs: HPF in/out and frequency, and each EQ band&rsquo;s gain, in Hz and dB. They insert, ramp, "
+     "conform and chase like a fader; a frequency sweeps evenly by octave."),
+    ("Timecode that starts where your show does.",
+     "A show whose session starts at 01:00:00:00 chases and reads 01:00:00:00 everywhere. LTC at another frame "
+     "rate no longer drops and re-latches, glitches in the code are ridden through, and right-clicking SYNC "
+     "chooses Internal, LTC or MTC."),
+    ("Editing on the beat.",
+     "Cues dragged, placed or pasted with Beat snap keep the beat&rsquo;s exact time. Paste onto another track "
+     "by selecting it first. Panic can recall a Scene."),
+    ("New menus, and a newer audio engine.",
+     "Cue, Markers, Track, Window and Help menus, no shortcuts changed. The engine handles input-only and "
+     "output-only devices, uses less memory, and converts audio about three times faster on Intel Macs."),
 ]
 
 FIRST_SESSION = [
-    ("Start the dLive MIDI Bridge",
+    ("Start MIDI Bridge",
      'Console Control talks to the console through the free <a href="/products/midi-bridge/">MIDI Bridge</a> '
      "(1.1 or later). Wait for the green line at the bottom of the window."),
     ("Match the base MIDI channel",
      "Settings (<kbd>⌘,</kbd>) &mdash; the same number as Utility &rarr; Control &rarr; MIDI on the console."),
     ("Add your tracks",
-     "<b>+ Track</b> (<kbd>⌘T</kbd>), pick a type and a range. &ldquo;1-16&rdquo; makes sixteen input tracks in "
+     "<b>+ Track</b>, pick a type and a range. &ldquo;1-16&rdquo; makes sixteen input tracks in "
      "one step."),
     ("Bring in the console&rsquo;s names",
      "Sync from Console (<kbd>⌃⌥R</kbd>) for channel names and colours, straight from the desk. File &rarr; Import "
@@ -131,7 +119,7 @@ SYNC_NOTE = ("<b>Right-click SYNC</b> for the source (LTC or MTC), the LTC input
              "time, drift tolerance and offset. <b>Still pulsing while code plays?</b> It is listening to the wrong "
              "input.")
 
-KEYS = [  # 0.3.2's (unchanged from 0.2.1) - docs/QUICK-REFERENCE.md in the apps repo has them all
+KEYS = [  # 0.3.9's (unchanged since 0.2.1) - docs/QUICK-REFERENCE.md in the apps repo has them all
     (["Space"], "Play / stop"),
     (["⌘⇧Esc"], "Panic"),
     (["⌘⇧L"], "Show Mode"),
@@ -185,14 +173,14 @@ TROUBLE = [
     ("var(--green)", "Green", "Console connected through the bridge. Its IP is shown."),
     ("var(--amber)", "Amber", "Bridge running, console unreachable. Check the console IP in the bridge, the network, "
                               "and MIDI-over-TCP on the console."),
-    ("var(--red)", "Red", "The dLive MIDI Bridge app isn&rsquo;t running. Start it."),
+    ("var(--red)", "Red", "The MIDI Bridge app isn&rsquo;t running. Start it."),
     ("var(--blue)", "Green, but nothing moves",
      "Check chase for everything (<kbd>⇧C</kbd>), the track&rsquo;s M, the lane&rsquo;s chase badge &mdash; or run "
      "Preflight (<kbd>⌃⌥P</kbd>)."),
     ("var(--blue)", "A track won&rsquo;t edit", "It is locked, or you are in Show Mode."),
 ]
-TROUBLE_NOTE = ("<b>Something went wrong?</b> Click <b>Export log</b> in the footer &mdash; a copy of the session log "
-                "lands on your Desktop. Send it with <b>Send feedback</b> beside it, or to "
+TROUBLE_NOTE = ("<b>Something went wrong?</b> <b>Help &rarr; Export Log&hellip;</b> puts a copy of the session log "
+                "on your Desktop. Send it with <b>Help &rarr; Send Feedback&hellip;</b>, or to "
                 '<a href="mailto:dylan@dylanmaudio.com">dylan@dylanmaudio.com</a>. The log already records your '
                 "settings, the show, every message you saw and the timecode state.")
 
@@ -205,8 +193,8 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is only checked when the app starts, so a show that runs past midnight carries on."),
     ("You need MIDI Bridge and a current Mac.",
-     'The free <a href="/products/midi-bridge/">dLive MIDI Bridge</a> (1.1 or later), macOS 11 or later, Apple '
-     "Silicon. Companion and a Stream Deck if you want keys. No analytics, no telemetry."),
+     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later; 1.5 for an SQ), macOS 11 or later, '
+     "Apple Silicon or Intel. Companion and a Stream Deck if you want keys. No analytics, no telemetry."),
 ]
 
 # ---------------------------------------------------------------- page
@@ -281,7 +269,7 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive first"),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ with MIDI Bridge 1.5"),
               ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+'),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
@@ -289,7 +277,8 @@ def build():
 
     guide = "".join([
         block(kick(f"New in {VERSION.replace(' BETA', '')}")
-              + "<p>Since 0.2.1, the build the testers had before. The full list comes with the download.</p>"
+              + "<p>Since 0.3.2, the build the testers had before. The beta now runs to 30 November 2026. "
+                "The full list comes with the download.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "
@@ -301,7 +290,7 @@ def build():
               + "<p>The button beside Record. Always this way round &mdash; a show never latches on its own when "
                 "it opens.</p>" + states(SYNC, SYNC_NOTE)),
         block(kick("The keys worth learning first")
-              + "<p>Every shortcut can be changed in View &rarr; Keyboard Shortcuts (<kbd>⌃⌥K</kbd>): click one "
+              + "<p>Every shortcut can be changed in Help &rarr; Keyboard Shortcuts (<kbd>⌃⌥K</kbd>): click one "
                 "and press the keys you want. Hover over any button to see its key. All of them are in the "
                 f'<a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a>.</p>'
               + keys(KEYS), "keys"),

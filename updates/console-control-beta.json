@@ -1,8 +1,8 @@
 {
-  "version": "0.3.2",
-  "url": "https://store.dylanmaudio.com",
-  "released": "2026-10-16",
-  "notes": "Fixed: on macOS 12 and 13, after inserting a scene (S, pick, Return)",
+  "version": "0.3.9",
+  "url": "https://dylanmaudio.com/cc-beta",
+  "released": "2026-10-23",
+  "notes": "Changed: the beta runs to 30 November 2026. Install this build: earlier betas stop sending to the console after 31 October.",
   "app": "Console Control",
   "slug": "console-control",
   "channel": "beta"

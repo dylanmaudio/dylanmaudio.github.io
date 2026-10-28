@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.11 BETA"          # with the MIDI Bridge 1.5.0 beta in the download (ROADMAP's brief, 28 Oct 2026)
+VERSION = "0.3.11 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (ROADMAP's brief, 28 Oct 2026)
 BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -51,7 +51,7 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 NEW = [  # 0.3.11 against 0.3.10, the build the testers had before: its CHANGELOG, in ROADMAP's beta
          # brief's selection (28 Oct). Nothing from "Not yet in this beta"; no 1.0 date.
     ("Four consoles: the dLive, the SQ, the Wing and the DiGiCo SD.",
-     "Choose the console in Settings &rarr; MIDI &rarr; Console, with the MIDI Bridge 1.5 beta (in the download) set "
+     "Choose the console in Settings &rarr; MIDI &rarr; Console, with the MIDI Bridge 1.5 beta (a second download with this one) set "
      "to the same one. On the SQ: faders, mutes, sends and scene recalls, with names and colours from Sync from "
      "Console. On the Wing: faders, mutes, sends to buses and Scene recalls. On the SD: faders, mutes, sends to "
      "auxes, snapshots recalled by the number on the desk&rsquo;s screen, and a Macros track that fires the "
@@ -73,7 +73,7 @@ NEW = [  # 0.3.11 against 0.3.10, the build the testers had before: its CHANGELO
 
 FIRST_SESSION = [
     ("Start MIDI Bridge",
-     "The 1.5 beta, in the download, set to your console. Console Control talks to the console through it. Wait "
+     "The 1.5 beta, a second download with this one, set to your console. Console Control talks to the console through it. Wait "
      "for the green line at the bottom of the window."),
     ("Choose the console",
      "Settings (<kbd>⌘,</kbd>) &rarr; MIDI &rarr; Console: the desk MIDI Bridge is set to. On a dLive, match the "
@@ -196,7 +196,7 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is only checked when the app starts, so a show that runs past midnight carries on."),
     ("You need MIDI Bridge and a current Mac.",
-     "The MIDI Bridge 1.5 beta, in the download. macOS 11 or later, Apple Silicon or Intel. Companion and a "
+     "The MIDI Bridge 1.5 beta, a second download with this one. macOS 11 or later, Apple Silicon or Intel. Companion and a "
      "Stream Deck if you want keys. No analytics, no telemetry."),
 ]
 
@@ -273,7 +273,7 @@ def build():
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
               ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ &middot; Wing &middot; DiGiCo SD"),
-              ("Needs", "MIDI Bridge 1.5 beta, in the download"),
+              ("Needs", "MIDI Bridge 1.5 beta, a second download with this one"),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
@@ -337,12 +337,12 @@ def build():
     </div>
     <p class="p-tagline">{p['tagline']} Free to try until {BETA_UNTIL}.</p>
     <div class="p-cta-row">{ctas()}</div>
-    <p class="beta-note">The download is a free checkout on the store: the link comes by email, and I&rsquo;ll email
-      you when a new beta is out. <b>The MIDI Bridge 1.5 beta comes in the download</b>: every cue reaches the console
+    <p class="beta-note">The download is a free checkout on the store: the links come by email, and I&rsquo;ll email
+      you when a new beta is out. <b>The MIDI Bridge 1.5 beta comes with it, as a second download</b>: every cue reaches the console
       through it, so install that too.
       Then see <a href="#new">what&rsquo;s new</a>, or start with <a href="#start">your first session</a>. The full
       <a href="{MANUAL}" target="_blank" rel="noopener">Reference Manual</a> and the
-      <a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a> are PDFs, also in the download.</p>
+      <a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a> are PDFs, also in the disk image.</p>
   </div>
 </section>
 

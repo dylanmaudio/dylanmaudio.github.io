@@ -33,7 +33,7 @@ import build_beta as B          # the guide's building blocks and styles, shared
 SLUG = "sr-beta"
 NAME = "Show Recorder"
 ICON = "show-recorder.png"
-VERSION = "0.2.15 BETA"          # with the MIDI Bridge 1.5.0 beta in the download (ROADMAP's brief, 28 Oct 2026)
+VERSION = "0.2.15 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (ROADMAP's brief, 28 Oct 2026)
 BETA_UNTIL = "30 November 2026"
 DOWNLOAD = C.CHECKOUT["show-recorder-beta"]
 CARDS = "show-recorder-beta"
@@ -105,7 +105,7 @@ FIRST_SESSION = [
      "console."),
     ("Bring in the console&rsquo;s names",
      "<b>Sync from Console</b> (<kbd>⌃⌥R</kbd>) reads every channel&rsquo;s name and colour from a dLive, an SQ, "
-     "a Wing or a DiGiCo SD, through the MIDI Bridge 1.5 beta in the download, and shows what would change first."),
+     "a Wing or a DiGiCo SD, through the MIDI Bridge 1.5 beta (a second download with this one), and shows what would change first."),
     ("Patch",
      "Select tracks, type the first channel, then <b>Inputs</b> to cascade them, or click and drag in the Patch "
      "Matrix."),
@@ -221,8 +221,8 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is checked once, at launch: a session that runs past midnight on the last day keeps recording."),
     ("You need a Mac and an audio interface.",
-     "macOS 11 or later, Apple Silicon. Any interface the Mac sees: Dante, MADI, USB. The MIDI Bridge 1.5 beta, in "
-     "the download, for the console features. No analytics, no telemetry."),
+     "macOS 11 or later, Apple Silicon. Any interface the Mac sees: Dante, MADI, USB. The MIDI Bridge 1.5 beta, a "
+     "second download with this one, for the console features. No analytics, no telemetry."),
 ]
 
 
@@ -246,7 +246,7 @@ def build():
               ("Platform", "macOS 11+"), ("Chip", "Apple Silicon"),
               ("Interfaces", "Any the Mac sees: Dante, MADI, USB"),
               ("Console", "Any; names and scenes from the dLive, SQ, Wing and DiGiCo SD"),
-              ("Needs", "MIDI Bridge 1.5 beta, in the download, for the console features")]
+              ("Needs", "MIDI Bridge 1.5 beta, a second download, for the console features")]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
 
@@ -312,12 +312,12 @@ def build():
     </div>
     <p class="p-tagline">{TAGLINE} Free to try until {BETA_UNTIL}.</p>
     <div class="p-cta-row">{ctas()}</div>
-    <p class="beta-note">The download is a free checkout on the store: the link comes by email, and <b>Check for
+    <p class="beta-note">The download is a free checkout on the store: the links come by email, and <b>Check for
       Updates</b> in the app tells you when a new beta is out. For the console features &mdash; names, colours
-      and scenes from the desk &mdash; <b>the MIDI Bridge 1.5 beta comes in the download</b>: install that too.
+      and scenes from the desk &mdash; <b>the MIDI Bridge 1.5 beta comes with it, as a second download</b>: install that too.
       Then see <a href="#new">what&rsquo;s new</a>, or start with <a href="#start">your first session</a>. The
       <a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a> and the full
-      <a href="{MANUAL}" target="_blank" rel="noopener">Reference Manual</a> are PDFs, also in the download.</p>
+      <a href="{MANUAL}" target="_blank" rel="noopener">Reference Manual</a> are PDFs, also in the disk image.</p>
   </div>
 </section>
 

@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.10 BETA"          # on the beta product (operator, 23 Oct 2026)
+VERSION = "0.3.11 BETA"          # with the MIDI Bridge 1.5.0 beta in the download (ROADMAP's brief, 28 Oct 2026)
 BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -48,40 +48,42 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # 0.3.10 against 0.3.2, the build the testers had before: the Console Control thread's
-         # docs/release-0.3.9-beta.md and the 0.3.9 / 0.3.10 CHANGELOG. No 1.0 date: it's private.
-    # Other consoles, said as the operator wants (23 Oct): support in this version, for a future
-    # release; not named, not promised now.
-    ("Ready for more consoles.",
-     "This version adds support for other consoles, for a future release. Until a MIDI Bridge that supports "
-     "them is out, the dLive is the console to use."),
-    ("HPF and EQ lanes.",
-     "On dLive inputs: HPF in/out and frequency, and each EQ band&rsquo;s gain, in Hz and dB. They insert, ramp, "
-     "conform and chase like a fader; a frequency sweeps evenly by octave."),
-    ("Timecode that starts where your show does.",
-     "A show whose session starts at 01:00:00:00 chases and reads 01:00:00:00 everywhere. LTC at another frame "
-     "rate no longer drops and re-latches, glitches in the code are ridden through, and right-clicking SYNC "
-     "chooses Internal, LTC or MTC."),
-    ("Editing on the beat.",
-     "Cues dragged, placed or pasted with Beat snap keep the beat&rsquo;s exact time. Paste onto another track "
-     "by selecting it first. Panic can recall a Scene."),
-    ("New menus, and a newer audio engine.",
-     "Cue, Markers, Track, Window and Help menus, no shortcuts changed. The engine handles input-only and "
-     "output-only devices, uses less memory, and converts audio about three times faster on Intel Macs."),
+NEW = [  # 0.3.11 against 0.3.10, the build the testers had before: its CHANGELOG, in ROADMAP's beta
+         # brief's selection (28 Oct). Nothing from "Not yet in this beta"; no 1.0 date.
+    ("Four consoles: the dLive, the SQ, the Wing and the DiGiCo SD.",
+     "Choose the console in Settings &rarr; MIDI &rarr; Console, with the MIDI Bridge 1.5 beta (in the download) set "
+     "to the same one. On the SQ: faders, mutes, sends and scene recalls, with names and colours from Sync from "
+     "Console. On the Wing: faders, mutes, sends to buses and Scene recalls. On the SD: faders, mutes, sends to "
+     "auxes, snapshots recalled by the number on the desk&rsquo;s screen, and a Macros track that fires the "
+     "desk&rsquo;s macros by name. The Reference Manual has the details for each."),
+    ("Pan, filter and EQ lanes on the Wing and the SD.",
+     "Right-click a Wing channel or an SD input &rarr; <b>Add pan, filter and EQ lanes&hellip;</b> for pan, HPF and LPF "
+     "(in / out and frequency) and each EQ band&rsquo;s gain, frequency and Q, in the console&rsquo;s own ranges."),
+    ("Stop no longer replays the show.",
+     "With &ldquo;Stop returns to where play started&rdquo; on, a Stop could send every cue from the start of the "
+     "show at once. Opening a menu in Show Mode no longer holds the cues back, and Panic and Stop stay stopped "
+     "with &ldquo;Start on valid timecode when stopped&rdquo; on."),
+    ("LTC chase picks the code up again.",
+     "When the timecode stops for a moment or jumps, chase catches it within about a second of its return, "
+     "instead of waiting for Stop and Play."),
+    ("And smaller fixes.",
+     "<kbd>⌘A</kbd> works in text fields; a decimal Scene number is refused instead of rounded; a conform sends "
+     "each mute once; a cue inserted from a dialog lands where you opened it."),
 ]
 
 FIRST_SESSION = [
     ("Start MIDI Bridge",
-     'Console Control talks to the console through the free <a href="/products/midi-bridge/">MIDI Bridge</a> '
-     "(1.1 or later). Wait for the green line at the bottom of the window."),
-    ("Match the base MIDI channel",
-     "Settings (<kbd>⌘,</kbd>) &mdash; the same number as Utility &rarr; Control &rarr; MIDI on the console."),
+     "The 1.5 beta, in the download, set to your console. Console Control talks to the console through it. Wait "
+     "for the green line at the bottom of the window."),
+    ("Choose the console",
+     "Settings (<kbd>⌘,</kbd>) &rarr; MIDI &rarr; Console: the desk MIDI Bridge is set to. On a dLive, match the "
+     "base MIDI channel too &mdash; the same number as Utility &rarr; Control &rarr; MIDI on the console."),
     ("Add your tracks",
      "<b>+ Track</b>, pick a type and a range. &ldquo;1-16&rdquo; makes sixteen input tracks in "
      "one step."),
     ("Bring in the console&rsquo;s names",
      "Sync from Console (<kbd>⌃⌥R</kbd>) for channel names and colours, straight from the desk. File &rarr; Import "
-     "Console Show File for Scene names and Actions."),
+     "Console Show File for a dLive&rsquo;s Scene names and Actions."),
     ("Import a show recording",
      "<kbd>⌘I</kbd>. With an LTC track present, every song is placed at its own timecode and outlined as a region."),
     ("Place cues",
@@ -172,8 +174,8 @@ STREAM_DECK = [
 
 TROUBLE = [
     ("var(--green)", "Green", "Console connected through the bridge. Its IP is shown."),
-    ("var(--amber)", "Amber", "Bridge running, console unreachable. Check the console IP in the bridge, the network, "
-                              "and MIDI-over-TCP on the console."),
+    ("var(--amber)", "Amber", "Bridge running, console unreachable. Check the console&rsquo;s address in MIDI "
+                              "Bridge, and the network."),
     ("var(--red)", "Red", "The MIDI Bridge app isn&rsquo;t running. Start it."),
     ("var(--blue)", "Green, but nothing moves",
      "Check chase for everything (<kbd>⇧C</kbd>), the track&rsquo;s M, the lane&rsquo;s chase badge &mdash; or run "
@@ -194,8 +196,8 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is only checked when the app starts, so a show that runs past midnight carries on."),
     ("You need MIDI Bridge and a current Mac.",
-     'The free <a href="/products/midi-bridge/">MIDI Bridge</a> (1.1 or later), macOS 11 or later, '
-     "Apple Silicon or Intel. Companion and a Stream Deck if you want keys. No analytics, no telemetry."),
+     "The MIDI Bridge 1.5 beta, in the download. macOS 11 or later, Apple Silicon or Intel. Companion and a "
+     "Stream Deck if you want keys. No analytics, no telemetry."),
 ]
 
 # ---------------------------------------------------------------- page
@@ -255,7 +257,7 @@ def keys(rows):
 def ctas(discord_label="Beta feedback"):
     return (f'<a href="{DOWNLOAD}" target="_blank" rel="noopener" class="btn btn-primary">Download the beta &mdash; free '
             f'<span class="arw">&rarr;</span></a>'
-            f'<a href="/products/midi-bridge/" class="btn btn-ghost">Get MIDI Bridge (free)</a>'
+            f'<a href="{QUICK_REF}" class="btn btn-ghost" target="_blank" rel="noopener">Quick Reference (PDF) &#8599;</a>'
             f'<a href="{MANUAL}" class="btn btn-ghost" target="_blank" rel="noopener">Reference Manual (PDF) &#8599;</a>'
             f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} '
             f'{discord_label}</a>')
@@ -270,16 +272,15 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive first; more in a future release"),
-              ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> 1.1+'),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ &middot; Wing &middot; DiGiCo SD"),
+              ("Needs", "MIDI Bridge 1.5 beta, in the download"),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
 
     guide = "".join([
         block(kick(f"New in {VERSION.replace(' BETA', '')}")
-              + "<p>Since 0.3.2, the build the testers had before. The beta now runs to 30 November 2026. "
-                "The full list comes with the download.</p>"
+              + "<p>Since 0.3.10, the build the testers had before. The full list comes with the download.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "
@@ -337,7 +338,8 @@ def build():
     <p class="p-tagline">{p['tagline']} Free to try until {BETA_UNTIL}.</p>
     <div class="p-cta-row">{ctas()}</div>
     <p class="beta-note">The download is a free checkout on the store: the link comes by email, and I&rsquo;ll email
-      you when a new beta is out. <b>You also need the free MIDI Bridge</b>: every cue reaches the console through it.
+      you when a new beta is out. <b>The MIDI Bridge 1.5 beta comes in the download</b>: every cue reaches the console
+      through it, so install that too.
       Then see <a href="#new">what&rsquo;s new</a>, or start with <a href="#start">your first session</a>. The full
       <a href="{MANUAL}" target="_blank" rel="noopener">Reference Manual</a> and the
       <a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a> are PDFs, also in the download.</p>

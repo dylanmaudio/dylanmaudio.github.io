@@ -33,7 +33,7 @@ import build_beta as B          # the guide's building blocks and styles, shared
 SLUG = "sr-beta"
 NAME = "Show Recorder"
 ICON = "show-recorder.png"
-VERSION = "0.2.14 BETA"          # on the beta product (operator, 23 Oct 2026)
+VERSION = "0.2.15 BETA"          # with the MIDI Bridge 1.5.0 beta in the download (ROADMAP's brief, 28 Oct 2026)
 BETA_UNTIL = "30 November 2026"
 DOWNLOAD = C.CHECKOUT["show-recorder-beta"]
 CARDS = "show-recorder-beta"
@@ -58,6 +58,29 @@ FEATURES = [
 # ---------------------------------------------------------------- the guide
 # The beta slides' copy (dylanmaudio-marketing store-assets/build_sr_beta_slides.py).
 
+NEW = [  # 0.2.15 against 0.2.14: its CHANGELOG, in ROADMAP's beta brief's selection (28 Oct 2026)
+    ("Four consoles, by their own names.",
+     "The header names the console MIDI Bridge is on (&ldquo;v0.2.15 &middot; Wing&rdquo;, &ldquo;&middot; "
+     "DiGiCo&rdquo;, &ldquo;&middot; SQ&rdquo;). New Session from the console names a desk&rsquo;s mixes as the desk "
+     "does &mdash; a Wing bus is &ldquo;Bus 1&rdquo;, the SQ&rsquo;s main is &ldquo;LR&rdquo; &mdash; and reads the "
+     "DiGiCo SD&rsquo;s channels, auxes, groups and matrices. A stereo channel on the SD or the Wing becomes one "
+     "stereo track."),
+    ("Scene markers that match the desk.",
+     "On the Wing a marker carries the scene&rsquo;s name (&ldquo;Scene 4: UP1&rdquo;); on the SD, the "
+     "snapshot&rsquo;s number as its screen shows it (&ldquo;Snapshot 1.93: Verse&rdquo;), and Recall in Playback "
+     "recalls that snapshot."),
+    ("AUTO: record when timecode runs.",
+     "A button in the transport row (and Transport &rarr; Record When Timecode Runs) arms recording on timecode for "
+     "the session: off for a line check, on for the show."),
+    ("Meters for every row.",
+     "A stereo track shows two meters, L and R. The Sub-Mixer and Sync rows &mdash; the L/R Mix, desk mixes, ambient "
+     "mics, Click and LTC &mdash; follow the inputs."),
+    ("And more.",
+     "<kbd>⇧E</kbd> makes the time selection from the selected clips; Export can export the selected clips and "
+     "remembers your last choices; patching an output during playback no longer drops the audio; LTC picks the code "
+     "up again after a pause."),
+]
+
 WHAT = [
     ("Every input, its own file.",
      "Broadcast WAV or FLAC, 44.1 to 192 kHz: record at 48 kHz from a 96 kHz system, converted as it records. "
@@ -81,9 +104,8 @@ FIRST_SESSION = [
      "<b>New Session</b> (<kbd>⌘N</kbd>): empty, from last night&rsquo;s session, from a template, or from the "
      "console."),
     ("Bring in the console&rsquo;s names",
-     "<b>Sync from Console</b> (<kbd>⌃⌥R</kbd>) reads every channel&rsquo;s name and colour through the free "
-     "<a href=\"/products/midi-bridge/\">MIDI Bridge</a>, and shows what would change first. The dLive first; "
-     "more manufacturers on the way."),
+     "<b>Sync from Console</b> (<kbd>⌃⌥R</kbd>) reads every channel&rsquo;s name and colour from a dLive, an SQ, "
+     "a Wing or a DiGiCo SD, through the MIDI Bridge 1.5 beta in the download, and shows what would change first."),
     ("Patch",
      "Select tracks, type the first channel, then <b>Inputs</b> to cascade them, or click and drag in the Patch "
      "Matrix."),
@@ -118,9 +140,9 @@ TIMECODE = [
     ("Every take at its code.",
      "The first take that sees code sets the timeline to the hour; takes land at their code to the sample, so a "
      "run&rsquo;s nights line up."),
-    ("Record when timecode runs.",
-     "A take starts when the code locks and stops when it&rsquo;s been gone 5 seconds, or keeps recording until "
-     "you stop it."),
+    ("Record when timecode runs: AUTO.",
+     "The <b>AUTO</b> button in the transport row. A take starts when the code locks and stops when it&rsquo;s been "
+     "gone 5 seconds, or keeps recording until you stop it."),
     ("Playback follows the show.",
      "<b>Follow timecode</b> in playback: a virtual soundcheck driven by the show&rsquo;s own code. Never during "
      "a take."),
@@ -135,8 +157,9 @@ SOUNDCHECK = [
     ("Soundcheck mute and solo.",
      "Beside each output: what plays to the console. They change nothing recorded or exported."),
     ("The desk follows the show.",
-     "Scene recalls become markers during a take; <b>Recall scenes in playback</b> puts the console in the right "
-     "scene wherever you jump. dLive, through MIDI Bridge."),
+     "Scene recalls become markers during a take, named as the desk shows them; <b>Recall scenes in playback</b> "
+     "puts the console in the right scene wherever you jump. On a dLive, a Wing or a DiGiCo SD, through MIDI "
+     "Bridge."),
     ("Gapless, to the sample.",
      "Drag across the ruler to loop a section; <kbd>⇧L</kbd> switches it off and on. A take always runs straight "
      "through."),
@@ -198,8 +221,8 @@ THE_BETA = [
     ("A show is never interrupted.",
      "The date is checked once, at launch: a session that runs past midnight on the last day keeps recording."),
     ("You need a Mac and an audio interface.",
-     "macOS 11 or later, Apple Silicon. Any interface the Mac sees: Dante, MADI, USB. MIDI Bridge for the console "
-     "features. No analytics, no telemetry."),
+     "macOS 11 or later, Apple Silicon. Any interface the Mac sees: Dante, MADI, USB. The MIDI Bridge 1.5 beta, in "
+     "the download, for the console features. No analytics, no telemetry."),
 ]
 
 
@@ -222,13 +245,14 @@ def build():
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
               ("Platform", "macOS 11+"), ("Chip", "Apple Silicon"),
               ("Interfaces", "Any the Mac sees: Dante, MADI, USB"),
-              ("Console", "Any; names and scenes from the dLive first"),
-              ("Needs", '<a href="/products/midi-bridge/" style="color:var(--blue)">MIDI Bridge</a> for the console '
-                        "features")]
+              ("Console", "Any; names and scenes from the dLive, SQ, Wing and DiGiCo SD"),
+              ("Needs", "MIDI Bridge 1.5 beta, in the download, for the console features")]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
 
     guide = "".join([
+        B.block(B.kick(f"New in {VERSION.replace(' BETA', '')}")
+                + "<p>Since 0.2.14. The full list comes with the download.</p>" + B.items(NEW), "new"),
         B.block(B.kick("What it is")
                 + "<p>A multitrack recorder for front of house, from any console through any audio interface. Built "
                   "to be left running for a whole show and trusted, with the after-show work in the same window.</p>"
@@ -290,8 +314,8 @@ def build():
     <div class="p-cta-row">{ctas()}</div>
     <p class="beta-note">The download is a free checkout on the store: the link comes by email, and <b>Check for
       Updates</b> in the app tells you when a new beta is out. For the console features &mdash; names, colours
-      and scenes from the desk &mdash; you also need the free <a href="/products/midi-bridge/">MIDI Bridge</a>.
-      Then start with <a href="#start">your first session</a>. The
+      and scenes from the desk &mdash; <b>the MIDI Bridge 1.5 beta comes in the download</b>: install that too.
+      Then see <a href="#new">what&rsquo;s new</a>, or start with <a href="#start">your first session</a>. The
       <a href="{QUICK_REF}" target="_blank" rel="noopener">Quick Reference</a> and the full
       <a href="{MANUAL}" target="_blank" rel="noopener">Reference Manual</a> are PDFs, also in the download.</p>
   </div>

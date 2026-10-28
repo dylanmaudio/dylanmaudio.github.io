@@ -1,0 +1,9 @@
+{
+  "version": "0.2.15",
+  "url": "https://dylanmaudio.com/sr-beta",
+  "released": "2026-10-28",
+  "notes": "New: the Allen & Heath SQ, the Behringer Wing and the DiGiCo SD by their own names, with the MIDI Bridge 1.5.0 beta. The beta runs to 30 November 2026.",
+  "app": "Show Recorder",
+  "slug": "show-recorder",
+  "channel": "beta"
+}

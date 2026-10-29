@@ -23,6 +23,9 @@ REDIRECTS = {
     "discord":  (C.DISCORD_URL, "the dylanmaudio Discord"),
     "sessions": ("/#book", "sessions &amp; consults"),
     "companion": ("/products/companion/", "the Companion module"),
+    # The Console Control Reels' end card (operator, 26 Oct 2026): short to say and to
+    # type from a video. Show Recorder's /sr waits for its public page.
+    "cc":       ("/products/console-control/", "Console Control"),
     # /cc-beta is no longer a redirect: it's the beta page itself (build_beta.py).
 }
 

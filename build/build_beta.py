@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.11 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (ROADMAP's brief, 28 Oct 2026)
+VERSION = "0.3.12 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (0.3.12 to testers 29 Oct 2026)
 BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -48,8 +48,18 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # 0.3.11 against 0.3.10, the build the testers had before: its CHANGELOG, in ROADMAP's beta
-         # brief's selection (28 Oct). Nothing from "Not yet in this beta"; no 1.0 date.
+NEW = [  # Since 0.3.10, the testers' build until 28 Oct: 0.3.12's CHANGELOG (29 Oct, a tester's report)
+         # first, then 0.3.11's in ROADMAP's beta brief's selection (28 Oct). Nothing from "Not yet in
+         # this beta"; no 1.0 date.
+    ("A new timecode input applies at once.",
+     "Change the LTC input or the MTC port in Settings &rarr; Sync and a chase already waiting for code listens "
+     "to the new one straight away, instead of after Stop and Play. (0.3.12)"),
+    ("An armed reference track meters its input.",
+     "Its meter shows what&rsquo;s coming in, with In lit red, so you can check the level before you record. "
+     "Before, it showed nothing until there was a take. (0.3.12)"),
+    ("Each lane&rsquo;s CHASE is a button.",
+     "Green when the lane chases, grey when it doesn&rsquo;t. Switched off, it used to read &ldquo;&mdash;&rdquo;, "
+     "which was hard to find to switch back on. (0.3.12)"),
     ("Four consoles: the dLive, the SQ, the Wing and the DiGiCo SD.",
      "Choose the console in Settings &rarr; MIDI &rarr; Console, with the MIDI Bridge 1.5 beta (a second download with this one) set "
      "to the same one. On the SQ: faders, mutes, sends and scene recalls, with names and colours from Sync from "
@@ -178,7 +188,7 @@ TROUBLE = [
                               "Bridge, and the network."),
     ("var(--red)", "Red", "The MIDI Bridge app isn&rsquo;t running. Start it."),
     ("var(--blue)", "Green, but nothing moves",
-     "Check chase for everything (<kbd>⇧C</kbd>), the track&rsquo;s M, the lane&rsquo;s chase badge &mdash; or run "
+     "Check chase for everything (<kbd>⇧C</kbd>), the track&rsquo;s M, the lane&rsquo;s CHASE button (grey is off) &mdash; or run "
      "Preflight (<kbd>⌃⌥P</kbd>)."),
     ("var(--blue)", "A track won&rsquo;t edit", "It is locked, or you are in Show Mode."),
 ]
@@ -279,8 +289,9 @@ def build():
                           for k, v in glance)
 
     guide = "".join([
-        block(kick(f"New in {VERSION.replace(' BETA', '')}")
-              + "<p>Since 0.3.10, the build the testers had before. The full list comes with the download.</p>"
+        block(kick("New since 0.3.10")
+              + "<p>0.3.11 (28 October) added the SQ, the Wing and the DiGiCo SD; 0.3.12 (29 October) fixes "
+                "what a tester found. The full list comes with the download.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "

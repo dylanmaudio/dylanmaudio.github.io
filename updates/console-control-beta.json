@@ -1,8 +1,8 @@
 {
-  "version": "0.3.11",
+  "version": "0.3.12",
   "url": "https://dylanmaudio.com/cc-beta",
-  "released": "2026-10-28",
-  "notes": "New: the Allen & Heath SQ, the Behringer Wing and the DiGiCo SD, with the MIDI Bridge 1.5.0 beta. The beta runs to 30 November 2026.",
+  "released": "2026-10-29",
+  "notes": "New: a new timecode input applies at once, an armed reference track meters its input, and each lane's CHASE is a button. With the MIDI Bridge 1.5.0 beta for the SQ, the Wing and the DiGiCo SD. The beta runs to 30 November 2026.",
   "app": "Console Control",
   "slug": "console-control",
   "channel": "beta"

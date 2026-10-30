@@ -1,8 +1,8 @@
 {
-  "version": "0.3.12",
+  "version": "0.3.13",
   "url": "https://dylanmaudio.com/cc-beta",
-  "released": "2026-10-29",
-  "notes": "New: a new timecode input applies at once, an armed reference track meters its input, and each lane's CHASE is a button. With the MIDI Bridge 1.5.0 beta for the SQ, the Wing and the DiGiCo SD. The beta runs to 30 November 2026.",
+  "released": "2026-10-30",
+  "notes": "New: stereo reference tracks, + Track → Audio reference track, and a jump in the timecode recalls the scene of the song it lands in. With the MIDI Bridge 1.5.0 beta for the SQ, the Wing and the DiGiCo SD. The beta runs to 30 November 2026.",
   "app": "Console Control",
   "slug": "console-control",
   "channel": "beta"

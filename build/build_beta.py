@@ -34,7 +34,7 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.12 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (0.3.12 to testers 29 Oct 2026)
+VERSION = "0.3.13 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (0.3.13 to testers 30 Oct 2026)
 BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
@@ -48,9 +48,20 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # Since 0.3.10, the testers' build until 28 Oct: 0.3.12's CHANGELOG (29 Oct, a tester's report)
-         # first, then 0.3.11's in ROADMAP's beta brief's selection (28 Oct). Nothing from "Not yet in
-         # this beta"; no 1.0 date.
+NEW = [  # Since 0.3.10, the testers' build until 28 Oct: 0.3.13's CHANGELOG (30 Oct) first, then 0.3.12's
+         # (29 Oct, a tester's report), then 0.3.11's in ROADMAP's beta brief's selection (28 Oct). Nothing
+         # from "Not yet in this beta"; no 1.0 date.
+    ("Stereo reference tracks.",
+     "A reference track can record two inputs, left and right, into one stereo file: pick its right input "
+     "beside its input (&ldquo;mono&rdquo; keeps it to one), and an armed stereo track meters both sides. (0.3.13)"),
+    ("Add a reference track from + Track.",
+     "<b>+ Track &rarr; Audio reference track</b> adds an empty one, mono or stereo, to import onto or to arm and "
+     "record. A new show starts with one reference track instead of four; shows you already have keep "
+     "theirs. (0.3.13)"),
+    ("A jump in the timecode recalls the right scene.",
+     "Following timecode, a jump recalls the scene of the song it lands in, and only that one. Before, a jump "
+     "forward recalled every scene on the way and a jump back none, so the desk stayed on the song you "
+     "left. (0.3.13)"),
     ("A new timecode input applies at once.",
      "Change the LTC input or the MTC port in Settings &rarr; Sync and a chase already waiting for code listens "
      "to the new one straight away, instead of after Stop and Play. (0.3.12)"),
@@ -290,8 +301,9 @@ def build():
 
     guide = "".join([
         block(kick("New since 0.3.10")
-              + "<p>0.3.11 (28 October) added the SQ, the Wing and the DiGiCo SD; 0.3.12 (29 October) fixes "
-                "what a tester found. The full list comes with the download.</p>"
+              + "<p>0.3.11 (28 October) added the SQ, the Wing and the DiGiCo SD; 0.3.12 (29 October) fixed "
+                "what a tester found; 0.3.13 (30 October) records reference tracks in stereo. The full list "
+                "comes with the download.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "

@@ -41,7 +41,7 @@ FEEDBACK = "mailto:dylan@dylanmaudio.com?subject=Show%20Recorder%20beta"
 MANUAL = "/guides/show-recorder-reference-manual.pdf"
 QUICK_REF = "/guides/show-recorder-quick-reference.pdf"
 
-TAGLINE = "Record the show. Leave with the mix."
+TAGLINE = "The DAW built for live sound. Your 2-track, mastered by the time the show ends."   # locked in 7 Nov 2026
 LEAD = ("Multitrack recording for live shows, built for FOH. Record every channel from any console, play it back "
         "for a virtual soundcheck, and leave the gig with a finished stereo mix and stems, mixed and mastered "
         "inside the app.")

@@ -13,6 +13,15 @@ changelog PDF. Notes on builds that never ship go in BUILD-HISTORY.md.
 Note: the public launch was v1.1.5. Everything before it was internal —
 those entries are kept below as the history of what launched.
 
+v1.4.2
+- Fixed: MTC made from incoming LTC slowly ran ahead of the LTC it was
+  reading: about one frame a minute at 30 fps and 48 kHz, half that at
+  96 kHz, building up until the timecode jumped or stopped. It now stays
+  on the LTC for as long as the timecode runs. If you added a delay or
+  offset downstream to make up for it, check it again with this version.
+  Generating timecode and converting between frame rates were not
+  affected.
+
 v1.4.1
 - New: Time Code Tool for Windows 10 and 11 (64-bit), in the system
   tray. It reads and generates LTC and MTC as on the Mac, on any audio

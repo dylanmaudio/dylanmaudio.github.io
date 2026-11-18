@@ -33,8 +33,8 @@ import build_beta as B          # the guide's building blocks and styles, shared
 SLUG = "sr-beta"
 NAME = "Show Recorder"
 ICON = "show-recorder.png"
-VERSION = "0.2.15 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (ROADMAP's brief, 28 Oct 2026)
-BETA_UNTIL = "30 November 2026"
+VERSION = "0.2.17 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (since 0.2.15, 28 Oct 2026)
+BETA_UNTIL = "1 January 2027"    # 0.2.17's own date (its CHANGELOG); earlier betas stop recording after 30 Nov
 DOWNLOAD = C.CHECKOUT["show-recorder-beta"]
 CARDS = "show-recorder-beta"
 FEEDBACK = "mailto:dylan@dylanmaudio.com?subject=Show%20Recorder%20beta"
@@ -58,27 +58,34 @@ FEATURES = [
 # ---------------------------------------------------------------- the guide
 # The beta slides' copy (dylanmaudio-marketing store-assets/build_sr_beta_slides.py).
 
-NEW = [  # 0.2.15 against 0.2.14: its CHANGELOG, in ROADMAP's beta brief's selection (28 Oct 2026)
-    ("Four consoles, by their own names.",
-     "The header names the console MIDI Bridge is on (&ldquo;v0.2.15 &middot; Wing&rdquo;, &ldquo;&middot; "
-     "DiGiCo&rdquo;, &ldquo;&middot; SQ&rdquo;). New Session from the console names a desk&rsquo;s mixes as the desk "
-     "does &mdash; a Wing bus is &ldquo;Bus 1&rdquo;, the SQ&rsquo;s main is &ldquo;LR&rdquo; &mdash; and reads the "
-     "DiGiCo SD&rsquo;s channels, auxes, groups and matrices. A stereo channel on the SD or the Wing becomes one "
-     "stereo track."),
-    ("Scene markers that match the desk.",
-     "On the Wing a marker carries the scene&rsquo;s name (&ldquo;Scene 4: UP1&rdquo;); on the SD, the "
-     "snapshot&rsquo;s number as its screen shows it (&ldquo;Snapshot 1.93: Verse&rdquo;), and Recall in Playback "
-     "recalls that snapshot."),
-    ("AUTO: record when timecode runs.",
-     "A button in the transport row (and Transport &rarr; Record When Timecode Runs) arms recording on timecode for "
-     "the session: off for a line check, on for the show."),
-    ("Meters for every row.",
-     "A stereo track shows two meters, L and R. The Sub-Mixer and Sync rows &mdash; the L/R Mix, desk mixes, ambient "
-     "mics, Click and LTC &mdash; follow the inputs."),
+NEW = [  # 0.2.17 against 0.2.15 (what testers held): the CHANGELOGs of 0.2.16 and 0.2.17 as built (f9b26552),
+         # chosen by STRATEGY: Show Recorder release, 18 Nov 2026; the same points as the testers' upload note
+    ("Every channel its own, at any rate.",
+     "At a session rate different from the interface&rsquo;s &mdash; 48 kHz from a 96 kHz Dante network, say "
+     "&mdash; each track now records its own input, past 32 channels too, and plays back only where it&rsquo;s "
+     "patched. Earlier betas could record the wrong input, or a mix of inputs, on some tracks. The interface label "
+     "shows both rates: &ldquo;recording 48 kHz &middot; interface 96 kHz&rdquo;."),
+    ("Sample rate conversion, your choice.",
+     "A new setting, in the Recording panel and <b>Settings &rarr; Recording</b>. Off, a session runs at the "
+     "interface&rsquo;s rate; On, you can record at another rate, as before. If you already use Show Recorder it "
+     "starts On, so nothing changes until you choose; on a new install it starts Off. New sessions also have a rate "
+     "of their own: <b>Settings &rarr; Recording &rarr; New sessions record at</b>. During a take, don&rsquo;t "
+     "change the interface&rsquo;s sample rate or its clock master: if it changes, press Stop and then Record."),
+    ("256-channel interfaces.",
+     "A 256-channel interface, a DAD Core 256 for example, now records and plays. Converting between rates at the "
+     "full 256 channels in and 256 out drops audio on an M1 Pro: if you need every channel, run the session at the "
+     "interface&rsquo;s own rate."),
+    ("Takes that come back.",
+     "Each track holds 10 seconds of audio on its way to the disk, so a drive held up for a few seconds no longer "
+     "costs audio. After a crash or a power cut the take comes back with its markers and renamed tracks, and a take "
+     "Stop couldn&rsquo;t save, on a full disk say, comes back when the session next opens."),
+    ("Markers and regions.",
+     "A click on a region selects it and leaves the playhead where it is; double-click to rename it. A click on a "
+     "marker goes to it; right-click to rename or delete. <kbd>[</kbd> twice while playing goes back two markers."),
     ("And more.",
-     "<kbd>⇧E</kbd> makes the time selection from the selected clips; Export can export the selected clips and "
-     "remembers your last choices; patching an output during playback no longer drops the audio; LTC picks the code "
-     "up again after a pause."),
+     "New Session asks where to save the show; <b>Mute all</b> for the Sub-Mixer and Sync and the Multitrack "
+     "outputs; holding Space no longer stops a take and then plays; Record, Stop and Play no longer wait for an "
+     "Import Audio or a Save As that&rsquo;s copying files."),
 ]
 
 WHAT = [
@@ -252,7 +259,7 @@ def build():
 
     guide = "".join([
         B.block(B.kick(f"New in {VERSION.replace(' BETA', '')}")
-                + "<p>Since 0.2.14. The full list comes with the download.</p>" + B.items(NEW), "new"),
+                + "<p>Since 0.2.15. The full list comes with the download.</p>" + B.items(NEW), "new"),
         B.block(B.kick("What it is")
                 + "<p>A multitrack recorder for front of house, from any console through any audio interface. Built "
                   "to be left running for a whole show and trusted, with the after-show work in the same window.</p>"

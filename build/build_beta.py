@@ -34,8 +34,8 @@ import build_products as P
 
 SLUG = "cc-beta"
 PRODUCT = C.PRODUCTS["console-control"]
-VERSION = "0.3.13 BETA"          # with the MIDI Bridge 1.5.0 beta, a second file on the store page (0.3.13 to testers 30 Oct 2026)
-BETA_UNTIL = "30 November 2026"   # from 0.3.7; 0.3.2 and earlier stop sending on 31 October
+VERSION = "0.3.15 BETA"          # with MIDI Bridge 1.5.0-beta.3, a second file on the store page (0.3.15 to testers 18 Nov 2026)
+BETA_UNTIL = "1 January 2027"     # from 0.3.15 (#499); 0.3.13 and earlier stop sending after 30 November
 DOWNLOAD = C.CHECKOUT["console-control-beta"]
 # The carousel: the beta product's own store set, in assets/cards/console-control-beta/,
 # copied there by dylanmaudio-marketing store-assets/publish_site_cards.py.
@@ -48,48 +48,45 @@ QUICK_REF = "/guides/console-control-quick-reference.pdf"
 # ---------------------------------------------------------------- the guide
 # (heading, detail) - detail may carry HTML.
 
-NEW = [  # Since 0.3.10, the testers' build until 28 Oct: 0.3.13's CHANGELOG (30 Oct) first, then 0.3.12's
-         # (29 Oct, a tester's report), then 0.3.11's in ROADMAP's beta brief's selection (28 Oct). Nothing
-         # from "Not yet in this beta"; no 1.0 date.
-    ("Stereo reference tracks.",
-     "A reference track can record two inputs, left and right, into one stereo file: pick its right input "
-     "beside its input (&ldquo;mono&rdquo; keeps it to one), and an armed stereo track meters both sides. (0.3.13)"),
-    ("Add a reference track from + Track.",
-     "<b>+ Track &rarr; Audio reference track</b> adds an empty one, mono or stereo, to import onto or to arm and "
-     "record. A new show starts with one reference track instead of four; shows you already have keep "
-     "theirs. (0.3.13)"),
-    ("A jump in the timecode recalls the right scene.",
-     "Following timecode, a jump recalls the scene of the song it lands in, and only that one. Before, a jump "
-     "forward recalled every scene on the way and a jump back none, so the desk stayed on the song you "
-     "left. (0.3.13)"),
-    ("A new timecode input applies at once.",
-     "Change the LTC input or the MTC port in Settings &rarr; Sync and a chase already waiting for code listens "
-     "to the new one straight away, instead of after Stop and Play. (0.3.12)"),
-    ("An armed reference track meters its input.",
-     "Its meter shows what&rsquo;s coming in, with In lit red, so you can check the level before you record. "
-     "Before, it showed nothing until there was a take. (0.3.12)"),
-    ("Each lane&rsquo;s CHASE is a button.",
-     "Green when the lane chases, grey when it doesn&rsquo;t. Switched off, it used to read &ldquo;&mdash;&rdquo;, "
-     "which was hard to find to switch back on. (0.3.12)"),
-    ("Four consoles: the dLive, the SQ, the Wing and the DiGiCo SD.",
-     "Choose the console in Settings &rarr; MIDI &rarr; Console, with the MIDI Bridge 1.5 beta (a second download with this one) set "
-     "to the same one. On the SQ: faders, mutes, sends and scene recalls, with names and colours from Sync from "
-     "Console. On the Wing: faders, mutes, sends to buses and Scene recalls. On the SD: faders, mutes, sends to "
-     "auxes, snapshots recalled by the number on the desk&rsquo;s screen, and a Macros track that fires the "
-     "desk&rsquo;s macros by name. The Reference Manual has the details for each."),
-    ("Pan, filter and EQ lanes on the Wing and the SD.",
-     "Right-click a Wing channel or an SD input &rarr; <b>Add pan, filter and EQ lanes&hellip;</b> for pan, HPF and LPF "
-     "(in / out and frequency) and each EQ band&rsquo;s gain, frequency and Q, in the console&rsquo;s own ranges."),
-    ("Stop no longer replays the show.",
-     "With &ldquo;Stop returns to where play started&rdquo; on, a Stop could send every cue from the start of the "
-     "show at once. Opening a menu in Show Mode no longer holds the cues back, and Panic and Stop stay stopped "
-     "with &ldquo;Start on valid timecode when stopped&rdquo; on."),
-    ("LTC chase picks the code up again.",
-     "When the timecode stops for a moment or jumps, chase catches it within about a second of its return, "
-     "instead of waiting for Stop and Play."),
+NEW = [  # Since 0.3.13, the testers' build until 18 Nov: 0.3.15's and 0.3.14's CHANGELOG entries as built
+         # (f9b26552), in this thread's selection (18 Nov). Nothing from 0.3.16; no 1.0 date.
+    ("Three more consoles: the Avantis, the Qu and the LV1.",
+     "Settings &rarr; MIDI &rarr; Console now lists the Allen &amp; Heath Avantis, the current Qu range and the "
+     "Waves eMotion LV1, beside the dLive, the SQ, the Wing and the DiGiCo SD. Set MIDI Bridge 1.5.0-beta.3 (a "
+     "second download with this one) to the same desk. The Qu has so far been run against a virtual Qu, not a "
+     "real one. A new show is now for the console MIDI Bridge is set to. (0.3.14, 0.3.15)"),
+    ("Panic ends everything.",
+     "In a cue-list show, Panic now ends everything still due to go to the console: a GO&rsquo;s fader ramps and "
+     "the next auto-follow. Stop still lets a GO&rsquo;s ramp run to its end. (0.3.15)"),
+    ("Show Mode locks everything.",
+     "New, Open, Close Show and the imports are refused, and Settings opens read-only. Leave Show Mode to change "
+     "them. Quitting or closing the window while the show plays, chases or records now asks first. (0.3.15)"),
+    ("Calibrate latency through the console.",
+     "Settings &rarr; Sync &rarr; Calibrate&hellip; &rarr; Measure the loop plays Console Control&rsquo;s own "
+     "timecode through your LTC channel and a spare channel&rsquo;s mute, and gives both numbers: how late the "
+     "timecode arrives and the console&rsquo;s lead. It replaces Measure and Check by ear. (0.3.14)"),
+    ("A newer autosave is offered back.",
+     "After a crash, opening the show offers the newest autosave if it&rsquo;s newer than your last save. "
+     "(0.3.15)"),
+    ("Big interfaces, and 96 kHz.",
+     "A 256-channel Dante or MADI card opens with all 256. At 96 kHz, playing or following MTC no longer runs "
+     "about 4% slow. What plays on outputs 1&ndash;2 no longer also comes out of 3 and 5&ndash;8, and an "
+     "interface that can&rsquo;t start says so instead of falling back to the Mac&rsquo;s speakers. (0.3.15)"),
+    ("Following timecode, more surely.",
+     "When the playback stops and plays from somewhere else, the console is conformed to the new song. A cue "
+     "isn&rsquo;t sent twice when the code stops and carries on, and slightly noisy 30 fps code is no longer "
+     "taken for 29.97. (0.3.14, 0.3.15)"),
+    ("When MIDI Bridge loses the console, you&rsquo;re told.",
+     "When it gets the console back, Console Control says so and asks you to press Conform. Nothing is sent by "
+     "itself. (0.3.14)"),
+    ("Editing stays where you are.",
+     "Only a click on the ruler moves the playhead; a click in the tracks selects. Zoom out to 10 hours across "
+     "the window. Add Region (<kbd>⌥R</kbd>) covers the time selection. A held Return no longer repeats GO. "
+     "(0.3.15)"),
     ("And smaller fixes.",
-     "<kbd>⌘A</kbd> works in text fields; a decimal Scene number is refused instead of rounded; a conform sends "
-     "each mute once; a cue inserted from a dialog lands where you opened it."),
+     "Sync from Console reads every Wing colour and a dLive&rsquo;s unnamed channels; Conform no longer lets a "
+     "Scene undo the faders it set; a show that can&rsquo;t open says why; a Bluetooth headset&rsquo;s microphone "
+     "is never opened; Import Audio asks you to save a new show first. (0.3.14, 0.3.15)"),
 ]
 
 FIRST_SESSION = [
@@ -169,7 +166,7 @@ SHOW_DAY = [
      "Flags problems before the show: bridge and console link, base-channel mismatches, chase switched off, "
      "send lanes the console can&rsquo;t route."),
     ("Show Mode &mdash; <kbd>⌘⇧L</kbd>",
-     "Locks editing and undo. Huge timecode, sync, chase, bridge health and live per-track readouts &mdash; and "
+     "Locks editing, undo, opening and closing shows, and Settings. Huge timecode, sync, chase, bridge health and live per-track readouts &mdash; and "
      "what&rsquo;s coming next, with countdowns. Asks before it enters and before it leaves."),
     ("Conform Console &mdash; <kbd>⌃⌥C</kbd>",
      "A one-shot chase you can use at any moment. Play always conforms first, so the console enters playback in "
@@ -293,17 +290,20 @@ def build():
     seo = C.seo_head(f"{SLUG}/", title, desc, image=f"assets/{p['icon']}", noindex=True)
     features = "".join(f"<li>{P.CK}<span>{f}</span></li>" for f in p["features"])
     glance = [("Version", VERSION), ("Beta until", BETA_UNTIL), ("Price", "Free during the beta"),
-              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ &middot; Wing &middot; DiGiCo SD"),
-              ("Needs", "MIDI Bridge 1.5 beta, a second download with this one"),
+              ("Platform", "macOS 11+"), ("Chip", "Apple Silicon &amp; Intel"), ("Console", "dLive &middot; SQ &middot; Avantis &middot; Qu &middot; Wing &middot; DiGiCo SD &middot; LV1"),
+              ("Needs", "MIDI Bridge 1.5.0-beta.3, a second download with this one"),
               ("Stream Deck", '<a href="/products/companion/" style="color:var(--blue)">via Companion</a>')]
     glance_rows = "".join(f'<div class="srow"><span class="k">{k}</span><span class="v">{v}</span></div>'
                           for k, v in glance)
 
     guide = "".join([
-        block(kick("New since 0.3.10")
-              + "<p>0.3.11 (28 October) added the SQ, the Wing and the DiGiCo SD; 0.3.12 (29 October) fixed "
-                "what a tester found; 0.3.13 (30 October) records reference tracks in stereo. The full list "
-                "comes with the download.</p>"
+        block(kick("New since 0.3.13")
+              + "<p>0.3.14 and 0.3.15 add the Avantis, the Qu and the LV1, and make Panic and Show Mode safe "
+                "at a show. The full list comes with the download.</p>"
+              + '<p class="beta-note"><b>Known in this beta:</b> Import Audio with a single file fails, and '
+                "then does nothing until Console Control is restarted. Pick the file together with a second "
+                "one and delete the extra clip, or, for a file of two or more channels, choose Split channels "
+                "and set its channels to Reference. It&rsquo;s fixed in the next beta.</p>"
               + items(NEW), "new"),
         block(kick("Your first session, in eight steps")
               + "<p>Twenty minutes at the desk, or at home with a show recording. Nothing reaches the console "

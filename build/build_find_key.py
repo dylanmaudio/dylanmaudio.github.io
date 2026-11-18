@@ -8,8 +8,9 @@ new store (D19 answered no, 18 Nov). The contract is the licence service's
 
 - The page POSTs {"email": ...} as JSON to ENDPOINT. CORS allows
   https://dylanmaudio.com.
-- The service always answers 202, whether or not the address has an order,
-  so the page always shows the same words. The email it sends lists every key,
+- The service always answers 202, whether or not the address has an order
+  and even over its rate limit (it then sends nothing), so the page always
+  shows the same words. It trims and lower-cases the address itself. The email it sends lists every key,
   product and download page for that address. It's rate-limited per address
   and per IP.
 
@@ -17,9 +18,10 @@ Not merged until the service answers on licence.dylanmaudio.com. When it goes
 live:
 - set LISTED = True (drops noindex), and add the page to build_seo.PAGES;
 - link it from the footer and the product pages' buy sections;
-- change privacy/index.html in the same commit (build_privacy.py): the email
+- put the privacy page's new wording into build_privacy.py in the same
+  commit. STRATEGY: Downloads writes it under #545, with EULA 1.1: the email
   address typed here goes to our licence service, and the store is no longer
-  Lemon Squeezy;
+  Lemon Squeezy. Don't draft a second version; send any wording need there;
 - set LS_NOTE = False once Lemon Squeezy's keys are imported (D14).
 
 The toolbar, footer and styles are the 404 page's (build_404.HTML), as for

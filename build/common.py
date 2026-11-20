@@ -69,6 +69,15 @@ DISCORD_SVG = ('<svg viewBox="0 0 24 24" width="18" height="18" fill="currentCol
 
 # --- Products (drives the per-product pages) --------------------------------
 # youtube = None until an intro video exists (then set the 11-char video id).
+# Black Friday 2026: the single paid utilities at half price, not the bundles
+# (operator, 20 Nov; dylanmaudio-marketing briefs/black-friday-2026.md). The
+# code must match the Lemon Squeezy discount. Shown 27-30 Nov in the visitor's
+# time zone by SALE_GUARD_JS, which shows the regular prices again afterwards
+# with no rebuild. Tidy-up after 30 Nov: the three sale= lines below, and the
+# three home cards' sale spans in build_site.py.
+BLACK_FRIDAY = {"label": "Black Friday", "code": "BF50", "from": "2026-11-27",
+                "until": "2026-11-30", "until_label": "30 November"}
+
 # status: "free" | "coming" | "buy". store = checkout URL or None.
 PRODUCTS = {
     "console-control": dict(
@@ -524,8 +533,7 @@ PRODUCTS = {
         name="Talk Light Trigger", abbr="TLT", tag="dLive", accent="blue",
         icon="talk-light-trigger.png", gallery=True, affiliated=True, status="buy", trial=True, price="$19",
         store=CHECKOUT["talk-light-trigger"], trial_store=CHECKOUT["talk-light-trigger-trial"], youtube="jP2Yyvd1uq4",
-        sale=dict(now="$9", was="$19", code="TLTINTROSALE",
-                  until="2026-10-31", until_label="31 October 2026"),
+        sale=dict(BLACK_FRIDAY, now="$9.50", was="$19"),
         os="macOS 11+, Windows 10 and 11",
         glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
         seo_title="Talk Light Trigger — talkback light for dLive, no hardware",
@@ -651,6 +659,7 @@ PRODUCTS = {
     "pilot-tone-trigger": dict(
         name="Pilot Tone Trigger", abbr="PTT", tag="dLive", accent="blue",
         icon="pilot-tone-trigger.png", gallery=True, affiliated=True, status="buy", trial=True, price="$59",
+        sale=dict(BLACK_FRIDAY, now="$29.50", was="$59"),
         store=CHECKOUT["pilot-tone-trigger"], trial_store=CHECKOUT["pilot-tone-trigger-trial"], youtube="GOfFZzGTEuA",
         os="macOS 11+, Windows 10 and 11",
         glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
@@ -798,6 +807,7 @@ PRODUCTS = {
     "time-code-tool": dict(
         name="Time Code Tool", abbr="TCT", tag="Universal", accent="blue",
         icon="time-code-tool.png", gallery=True, affiliated=False, status="buy", trial=True, price="$69",
+        sale=dict(BLACK_FRIDAY, now="$34.50", was="$69"),
         store=CHECKOUT["time-code-tool"], trial_store=CHECKOUT["time-code-tool-trial"], youtube="A6iKjxHxXA4",
         os="macOS 11+, Windows 10 and 11",
         glance=[("Platform", "macOS 11+ &middot; Windows 10 &amp; 11"), ("Chip", "Apple Silicon, Intel &amp; 64-bit PC")],
@@ -943,16 +953,22 @@ def inject_analytics(html_str: str) -> str:
     return html_str.replace("</body>", snippet + "</body>", 1)
 
 
-# Self-expiring sale guard: after the date in [data-sale-until], hide every
-# .sale-only element and reveal every .sale-reg one (the regular-price fallback),
-# so a time-boxed promo reverts on its own without a rebuild. Uses the native
+# Self-timed sale guard. A sale's elements are built hidden (.sale-only) beside
+# the regular price (.sale-reg), so the page shows the regular price without
+# JavaScript, before the sale and after it. Between [data-sale-from] (00:00) and
+# [data-sale-until] (23:59:59), in the visitor's own time zone, it swaps them,
+# and puts the code into each Buy link marked data-sale-code, so a buyer from
+# the site doesn't have to type it (Lemon Squeezy's checkout[discount_code]).
+# One push before the sale covers its start and its end. Uses the native
 # `hidden` attribute (see the [hidden]{display:none!important} rule in the CSS).
 SALE_GUARD_JS = (
     "(function(){var s=document.querySelector('[data-sale-until]');if(!s)return;"
-    "var end=new Date(s.getAttribute('data-sale-until')+'T23:59:59');"
-    "if(Date.now()>end.getTime()){"
-    "document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=true;});"
-    "document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=false;});}})();"
+    "var now=Date.now(),end=new Date(s.getAttribute('data-sale-until')+'T23:59:59').getTime(),"
+    "f=s.getAttribute('data-sale-from'),on=now<=end&&(!f||now>=new Date(f+'T00:00:00').getTime());"
+    "document.querySelectorAll('.sale-only').forEach(function(e){e.hidden=!on;});"
+    "document.querySelectorAll('.sale-reg').forEach(function(e){e.hidden=on;});"
+    "if(on){document.querySelectorAll('a[data-sale-code]').forEach(function(a){try{var u=new URL(a.href);"
+    "u.searchParams.set('checkout[discount_code]',a.getAttribute('data-sale-code'));a.href=u.toString();}catch(e){}});}})();"
 )
 
 

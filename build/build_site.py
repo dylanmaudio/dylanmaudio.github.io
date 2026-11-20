@@ -345,7 +345,7 @@ __SEO__
         </div>
         <p>Someone talks on the shout bus and your dLive&rsquo;s own surface lights flash, so you know to put the headphones on. A talkback, shout or call light with nothing to rig; one SoftKey to cancel.</p>
         <div class="specs"><span class="spec">signal &rarr; trigger</span><span class="spec">tally</span><span class="spec">menu bar</span></div>
-        <div class="card-foot"><span class="price sale-only" data-sale-until="2026-10-31"><s>$19</s> <b style="color:var(--green)">$9</b></span><span class="price sale-reg" hidden>$19</span><a href="products/talk-light-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
+        <div class="card-foot"><span class="price sale-only" data-sale-until="2026-11-30" data-sale-from="2026-11-27" hidden><s>$19</s> <b style="color:var(--green)">$9.50</b></span><span class="price sale-reg">$19</span><a href="products/talk-light-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>
 
       <article class="card">
@@ -355,7 +355,7 @@ __SEO__
         </div>
         <p>A pilot tone drops — a playback machine, a Waves server, a plugin host — and your dLive switches to the backup you already built: main/backup playback or the "inserts out" scene, with no switching hardware.</p>
         <div class="specs"><span class="spec">tone detect</span><span class="spec">auto-failover</span><span class="spec">Waves failover</span></div>
-        <div class="card-foot"><span class="price">$59</span><a href="products/pilot-tone-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
+        <div class="card-foot"><span class="price sale-only" data-sale-until="2026-11-30" data-sale-from="2026-11-27" hidden><s>$59</s> <b style="color:var(--green)">$29.50</b></span><span class="price sale-reg">$59</span><a href="products/pilot-tone-trigger/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>
 
       <article class="card">
@@ -365,7 +365,7 @@ __SEO__
         </div>
         <p>Read incoming LTC or MTC and see how healthy it is; send it on clean as LTC, MTC or both, at any frame rate; or be the timecode master and render LTC to a WAV. A far steadier endpoint than piping LTC straight into a DAW. Works with any console.</p>
         <div class="specs"><span class="spec">LTC in</span><span class="spec">MTC out</span><span class="spec">LTC&rarr;WAV</span></div>
-        <div class="card-foot"><span class="price">$69</span><a href="products/time-code-tool/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
+        <div class="card-foot"><span class="price sale-only" data-sale-until="2026-11-30" data-sale-from="2026-11-27" hidden><s>$69</s> <b style="color:var(--green)">$34.50</b></span><span class="price sale-reg">$69</span><a href="products/time-code-tool/" class="card-link">Learn more <span class="arw">&rarr;</span></a></div>
       </article>
     </div>
 

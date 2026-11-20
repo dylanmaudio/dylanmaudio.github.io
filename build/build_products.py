@@ -335,6 +335,31 @@ def module_ctas(p, discord_label="Get help"):
             f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} {discord_label}</a>')
 
 
+def sale_attrs(sale):
+    """The dates SALE_GUARD_JS reads, on every element of a sale."""
+    a = f'data-sale-until="{sale["until"]}"'
+    return a + (f' data-sale-from="{sale["from"]}"' if sale.get("from") else "")
+
+
+def sale_label(sale):
+    return sale.get("label", "Intro sale")
+
+
+def btn_price(p):
+    """A Buy button's price: the sale price during a sale, the regular one otherwise."""
+    sale = p.get("sale")
+    if not sale:
+        return p["price"]
+    return (f'<span class="sale-reg">{p["price"]}</span>'
+            f'<span class="sale-only" {sale_attrs(sale)} hidden>{sale["now"]}</span>')
+
+
+def sale_code_attr(p):
+    """Marks a Buy link so SALE_GUARD_JS adds the code to it during the sale."""
+    sale = p.get("sale")
+    return f' data-sale-code="{sale["code"]}"' if sale and sale.get("code") else ""
+
+
 def hero_cta(p):
     if p["status"] == "module":
         return module_ctas(p)
@@ -345,9 +370,9 @@ def hero_cta(p):
         # The store page carries the trial and the licence together; the trial
         # download is the conversion a search visitor is most likely to make.
         if p.get("trial"):
-            price = f' &mdash; {p["price"]}' if p.get("price") else ""
+            price = f' &mdash; {btn_price(p)}' if p.get("price") else ""
             return (f'<a href="{p.get("trial_store") or p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
-                    f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{price}</a>'
+                    f'<a href="{p["store"]}"{sale_code_attr(p)} target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{price}</a>'
                     f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
         return (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
                 f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
@@ -395,15 +420,15 @@ def band(p):
         reg_sub = ("Buy a licence" + (f" &mdash; {price}" if price else "")
                    + ", or try it free first with 20-minute sessions.")
         if sale:
-            sub = (f'<span class="sale-only" data-sale-until="{sale["until"]}"><b>Intro sale &mdash; {sale["now"]}</b> '
+            sub = (f'<span class="sale-only" {sale_attrs(sale)} hidden><b>{sale_label(sale)} &mdash; {sale["now"]}</b> '
                    f'with code <code>{sale["code"]}</code> until {sale["until_label"]} '
                    f'<s>(was {sale["was"]})</s>. Or try it free first, 20-minute sessions.</span>'
-                   f'<span class="sale-reg" hidden>{reg_sub}</span>')
+                   f'<span class="sale-reg">{reg_sub}</span>')
         else:
             sub = reg_sub
         if p.get("trial_store"):
             cta = (f'<a href="{p["trial_store"]}" target="_blank" rel="noopener" class="btn btn-primary">Download the free trial <span class="arw">&rarr;</span></a>'
-                   f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{(" &mdash; " + price) if price else ""}</a>'
+                   f'<a href="{p["store"]}"{sale_code_attr(p)} target="_blank" rel="noopener" class="btn btn-ghost">Buy a licence{(" &mdash; " + btn_price(p)) if price else ""}</a>'
                    f'<a href="{C.DISCORD_URL}" class="btn btn-discord" target="_blank" rel="noopener">{C.DISCORD_SVG} Get help</a>')
         else:
             cta = (f'<a href="{p["store"]}" target="_blank" rel="noopener" class="btn btn-primary">View in store <span class="arw">&rarr;</span></a>'
@@ -429,9 +454,9 @@ def status_row(p):
     if p["status"] == "buy":
         sale = p.get("sale")
         if sale:
-            v = (f'<span class="sale-only" data-sale-until="{sale["until"]}"><s>{sale["was"]}</s> '
+            v = (f'<span class="sale-only" {sale_attrs(sale)} hidden><s>{sale["was"]}</s> '
                  f'<b style="color:var(--green)">{sale["now"]}</b></span>'
-                 f'<span class="sale-reg" hidden>{p.get("price", "")}</span>')
+                 f'<span class="sale-reg">{p.get("price", "")}</span>')
         else:
             v = p.get("price", "In store")
         return f'<div class="srow"><span class="k">Price</span><span class="v">{v}</span></div>'
@@ -563,7 +588,7 @@ def build_page(slug, p):
         ld["offers"] = {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
     elif p["status"] == "buy" and p.get("price"):
         sale = p.get("sale")
-        if sale:
+        if sale and not sale.get("from"):
             ld["offers"] = {"@type": "Offer", "price": sale["now"].lstrip("$"), "priceCurrency": "USD",
                             "url": p["store"], "priceValidUntil": sale["until"]}
         else:
@@ -571,8 +596,8 @@ def build_page(slug, p):
                             "priceCurrency": "USD", "url": p["store"]}
     sale = p.get("sale")
     sale_banner = ("" if not sale else
-                   f'<div class="sale-banner sale-only" data-sale-until="{sale["until"]}">'
-                   f'<span class="s-hi">Intro sale &mdash; {sale["now"]}</span>'
+                   f'<div class="sale-banner sale-only" {sale_attrs(sale)} hidden>'
+                   f'<span class="s-hi">{sale_label(sale)} &mdash; {sale["now"]}</span>'
                    f'<span class="s-sub"><s>was {sale["was"]}</s> &middot; code <b>{sale["code"]}</b> &middot; until {sale["until_label"]}</span>'
                    f'</div>')
     manual_btn = ("" if p.get("manual") is False else

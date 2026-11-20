@@ -18,10 +18,10 @@ Not merged until the service answers on licence.dylanmaudio.com. When it goes
 live:
 - set LISTED = True (drops noindex), and add the page to build_seo.PAGES;
 - link it from the footer and the product pages' buy sections;
-- put the privacy page's new wording into build_privacy.py in the same
-  commit. STRATEGY: Downloads writes it under #545, with EULA 1.1: the email
-  address typed here goes to our licence service, and the store is no longer
-  Lemon Squeezy. Don't draft a second version; send any wording need there;
+- the privacy page's new wording is on this branch (build_privacy.py, 21 Nov:
+  PRIVACY.txt 1.2's terms, and STRATEGY: Downloads' "Who else is involved"
+  list under #545). It goes up with this page, once that thread has read it;
+  send any wording change there;
 - set LS_NOTE = False once Lemon Squeezy's keys are imported (D14).
 
 The toolbar, footer and styles are the 404 page's (build_404.HTML), as for
